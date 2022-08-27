@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/andreazwu/API-project/issues"
   },
-  "homepage": "https://github.com/andreazwu/API-project#readme"
+  "homepage": "https://github.com/andreazwu/API-project#readme",
+  "dependencies": {
+    "pg": "^8.8.0"
+  }
 }
