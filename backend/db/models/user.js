@@ -1,32 +1,3 @@
-// 'use strict';
-// const {
-//   Model
-// } = require('sequelize');
-// module.exports = (sequelize, DataTypes) => {
-//   class user extends Model {
-//     /**
-//      * Helper method for defining associations.
-//      * This method is not a part of Sequelize lifecycle.
-//      * The `models/index` file will call this method automatically.
-//      */
-//     static associate(models) {
-//       // define association here
-//     }
-//   }
-//   user.init({
-//     id: DataTypes.INTEGER,
-//     firstName: DataTypes.STRING,
-//     lastName: DataTypes.STRING,
-//     username: DataTypes.STRING,
-//     hashedPassword: DataTypes.STRING,
-//     email: DataTypes.STRING
-//   }, {
-//     sequelize,
-//     modelName: 'user',
-//   });
-//   return user;
-// };
-
 'use strict';
 const { Model, Validator } = require('sequelize');
 const bcrypt = require('bcryptjs');
