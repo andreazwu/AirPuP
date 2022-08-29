@@ -41,6 +41,9 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
+
+    await queryInterface.addIndex('Users', ['username', 'email'], { unique: true });
+
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Users');
