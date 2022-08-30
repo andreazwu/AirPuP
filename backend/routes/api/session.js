@@ -49,10 +49,12 @@ router.post('/', validateLogin, async (req, res, next) => {
     });
   }
 
+  //find jwt token & set as user attribute
   const token = await setTokenCookie(res, user)
 
   //https://sequelize.org/api/v6/class/src/model.js~model
   user.dataValues.token = token
+
   return res.json(user)
 
   // let userObj = user.toJSON()
