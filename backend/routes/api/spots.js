@@ -33,11 +33,40 @@ router.get('/current', requireAuth, async (req, res) => {
   //requireAuth ensures (req.user) -- if no current logged in user, err-->err handling
   const currentUser = req.user
 
+  //get an ARRAY of current user's owned spots
   const currentSpots = await Spot.findAll({
     where: {
       ownerId: currentUser.id
     }
   })
+
+  for (let spot of currentSpots) {
+
+
+    //avgRating
+    const rating = await Review.findAll({
+      where: { spotId: spot.id },
+      attributes: [
+        [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+      ]
+    })
+
+    //previewImage
+    const preview = await SpotImage.findAll({
+      where: {
+        spotId: spot.id,
+        preview: true
+      },
+      attributes: [
+        ["url", "previewImage"]
+      ],
+      limit: 1
+    })
+
+    spot = spot.toJSON()
+    spot.avgRating = rating
+    spot.previewImage = preview
+  }
 
   return res.json(currentSpots)
 })

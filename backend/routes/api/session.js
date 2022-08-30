@@ -17,24 +17,52 @@ const validateLogin = [
 ];
 
 // Log in
+// Successful response includes the user's id, firstName, lastName, email, and token
 router.post('/', validateLogin, async (req, res, next) => {
-  const { credential, password } = req.body;
 
-  const user = await User.login({ credential, password });
+  const { credential, password } = req.body
 
-  if (!user) {
-    const err = new Error('Login failed');
-    err.status = 401;
-    err.title = 'Login failed';
-    err.errors = ['The provided credentials were invalid.'];
-    return next(err);
+  let user
+
+  try {
+    user = await User.login({ credential, password })
+
+  } catch (err) {
+    // status 400 is given when credentials / password not provided
+    res.status(400)
+    return res.json({
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "credential": "Email or username is required",
+        "password": "Password is required"
+      }
+    });
   }
 
-  await setTokenCookie(res, user);
+  // status 401 is given when invalid credentials are given
+  if (!user) {
+    res.status(401)
+    return res.json({
+      "message": "Invalid credentials",
+      "statusCode": 401
+    });
+  }
 
-  return res.json({
-    user
-  });
+  const token = await setTokenCookie(res, user)
+
+  //https://sequelize.org/api/v6/class/src/model.js~model
+  user.dataValues.token = token
+  return res.json(user)
+
+  // let userObj = user.toJSON()
+  // userObj.token = token
+  // return res.json(userObj)
+
+  // //does NOT work
+  // user = user.toJSON()
+  // user.token = token
+  // return res.json({ ...user })
 }
 );
 
