@@ -22,13 +22,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(
-        models.Booking, {
-        foreignKey: "userId"
+        models.Spot, {
+        foreignKey: "ownerId"
       })
 
       User.hasMany(
-        models.Spot, {
-        foreignKey: "ownerId"
+        models.Booking, {
+        foreignKey: "userId"
       })
 
       User.hasMany(
