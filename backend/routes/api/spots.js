@@ -12,20 +12,65 @@ const { Op } = require('sequelize');
 
 // Get all spots
 // id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, updatedAt, >>>previewImage, and >>>avgRating
-router.get("/", async (req, res) => {
-  const spots = await Spot.findAll({
-    // include: [
-    //   { model: Review, attributes: [] },
-    //   { model: SpotImage, attributes: [["url", "previewImage"], where: { preview: true } }
-    // ],
-    // attributes: {
-    //   include: [
-    //     [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
+
+// Get all Spots owned by the Current User
+router.get('/', async (req, res) => {
+  //get an ARRAY of current user's owned spots
+  const allSpots = await Spot.findAll()
+
+  let spotsInfo = []
+
+  for (let spot of allSpots) {
+
+    // //avgRating
+    // const rating = await Review.findAll({
+    //   where: { spotId: spot.id },
+    //   attributes: [
+    //     [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
     //   ]
-    // }
+    // })
+
+    // //previewImage
+    // const preview = await SpotImage.findAll({
+    //   where: {
+    //     spotId: spot.id,
+    //     preview: true
+    //   },
+    //   attributes: [
+    //     ["url", "previewImage"]
+    //   ],
+    //   limit: 1
+    // })
+
+    data = {
+      ...spot.dataValues,
+      // avgRating: rating[0].avgRating,
+      // previewImage: preview[0].previewImage
+    }
+
+    spotsInfo.push(data)
+  }
+
+  return res.json({
+    Spots: spotsInfo
   })
-  return res.json(spots)
 })
+
+// // eager loading like this doesn't work (yet, try later:)
+// router.get("/", async (req, res) => {
+// const spots = await Spot.findAll({
+// include: [
+//   { model: Review, attributes: [] },
+//   { model: SpotImage, attributes: [["url", "previewImage"], where: { preview: true } }
+// ],
+// attributes: {
+//   include: [
+//     [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
+//   ]
+// }
+// })
+// return res.json(spots)
+// })
 
 
 // Get all Spots owned by the Current User
@@ -40,8 +85,9 @@ router.get('/current', requireAuth, async (req, res) => {
     }
   })
 
-  for (let spot of currentSpots) {
+  let spotsInfo = []
 
+  for (let spot of currentSpots) {
 
     //avgRating
     const rating = await Review.findAll({
@@ -63,12 +109,21 @@ router.get('/current', requireAuth, async (req, res) => {
       limit: 1
     })
 
-    spot = spot.toJSON()
-    spot.avgRating = rating
-    spot.previewImage = preview
+    // spot.dataValues.avgRating = rating
+    // spot.dataValues.previewImage = preview
+
+    data = {
+      ...spot.dataValues,
+      avgRating: rating[0].avgRating,
+      previewImage: preview[0].previewImage
+    }
+
+    spotsInfo.push(data)
   }
 
-  return res.json(currentSpots)
+  return res.json({
+    Spots: spotsInfo
+  })
 })
 
 
