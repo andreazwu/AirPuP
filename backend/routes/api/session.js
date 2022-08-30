@@ -1,5 +1,5 @@
 const express = require('express');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -77,14 +77,21 @@ router.delete('/', (_req, res) => {
 );
 
 
-// Restore session user
-router.get('/', restoreUser, (req, res) => {
-  const { user } = req;
+// Restore session user & get current user
+router.get('/', [restoreUser, requireAuth], async (req, res) => {
+  const { user } = req
+
   if (user) {
+    // //find jwt token & set as user attribute
+    // //doesn't work
+    // const token = await setTokenCookie(res, user)
+    // user.dataValues.token = token
+
     return res.json({
       user: user.toSafeObject()
-    });
-  } else return res.json({});
+    })
+
+  } else return res.json({})
 }
 );
 
