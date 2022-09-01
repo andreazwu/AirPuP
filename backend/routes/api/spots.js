@@ -9,70 +9,168 @@ const router = express.Router();
 
 const { Op } = require('sequelize');
 
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
 
-// Get all spots
-// id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, updatedAt, >>>previewImage, and >>>avgRating
+const validateSpot = [
+  check('address')
+    .exists({ checkFalsy: true })
+    .withMessage('Street address is required'),
+  check('city')
+    .exists({ checkFalsy: true })
+    .withMessage('City is required'),
+  check('state')
+    .exists({ checkFalsy: true })
+    .withMessage('State is required'),
+  check('country')
+    .exists({ checkFalsy: true })
+    .withMessage('Country is required'),
+  check('lat')
+    .exists({ checkFalsy: true })
+    .withMessage('Latitude is required')
+    .isLength({ min: -90, max: 90 })
+    .withMessage('Latitude is not valid'),
+  check('lng')
+    .exists({ checkFalsy: true })
+    .withMessage('Longitude is required')
+    .isLength({ min: -180, max: 180 })
+    .withMessage('Longitude is not valid'),
+  check('name')
+    .exists({ checkFalsy: true })
+    .withMessage('Name is required')
+    .isLength({ max: 49 })
+    .withMessage('Name must be less than 50 characters'),
+  check('description')
+    .exists({ checkFalsy: true })
+    .withMessage('Description is required'),
+  check('price')
+    .exists({ checkFalsy: true })
+    .withMessage('Price per day is required'),
+  handleValidationErrors
+]
 
-// Get all Spots owned by the Current User
-router.get('/', async (req, res) => {
-  //get an ARRAY of current user's owned spots
-  const allSpots = await Spot.findAll()
+const validateReview = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .withMessage('Stars is required')
+    .isLength({ min: 1, max: 5 })
+    .withMessage('Stars must be an integer from 1 to 5'),
+  handleValidationErrors
+]
 
-  let spotsInfo = []
+const validateBooking = [
+  check('endDate')
+    .exists({ checkFalsy: true })
+    .withMessage('endDate is required')
+    .isAfter('startDate')
+    .withMessage('endDate cannot be on or before startDate'),
+  handleValidationErrors
+]
 
-  for (let spot of allSpots) {
+const checkValidate = [
+  check('page')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('Page must be greater than or equal to 0"'),
+  check('size')
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage('Size must be greater than or equal to 0'),
+  check('maxLat')
+    .optional()
+    .isDecimal()
+    .withMessage('Maximum latitude is invalid'),
+  check('minLat')
+    .optional()
+    .isDecimal()
+    .withMessage('Minimum latitude is invalid'),
+  check('minLng')
+    .optional()
+    .isDecimal()
+    .withMessage('Maximum longitude is invalid'),
+  check('maxLng')
+    .optional()
+    .isDecimal()
+    .withMessage('Minimum longitude is invalid'),
+  check('minPrice')
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage('Maximum price must be greater than or equal to 0'),
+  check('maxPrice')
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage('Minimum price must be greater than or equal to 0'),
+  handleValidationErrors
+]
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
 
-    // //avgRating
-    // const rating = await Review.findAll({
-    //   where: { spotId: spot.id },
-    //   attributes: [
-    //     [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
-    //   ]
-    // })
+// // Get all spots
+// // id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, updatedAt, >>>previewImage, and >>>avgRating
 
-    // //previewImage
-    // const preview = await SpotImage.findAll({
-    //   where: {
-    //     spotId: spot.id,
-    //     preview: true
-    //   },
-    //   attributes: [
-    //     ["url", "previewImage"]
-    //   ],
-    //   limit: 1
-    // })
+// // Get all Spots owned by the Current User
+// router.get('/', async (req, res) => {
+//   //get an ARRAY of current user's owned spots
+//   const allSpots = await Spot.findAll()
 
-    data = {
-      ...spot.dataValues,
-      // avgRating: rating[0].avgRating,
-      // previewImage: preview[0].previewImage
-    }
+//   let spotsInfo = []
 
-    spotsInfo.push(data)
-  }
+//   for (let spot of allSpots) {
 
-  return res.json({
-    Spots: spotsInfo
-  })
-})
+//     //avgRating
+//     const rating = await Review.findAll({
+//       where: { spotId: spot.id },
+//       attributes: [
+//         [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+//       ]
+//     })
+
+//     //previewImage
+//     const preview = await SpotImage.findAll({
+//       where: {
+//         spotId: spot.id,
+//         preview: true
+//       },
+//       attributes: [
+//         ["url", "previewImage"]
+//       ],
+//       limit: 1
+//     })
+
+//     data = {
+//       ...spot.dataValues,
+//       avgRating: rating[0].avgRating,
+//       previewImage: preview[0].previewImage
+//     }
+
+//     spotsInfo.push(data)
+//   }
+
+//   return res.json({
+//     Spots: spotsInfo
+//   })
+// })
 
 // // get all spots
 // // eager loading (doesn't work)
 
-// router.get("/", async (req, res) => {
-// const spots = await Spot.findAll({
-// include: [
-//   { model: Review, attributes: [] },
-//   { model: SpotImage, attributes: [["url", "previewImage"], where: { preview: true } }
-// ],
-// attributes: {
-//   include: [
-//     [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
-//   ]
-// }
-// })
-// return res.json(spots)
-// })
+router.get("/", async (req, res) => {
+  const spots = await Spot.findAll({
+    include: [
+      { model: Review, attributes: [] },
+      { model: SpotImage, attributes: ["url", "previewImage"], where: { preview: true } }
+    ],
+    attributes: {
+      include: [
+        [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
+      ]
+    }
+  })
+  return res.json(spots)
+})
 
 
 // Get all Spots owned by the Current User

@@ -16,14 +16,15 @@ router.use('/users', usersRouter);
 
 router.use('/spots', spotsRouter);
 
-router.use('/reviews', reviewsRouter);
+// router.use('/reviews', reviewsRouter);
 
-router.use('/bookings', bookingsRouter);
-
-
+// router.use('/bookings', bookingsRouter);
 
 
 
+
+
+//----------------------------------------------
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
