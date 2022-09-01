@@ -16,6 +16,10 @@ router.use('/users', usersRouter);
 
 router.use('/spots', spotsRouter);
 
+router.use('/reviews', reviewsRouter);
+
+router.use('/bookings', bookingsRouter);
+
 
 
 

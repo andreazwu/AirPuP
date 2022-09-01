@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, User, Booking, Review, SpotImage, sequelize } = require('../../db/models');
+const { Spot, User, Booking, Review, SpotImage, ReviewImage, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -56,7 +56,9 @@ router.get('/', async (req, res) => {
   })
 })
 
-// // eager loading like this doesn't work (yet, try later:)
+// // get all spots
+// // eager loading (doesn't work)
+
 // router.get("/", async (req, res) => {
 // const spots = await Spot.findAll({
 // include: [
@@ -125,6 +127,48 @@ router.get('/current', requireAuth, async (req, res) => {
     Spots: spotsInfo
   })
 })
+
+
+// Get details of a Spot from an id
+// id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, and updatedAt
+//"numReviews", "avgStarRating", "SpotImages", "Owner"
+
+router.get("/:spotId", async (req, res) => {
+  const { spotId } = req.params
+
+  const spotById = await Spot.findByPk(spotId, {
+    include: [
+      { model: SpotImage, attributes: ["id", "url", "preview"] },
+      { model: User, attributes: ["id", "firstName", "lastName"] }
+    ]
+  })
+
+  if (!spotById) {
+    res.status(404)
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  } else {
+    const numReviews = await Review.count({ where: { spotId } })
+    const avgRating = await Review.findAll({
+      where: { spotId },
+      attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]]
+    })
+  }
+
+
+
+})
+
+
+
+
+
+
+
+
+
 
 
 
