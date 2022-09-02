@@ -73,7 +73,14 @@ const validReview = [
   handleValidationErrors
 ]
 
-
+// const validBooking = [
+//   check('endDate')
+//     .exists({ checkFalsy: true })
+//     .withMessage('endDate is required')
+//     .isAfter('startDate')
+//     .withMessage('endDate cannot be on or before startDate'),
+//   handleValidationErrors
+// ]
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 
@@ -513,7 +520,95 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     })
     return res.json({ Bookings: ownerBookings })
   }
+})
 
+
+// Create a Booking from a Spot based on the Spot id
+router.post("/:spotId/bookings", [requireAuth], async (req, res) => {
+
+  const { spotId } = req.params
+  const { user } = req
+  // const { startDate, endDate } = req.body
+  const reqStart = req.body.startDate
+  const reqEnd = req.body.endDate
+
+  const spot = await Spot.findByPk(spotId)
+
+  if (!spot) {
+    res.status(404)
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+
+  if (spot.ownerId === user.id) {
+    res.status(403)
+    return res.json({
+      "message": "You shouldn't book your own spot!!",
+      "statusCode": 403
+    })
+  }
+
+  const today = new Date()
+
+  //Date.parse() - # of ms since Jan 1 1970
+  if (!reqStart || !reqEnd ||
+    Date.parse(reqStart) > Date.parse(reqEnd) ||
+    Date.parse(today) > Date.parse(reqStart)) {
+
+    res.status(400)
+    return res.json({
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "endDate": "endDate cannot be on or before startDate"
+      }
+    })
+  }
+
+  const conflictBooking = await Booking.findOne({
+    where: {
+      spotId,
+      [Op.or]: [
+        //conflict start falls b/t reqStart and reqEnd
+        { startDate: { [Op.between]: [reqStart, reqEnd] } },
+        //conflict end falls b/t reqStart and reqEnd
+        { endDate: { [Op.between]: [reqStart, reqEnd] } },
+        //whole conflict period envelops (reqStart and reqEnd) period
+        {
+          startDate: { [Op.lte]: reqStart },
+          endDate: { [Op.gte]: reqEnd }
+        },
+        //whole conflict period falls b/t reqStart and reqEnd
+        {
+          startDate: { [Op.gte]: reqStart },
+          endDate: { [Op.lte]: reqEnd }
+        }
+      ]
+    }
+  })
+
+  if (conflictBooking) {
+    res.status(403)
+    return res.json({
+      "message": "Sorry, this spot is already booked for the specified dates",
+      "statusCode": 403,
+      "errors": {
+        "startDate": "Start date conflicts with an existing booking",
+        "endDate": "End date conflicts with an existing booking"
+      }
+    })
+  }
+
+  const newBooking = await Booking.create({
+    spotId: spot.id,
+    userId: user.id,
+    startDate: reqStart,
+    endDate: reqEnd
+  })
+
+  return res.json(newBooking)
 })
 
 
