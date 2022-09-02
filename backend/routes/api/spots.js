@@ -59,6 +59,21 @@ const validSpot = [
     .withMessage("Price per day is required"),
   handleValidationErrors
 ]
+
+const validReview = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .isInt({ min: 1, max: 5 })
+    .withMessage('Stars must be an integer from 1 to 5'),
+  handleValidationErrors
+]
+
+
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 
@@ -125,6 +140,7 @@ router.get("/", async (req, res) => {
   })
 })
 
+
 // Question re: eager-loading - notes
 
 
@@ -175,7 +191,6 @@ router.get("/current", requireAuth, async (req, res) => {
 
 
 // Get details of a Spot from an id
-//"numReviews", "avgStarRating", "SpotImages", "Owner"
 router.get("/:spotId", async (req, res) => {
   const { spotId } = req.params
 
@@ -216,9 +231,6 @@ router.get("/:spotId", async (req, res) => {
 })
 
 
-
-
-
 // Add an Image to a Spot based on the Spots id
 router.post("/:spotId/images", requireAuth, async (req, res) => {
 
@@ -251,8 +263,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 })
 
 
-//create a spot
-//id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, and updatedAt
+// Create a spot
 router.post("/", [validSpot, requireAuth], async (req, res) => {
 
   const { address, city, state, country,
@@ -360,7 +371,7 @@ router.put("/:spotId", [validSpot, requireAuth], async (req, res) => {
 
 
 // Delete a Spot
-router.delete('/:spotId', requireAuth, async (req, res) => {
+router.delete("/:spotId", requireAuth, async (req, res) => {
   const { spotId } = req.params
   const { user } = req
 
@@ -389,6 +400,79 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     })
   }
 })
+
+
+//------Reviews-------
+
+// Get all Reviews by a Spots id
+router.get("/:spotId/reviews", async (req, res) => {
+  const { spotId } = req.params
+
+  const spot = await Spot.findByPk(spotId)
+
+  if (!spot) {
+    res.status(404)
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+
+  const reviews = await Review.findAll({
+    where: { spotId: spotId },
+    include: [
+      { model: User, attributes: ["id", "firstName", "lastName"] },
+      { model: ReviewImage, attributes: ["id", "url"] }
+    ]
+  })
+
+  res.json({ Reviews: reviews })
+})
+
+
+// Create a Review for a Spot based on the Spot id
+router.post('/:spotId/reviews', [validReview, requireAuth], async (req, res) => {
+
+  const { spotId } = req.params
+  const { user } = req
+  const { review, stars } = req.body
+
+  const spot = await Spot.findByPk(spotId)
+
+  if (!spot) {
+    res.status(404)
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+
+  const existingReview = await Review.findOne({
+    where: {
+      userId: user.id,
+      spotId: spot.id
+    }
+  })
+
+  if (existingReview) {
+    res.status(403)
+    return res.json({
+      "message": "User already has a review for this spot",
+      "statusCode": 403
+    })
+  }
+
+  const newReview = await Review.create({ //<<<<<<<
+    userId: user.id,
+    spotId: spotId,
+    review,
+    stars
+  })
+
+  res.json(newReview)
+})
+
+
 
 
 module.exports = router;
