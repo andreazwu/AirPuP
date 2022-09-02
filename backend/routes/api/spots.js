@@ -147,7 +147,7 @@ router.get("/", validPagination, async (req, res) => {
   if (maxPrice) where.price = { [Op.lte]: maxPrice }
 
 
-  //get an ARRAY of current users owned spots
+  // ARRAY of current users owned spots, with query filters
   const allSpots = await Spot.findAll({
     where,
     ...pagination
