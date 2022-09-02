@@ -341,7 +341,7 @@ router.put("/:spotId", [validSpot, requireAuth], async (req, res) => {
       })
     }
 
-    await spot.update({ //<<<<<<
+    await spot.update({ //<<<<<< INSTANCE (not capitalized)
       address,
       city,
       state,
