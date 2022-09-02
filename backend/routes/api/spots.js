@@ -174,9 +174,6 @@ router.post('/', [validSpot, requireAuth], async (req, res) => {
   const { address, city, state, country,
     lat, lng, name, description, price } = req.body
 
-  // Body validation error 400
-  let createSpot
-
   try {
     const createSpot = await Spot.create({
       ownerId: req.user.id,
@@ -190,6 +187,10 @@ router.post('/', [validSpot, requireAuth], async (req, res) => {
       description,
       price
     })
+
+    res.status(201)
+    return res.json(createSpot)
+
   } catch (error) {
     res.status(400)
     return res.json({
@@ -209,63 +210,52 @@ router.post('/', [validSpot, requireAuth], async (req, res) => {
     })
   }
 
-  res.status(201)
-  res.json(createSpot)
+
 });
-
-
 
 
 // Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
   //requireAuth ensures (req.user) -- if no current logged in user, err-->err handling
-  const currentUser = req.user
-
-  //get an ARRAY of current user's owned spots
-  const currentSpots = await Spot.findAll({
+  const { user } = req
+  const allSpots = await Spot.findAll({
     where: {
-      ownerId: currentUser.id
+      ownerId: user.id
     }
   })
 
-  let spotsInfo = []
+  let spotList = []
 
-  for (let spot of currentSpots) {
-    //avgRating
+  for (let i = 0; i < allSpots.length; i++) {
+    const spotObj = allSpots[i].toJSON()
+
     const rating = await Review.findAll({
-      where: { spotId: spot.id },
-      attributes: [
-        [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
-      ]
+      where: { spotId: spotObj.id },
+      attributes: [[sequelize.fn('AVG', sequelize.col("stars")), 'avgRating']]
     })
 
-    //previewImage
-    const preview = await SpotImage.findAll({
+    spotObj.avgRating = rating[0].toJSON().avgRating
+
+    const image = await SpotImage.findAll({
       where: {
-        spotId: spot.id,
-        preview: true
+        [Op.and]: [
+          { spotId: spotObj.id },
+          { preview: true }
+        ]
       },
-      attributes: [
-        ["url", "previewImage"]
-      ],
-      limit: 1
+      attributes: ['url']
     })
 
-    // spot.dataValues.avgRating = rating
-    // spot.dataValues.previewImage = preview
-
-    data = {
-      ...spot.dataValues,
-      avgRating: rating[0].avgRating,
-      previewImage: preview[0].previewImage
+    if (!image.length) {
+      spotObj.previewImage = "no image"
+    } else {
+      spotObj.previewImage = image[0].url
     }
 
-    spotsInfo.push(data)
+    spotList.push(spotObj)
   }
 
-  return res.json({
-    Spots: spotsInfo
-  })
+  return res.json({ Spots: spotList })
 })
 
 
