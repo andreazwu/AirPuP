@@ -5,6 +5,9 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
+
 const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
@@ -15,6 +18,9 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
 
 // Log in
 // Successful response includes the user's id, firstName, lastName, email, and token
