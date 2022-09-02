@@ -73,6 +73,76 @@ const validReview = [
   handleValidationErrors
 ]
 
+// const validPagination = [
+//   check("page")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         val = parseInt(val)
+//         if (Number.isInteger(val) && val >= 0 && val <= 10) return true
+//       }
+//     })
+//     .withMessage("Page must be greater than or equal to 0"),
+//   check("size")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         val = parseInt(val)
+//         if (Number.isInteger(val) && val >= 0 && val <= 10) return true
+//       }
+//     })
+//     .withMessage("Size must be greater than or equal to 0"),
+//   check("minLat")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         if (!isNaN(val) && val.includes(".")) return true
+//       }
+//     })
+//     .withMessage("Minimum latitude is invalid",),
+//   check("maxLat")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         if (!isNaN(val) && val.includes(".")) return true
+//       }
+//     })
+//     .withMessage("Maximum latitude is invalid",),
+//   check("minLng")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         if (!isNaN(val) && val.includes(".")) return true
+//       }
+//     })
+//     .withMessage("Minimum longitude is invalid"),
+//   check("maxLng")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         if (!isNaN(val) && val.includes(".")) return true
+//       }
+//     })
+//     .withMessage("Maximum longitude is invalid"),
+//   check("minPrice")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         if (val > 0) return true
+//       }
+//     })
+//     .withMessage("Minimum price must be greater than or equal to 0"),
+//   check("maxPrice")
+//     .custom(val => {
+//       if (!val) return true
+//       if (val) {
+//         if (val > 0) return true
+//       }
+//     })
+//     .withMessage("Maximum price must be greater than or equal to 0"),
+
+//   handleValidationErrors
+// ]
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 
@@ -141,13 +211,10 @@ router.get("/", async (req, res) => {
 
   return res.json({
     Spots: spotList,
-    page,
-    size
+    // page,
+    // size
   })
 })
-
-
-// Question re: eager-loading - notes
 
 
 // Get all Spots owned by the Current User
@@ -156,9 +223,7 @@ router.get("/current", requireAuth, async (req, res) => {
   const { user } = req
 
   const allSpots = await Spot.findAll({
-    where: {
-      ownerId: user.id
-    }
+    where: { ownerId: user.id }
   })
 
   let spotList = []
@@ -171,8 +236,8 @@ router.get("/current", requireAuth, async (req, res) => {
       attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]]
     })
 
-    // spotObj.avgRating = rating[0].toJSON().avgRating //4.33333333
-    spotObj.avgRating = Number(parseFloat(rating[0].toJSON().avgRating).toFixed(1))
+    // spotObj.avgRating = rating[0].toJSON().avgRating //4.3333333333
+    spotObj.avgRating = Number(parseFloat(rating[0].toJSON().avgRating).toFixed(1)) //4.3
 
 
     const image = await SpotImage.findAll({
@@ -484,8 +549,8 @@ router.post("/:spotId/reviews", [validReview, requireAuth], async (req, res) => 
 
 //------Bookings-------
 
-// Get all Bookings for a Spot based on the Spot's id
-router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+// Get all Bookings for a Spot based on the Spot"s id
+router.get("/:spotId/bookings", requireAuth, async (req, res) => {
   const { spotId } = req.params
   const { user } = req
 
@@ -517,7 +582,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
       },
       include: {
         model: User,
-        attributes: ['id', 'firstName', 'lastName'],
+        attributes: ["id", "firstName", "lastName"],
       }
     })
     return res.json({ Bookings: ownerBookings })

@@ -24,7 +24,7 @@ const { Op } = require('sequelize');
 
 
 // Get all of the Current User's Bookings
-router.get('/current', requireAuth, async (req, res) => {
+router.get("/current", requireAuth, async (req, res) => {
 
   const { user } = req
 
@@ -155,7 +155,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
 
 
 // Delete a Booking
-router.delete('/:bookingId', requireAuth, async (req, res) => {
+router.delete("/:bookingId", requireAuth, async (req, res) => {
   const { bookingId } = req.params
   const { user } = req
 
