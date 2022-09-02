@@ -86,13 +86,19 @@ router.post('/', validateSignup, async (req, res) => {
 
   const user = await User.signup({ firstName, lastName, email, username, password })
 
-  //find jwt token & set as user attribute
+  //find jwt token
   const token = await setTokenCookie(res, user)
-  user.dataValues.token = token
 
-  return res.json(user)
-}
-);
+  // user.dataValues.token = token
+  // return res.json(user)
+
+  const userObj = user.toJSON()
+  userObj.token = token
+  delete userObj.createdAt
+  delete userObj.updatedAt
+
+  return res.json(userObj)
+})
 
 
 module.exports = router;

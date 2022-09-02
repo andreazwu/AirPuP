@@ -28,13 +28,9 @@ router.post('/', validateLogin, async (req, res, next) => {
 
   const { credential, password } = req.body
 
-  let user
+  const user = await User.login({ credential, password })
 
-  try {
-    user = await User.login({ credential, password })
-
-  } catch (err) {
-    // status 400 is given when credentials / password not provided
+  if (!credential || !password) {
     res.status(400)
     return res.json({
       "message": "Validation error",
@@ -43,36 +39,31 @@ router.post('/', validateLogin, async (req, res, next) => {
         "credential": "Email or username is required",
         "password": "Password is required"
       }
-    });
+    })
   }
 
-  // status 401 is given when invalid credentials are given
   if (!user) {
     res.status(401)
     return res.json({
       "message": "Invalid credentials",
       "statusCode": 401
-    });
+    })
   }
 
-  //find jwt token & set as user attribute
+  //find jwt token
   const token = await setTokenCookie(res, user)
 
-  //https://sequelize.org/api/v6/class/src/model.js~model
-  user.dataValues.token = token
+  // //https://sequelize.org/api/v6/class/src/model.js~model
+  // user.dataValues.token = token
+  // return res.json(user)
 
-  return res.json(user)
+  const userObj = user.toJSON()
+  userObj.token = token
+  delete userObj.createdAt
+  delete userObj.updatedAt
 
-  // let userObj = user.toJSON()
-  // userObj.token = token
-  // return res.json(userObj)
-
-  // //does NOT work
-  // user = user.toJSON()
-  // user.token = token
-  // return res.json({ ...user })
-}
-);
+  return res.json(userObj)
+})
 
 
 // Log out
