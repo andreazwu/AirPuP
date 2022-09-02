@@ -79,31 +79,31 @@ const validReview = [
 
 // Get all spots
 router.get("/", async (req, res) => {
-  //query:
-  const { page, size, minLat, maxLat,
-    minLng, maxLng, minPrice, maxPrice } = req.query
+  // //query:
+  // const { page, size, minLat, maxLat,
+  //   minLng, maxLng, minPrice, maxPrice } = req.query
 
-  page = parseInt(page)
-  size = parseInt(size)
-  minLat = parseFloat(minLat)
-  maxLat = parseFloat(maxLat)
-  minLng = parseFloat(minLng)
-  maxLng = parseFloat(maxLng)
-  minPrice = parseFloat(minPrice)
-  maxPrice = parseFloat(maxPrice)
+  // page = parseInt(page)
+  // size = parseInt(size)
+  // minLat = parseFloat(minLat)
+  // maxLat = parseFloat(maxLat)
+  // minLng = parseFloat(minLng)
+  // maxLng = parseFloat(maxLng)
+  // minPrice = parseFloat(minPrice)
+  // maxPrice = parseFloat(maxPrice)
 
-  let pagination = {}
+  // let pagination = {}
 
-  //isNaN(null) = false; isNaN(undefined) = true
-  if (!page || isNaN(page)) page = 1
-  if (!size || isNaN(size)) size = 20
+  // //isNaN(null) = false; isNaN(undefined) = true
+  // if (!page || isNaN(page)) page = 1
+  // if (!size || isNaN(size)) size = 20
 
-  pagination.limit = size
-  pagination.offset = size * (page - 1)
+  // pagination.limit = size
+  // pagination.offset = size * (page - 1)
 
   //get an ARRAY of current users owned spots
   const allSpots = await Spot.findAll({
-    ...pagination
+    // ...pagination
   })
 
   let spotList = []
@@ -116,7 +116,8 @@ router.get("/", async (req, res) => {
       attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]]
     })
 
-    spotObj.avgRating = rating[0].toJSON().avgRating
+    // spotObj.avgRating = rating[0].toJSON().avgRating
+    spotObj.avgRating = Number(parseFloat(rating[0].toJSON().avgRating).toFixed(1))
 
     const image = await SpotImage.findAll({
       where: {
@@ -170,7 +171,9 @@ router.get("/current", requireAuth, async (req, res) => {
       attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]]
     })
 
-    spotObj.avgRating = rating[0].toJSON().avgRating
+    // spotObj.avgRating = rating[0].toJSON().avgRating //4.33333333
+    spotObj.avgRating = Number(parseFloat(rating[0].toJSON().avgRating).toFixed(1))
+
 
     const image = await SpotImage.findAll({
       where: {
@@ -222,7 +225,8 @@ router.get("/:spotId", async (req, res) => {
       where: { spotId },
       attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]]
     })
-    spotObj.avgRating = rating[0].toJSON().avgRating
+    // spotObj.avgRating = rating[0].toJSON().avgRating
+    spotObj.avgRating = Number(parseFloat(rating[0].toJSON().avgRating).toFixed(1))
 
     return res.json(spotObj)
 
