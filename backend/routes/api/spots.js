@@ -87,10 +87,48 @@ router.get('/', async (req, res) => {
     ...pagination
   })
 
+  let spotList = []
+
+  for (let i = 0; i < allSpots.length; i++) {
+    const spotObj = allSpots[i].toJSON()
+
+    const rating = await Review.findAll({
+      where: { spotId: spotObj.id },
+      attributes: [[sequelize.fn('AVG', sequelize.col("stars")), 'avgRating']]
+    })
+
+    spotObj.avgRating = rating[0].toJSON().avgRating
+
+    const image = await SpotImage.findAll({
+      where: {
+        [Op.and]: [
+          { spotId: spotObj.id },
+          { preview: true }
+        ]
+      },
+      attributes: ['url']
+    })
+
+    if (!image.length) {
+      spotObj.previewImage = "no image"
+    } else {
+      spotObj.previewImage = image[0].url
+    }
+    // spotObj.LALALALALA = image
+
+    spotList.push(spotObj)
+  }
+
+  return res.json({
+    Spots: spotList,
+    page,
+    size
+  })
+
 })
 
 // // // get all spots
-// // // eager loading (doesn't work)
+// // // eager loading (doesn't work?? only return first spot)
 
 // router.get("/", async (req, res) => {
 //   const allSpots = await Spot.findAll({
