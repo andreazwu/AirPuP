@@ -75,11 +75,11 @@ const validReview = [
 
 const validPagination = [
   check("page")
-    // .optional()
+    .optional()
     .isInt({ min: 1 }, { max: 10 })
     .withMessage("Page must be greater than or equal to 0"),
   check("size")
-    // .optional()
+    .optional()
     .isInt({ min: 1 }, { max: 20 })
     .withMessage("Size must be greater than or equal to 0"),
   check("minLat")
