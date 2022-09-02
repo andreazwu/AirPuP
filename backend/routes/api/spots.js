@@ -73,35 +73,33 @@ const validReview = [
   handleValidationErrors
 ]
 
-// const validBooking = [
-//   check('endDate')
-//     .exists({ checkFalsy: true })
-//     .withMessage('endDate is required')
-//     .isAfter('startDate')
-//     .withMessage('endDate cannot be on or before startDate'),
-//   handleValidationErrors
-// ]
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 
 
 // Get all spots
 router.get("/", async (req, res) => {
-  let { size, page } = req.query
+  //query:
+  const { page, size, minLat, maxLat,
+    minLng, maxLng, minPrice, maxPrice } = req.query
 
-  if (!page) page = 1
-  if (!size) size = 20
+  page = parseInt(page)
+  size = parseInt(size)
+  minLat = parseFloat(minLat)
+  maxLat = parseFloat(maxLat)
+  minLng = parseFloat(minLng)
+  maxLng = parseFloat(maxLng)
+  minPrice = parseFloat(minPrice)
+  maxPrice = parseFloat(maxPrice)
 
-  page = parseInt(page);
-  size = parseInt(size);
+  let pagination = {}
 
-  const pagination = {}
+  //isNaN(null) = false; isNaN(undefined) = true
+  if (!page || isNaN(page)) page = 1
+  if (!size || isNaN(size)) size = 20
 
-  if (page >= 1 && size >= 1) {
-    pagination.limit = size
-    pagination.offset = size * (page - 1)
-
-  }
+  pagination.limit = size
+  pagination.offset = size * (page - 1)
 
   //get an ARRAY of current users owned spots
   const allSpots = await Spot.findAll({
