@@ -41,16 +41,13 @@ router.get("/current", requireAuth, async (req, res, next) => {
   for (let i = 0; i < reviews.length; i++) {
     const reviewObj = reviews[i].toJSON()
 
-    const image = await ReviewImage.findAll({
-      where: { reviewId: reviewObj.id },
-      attributes: ["url"]
-    })
-
-    if (!image.length) {
-      reviewObj.previewImage = "no image"
+    if (!reviewObj.Spot.SpotImages) {
+      reviewObj.Spot.previewImage = "no image"
     } else {
-      reviewObj.previewImage = image[0].url //<<<< array
+      reviewObj.Spot.previewImage = reviewObj.Spot.SpotImages[0].url
     }
+
+    delete reviewObj.Spot.SpotImages //<<<<<<
 
     reviewList.push(reviewObj)
   }
@@ -97,11 +94,11 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   }
 
   const newReviewImage = await ReviewImage.create({
-    url: url,
+    url,
     reviewId: review.id
   })
 
-  const reviewImage = await Image.findByPk(newReviewImage.id, {
+  const reviewImage = await ReviewImage.findByPk(newReviewImage.id, {
     attributes: ["id", "url"]
   })
 
@@ -162,12 +159,6 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
 //     statusCode: 404
 //   })
 // })
-
-
-
-
-
-
 
 
 
