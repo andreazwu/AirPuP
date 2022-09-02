@@ -12,6 +12,20 @@ const { Op } = require("sequelize");
 
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
+const validReview = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .isInt({ min: 1, max: 5 })
+    .withMessage('Stars must be an integer from 1 to 5'),
+  handleValidationErrors
+]
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
 
 
 // Get all Reviews of the Current User
@@ -54,6 +68,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
 
   return res.json({ Reviews: reviewList })
 })
+
 
 
 // Add an Image to a Review based on the Reviews id
@@ -105,33 +120,53 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   return res.json(reviewImage)
 })
 
-// // Edit a Review
-// router.put("/:reviewId", requireAuth, validateReview, async (req, res, next) => {
-//   const userReview = await Review.findByPk(req.params.reviewId);
-//   if (userReview) {
-//     if (userReview.userId === req.user.id) {
-//       const { review, stars } = req.body
 
-//       if (review) userReview.review = review
-//       if (stars) userReview.stars = stars
-//       await userReview.save()
 
-//       res.json(userReview)
-//     }
 
-//     // if review does not belong to current user
-//     else res.status(401).json({
-//       message: "Unauthorized user",
-//       statusCode: 401
-//     })
-//   }
+// Edit a Review
+router.put("/:reviewId", [requireAuth, validReview], async (req, res) => {
 
-//   // if review not found
-//   else res.status(404).json({
-//     message: "Review couldn't be found",
-//     statusCode: 404
-//   })
-// })
+  const { review, stars } = req.body
+  const { reviewId } = req.params
+  const { user } = req
+
+  const editReview = await Review.findByPk(reviewId)
+
+  if (!editReview) {
+    res.status(404)
+    return res.json({
+      "message": "Review couldn't be found",
+      "statusCode": 404
+    })
+  }
+
+  if (editReview.userId !== user.id) {
+    res.status(403)
+    return res.json({
+      "message": "This is NOT your review!!",
+      "statusCode": 403
+    })
+  }
+
+  try {
+    await editReview.update({ review, stars }) //<<<<<<
+    return res.json(editReview)
+
+  } catch (error) {
+    res.status(400)
+    return res.json({
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "review": "Review text is required",
+        "stars": "Stars must be an integer from 1 to 5",
+      }
+    })
+  }
+})
+
+
+
 
 // // Delete a Review
 // router.delete("/:reviewId", requireAuth, async (req, res, next) => {
