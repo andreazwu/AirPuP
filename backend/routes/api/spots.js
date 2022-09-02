@@ -301,8 +301,8 @@ router.put("/:spotId", [validSpot, requireAuth], async (req, res) => {
 
   const { address, city, state, country,
     lat, lng, name, description, price } = req.body
-
   const { spotId } = req.params
+  const { user } = req
 
   const spot = await Spot.findByPk(spotId)
 
@@ -315,6 +315,14 @@ router.put("/:spotId", [validSpot, requireAuth], async (req, res) => {
   }
 
   try {
+    if (spot.ownerId !== user.id) {
+      res.status(403)
+      return res.json({
+        "message": "This is NOT your property!!",
+        "statusCode": 403
+      })
+    }
+
     await spot.update({ //<<<<<<
       address,
       city,
@@ -352,25 +360,34 @@ router.put("/:spotId", [validSpot, requireAuth], async (req, res) => {
 
 
 // Delete a Spot
-router.delete('/:spotId', restoreUser, requireAuth, async (req, res, next) => {
+router.delete('/:spotId', requireAuth, async (req, res) => {
   const { spotId } = req.params
+  const { user } = req
 
-  const deleteSpot = await Spot.findByPk(spotId)
+  const spot = await Spot.findByPk(spotId)
 
-  if (!deleteSpot) {
-    res.statusCode = 404,
-      res.json({
-        "message": "Spot couldn't be found",
-        "statusCode": 404
+  if (!spot) {
+    res.status(404)
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+
+  } else {
+    if (spot.ownerId !== user.id) {
+      res.status(403)
+      return res.json({
+        "message": "This is NOT your property!!",
+        "statusCode": 403
       })
+    }
+
+    await spot.destroy()
+    return res.json({
+      "message": "Successfully deleted",
+      "statusCode": 200
+    })
   }
-
-  await deleteSpot.destroy()
-  res.json({
-    "message": "Successfully deleted",
-    "statusCode": 200
-  })
-
 })
 
 
