@@ -36,17 +36,17 @@ const validSpot = [
   check("lat")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .isFloat({ min: -90, max: 90 })
+    .isFloat({ min: -90 }, { max: 90 })
     .withMessage("Latitude is not valid"),
   check("lng")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .isFloat({ min: -180, max: 180 })
+    .isFloat({ min: -180 }, { max: 180 })
     .withMessage("Longitude is not valid"),
   check("name")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .isLength({ min: 1, max: 50 })
+    .isLength({ min: 1 }, { max: 50 })
     .withMessage("Name must be less than 50 characters"),
   check("description")
     .exists({ checkFalsy: true })
@@ -68,113 +68,91 @@ const validReview = [
   check("stars")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .isInt({ min: 1, max: 5 })
+    .isInt({ min: 1 }, { max: 5 })
     .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrors
 ]
 
-// const validPagination = [
-//   check("page")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         val = parseInt(val)
-//         if (Number.isInteger(val) && val >= 0 && val <= 10) return true
-//       }
-//     })
-//     .withMessage("Page must be greater than or equal to 0"),
-//   check("size")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         val = parseInt(val)
-//         if (Number.isInteger(val) && val >= 0 && val <= 10) return true
-//       }
-//     })
-//     .withMessage("Size must be greater than or equal to 0"),
-//   check("minLat")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         if (!isNaN(val) && val.includes(".")) return true
-//       }
-//     })
-//     .withMessage("Minimum latitude is invalid",),
-//   check("maxLat")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         if (!isNaN(val) && val.includes(".")) return true
-//       }
-//     })
-//     .withMessage("Maximum latitude is invalid",),
-//   check("minLng")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         if (!isNaN(val) && val.includes(".")) return true
-//       }
-//     })
-//     .withMessage("Minimum longitude is invalid"),
-//   check("maxLng")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         if (!isNaN(val) && val.includes(".")) return true
-//       }
-//     })
-//     .withMessage("Maximum longitude is invalid"),
-//   check("minPrice")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         if (val > 0) return true
-//       }
-//     })
-//     .withMessage("Minimum price must be greater than or equal to 0"),
-//   check("maxPrice")
-//     .custom(val => {
-//       if (!val) return true
-//       if (val) {
-//         if (val > 0) return true
-//       }
-//     })
-//     .withMessage("Maximum price must be greater than or equal to 0"),
-
-//   handleValidationErrors
-// ]
+const validPagination = [
+  check("page")
+    // .optional()
+    .isInt({ min: 1 }, { max: 10 })
+    .withMessage("Page must be greater than or equal to 0"),
+  check("size")
+    // .optional()
+    .isInt({ min: 1 }, { max: 20 })
+    .withMessage("Size must be greater than or equal to 0"),
+  check("minLat")
+    .optional()
+    .isDecimal()
+    .withMessage("Minimum latitude is invalid",),
+  check("maxLat")
+    .optional()
+    .isDecimal()
+    .withMessage("Maximum latitude is invalid",),
+  check("minLng")
+    .optional()
+    .isDecimal()
+    .withMessage("Minimum longitude is invalid"),
+  check("maxLng")
+    .optional()
+    .isDecimal()
+    .withMessage("Maximum longitude is invalid"),
+  check("minPrice")
+    .optional()
+    .isDecimal({ min: 0 })
+    .withMessage("Minimum price must be greater than or equal to 0"),
+  check("maxPrice")
+    .optional()
+    .isDecimal({ min: 0 })
+    .withMessage("Maximum price must be greater than or equal to 0"),
+  handleValidationErrors
+]
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 
 
 // Get all spots
-router.get("/", async (req, res) => {
-  // //query:
-  // const { page, size, minLat, maxLat,
-  //   minLng, maxLng, minPrice, maxPrice } = req.query
+router.get("/", validPagination, async (req, res) => {
+  //query filters:
+  let { page, size, minLat, maxLat,
+    minLng, maxLng, minPrice, maxPrice } = req.query
 
-  // page = parseInt(page)
-  // size = parseInt(size)
-  // minLat = parseFloat(minLat)
-  // maxLat = parseFloat(maxLat)
-  // minLng = parseFloat(minLng)
-  // maxLng = parseFloat(maxLng)
-  // minPrice = parseFloat(minPrice)
-  // maxPrice = parseFloat(maxPrice)
+  let pagination = {}
 
-  // let pagination = {}
+  page = parseInt(page)
+  size = parseInt(size)
 
-  // //isNaN(null) = false; isNaN(undefined) = true
-  // if (!page || isNaN(page)) page = 1
-  // if (!size || isNaN(size)) size = 20
+  //isNaN(null) = false; isNaN(undefined) = true
+  if (!page || isNaN(page)) page = 1
+  if (!size || isNaN(size)) size = 20
 
-  // pagination.limit = size
-  // pagination.offset = size * (page - 1)
+  pagination.limit = size
+  pagination.offset = size * (page - 1)
+
+  let where = {}
+
+  minLat = parseFloat(minLat)
+  maxLat = parseFloat(maxLat)
+  minLng = parseFloat(minLng)
+  maxLng = parseFloat(maxLng)
+  minPrice = parseFloat(minPrice)
+  maxPrice = parseFloat(maxPrice)
+
+  if (minLat) where.lat = { [Op.gte]: minLat }
+  if (maxLat) where.lat = { [Op.lte]: maxLat }
+  if (minLng) where.lng = { [Op.gte]: minLng }
+  if (maxLng) where.lng = { [Op.lte]: maxLng }
+  if (minPrice) where.price = { [Op.gte]: minPrice }
+  if (maxPrice) where.price = { [Op.lte]: maxPrice }
+
 
   //get an ARRAY of current users owned spots
   const allSpots = await Spot.findAll({
-    // ...pagination
+    where,
+    ...pagination
   })
+
 
   let spotList = []
 
@@ -211,8 +189,8 @@ router.get("/", async (req, res) => {
 
   return res.json({
     Spots: spotList,
-    // page,
-    // size
+    page,
+    size
   })
 })
 
@@ -549,7 +527,7 @@ router.post("/:spotId/reviews", [validReview, requireAuth], async (req, res) => 
 
 //------Bookings-------
 
-// Get all Bookings for a Spot based on the Spot"s id
+// Get all Bookings for a Spot based on the Spot id
 router.get("/:spotId/bookings", requireAuth, async (req, res) => {
   const { spotId } = req.params
   const { user } = req
