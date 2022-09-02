@@ -124,94 +124,9 @@ router.get('/', async (req, res) => {
     page,
     size
   })
-
 })
 
-// // // get all spots
-// // // eager loading (doesn't work?? only return first spot)
-
-// router.get("/", async (req, res) => {
-//   const allSpots = await Spot.findAll({
-//     include: [
-//       { model: Review, attributes: [] },
-//       { model: SpotImage }
-//     ],
-//     attributes: {
-//       include: [
-//         [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
-//       ]
-//     },
-//     raw: true
-//   })
-
-//   let spotList = []
-
-//   allSpots.forEach(spot => {
-//     spotList.push(spot.toJSON())
-//   })
-
-//   spotList.forEach(spot => {
-//     spot.SpotImages.forEach(image => {
-//       if (image.preview === true) {
-//         spot.previewImage = image.url
-//       }
-//     })
-//     if (!spot.SpotImages) {
-//       spot.previewImage = "no image"
-//     }
-//     delete spot.SpotImages
-//   })
-
-//   return res.json(spotList)
-// })
-
-
-
-//create a spot
-//id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, and updatedAt
-router.post('/', [validSpot, requireAuth], async (req, res) => {
-
-  const { address, city, state, country,
-    lat, lng, name, description, price } = req.body
-
-  try {
-    const createSpot = await Spot.create({
-      ownerId: req.user.id,
-      address,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      name,
-      description,
-      price
-    })
-
-    res.status(201)
-    return res.json(createSpot)
-
-  } catch (error) {
-    res.status(400)
-    return res.json({
-      "message": "Validation Error",
-      "statusCode": 400,
-      "errors": {
-        "address": "Street address is required",
-        "city": "City is required",
-        "state": "State is required",
-        "country": "Country is required",
-        "lat": "Latitude is not valid",
-        "lng": "Longitude is not valid",
-        "name": "Name must be less than 50 characters",
-        "description": "Description is required",
-        "price": "Price per day is required"
-      }
-    })
-  }
-
-
-});
+// Question re: eager-loading - notes
 
 
 // Get all Spots owned by the Current User
@@ -262,32 +177,47 @@ router.get('/current', requireAuth, async (req, res) => {
 // Get details of a Spot from an id
 // id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, and updatedAt
 //"numReviews", "avgStarRating", "SpotImages", "Owner"
-
 router.get("/:spotId", async (req, res) => {
   const { spotId } = req.params
 
-  const spotById = await Spot.findByPk(spotId, {
-    include: [
-      { model: SpotImage, attributes: ["id", "url", "preview"] },
-      { model: User, attributes: ["id", "firstName", "lastName"] }
-    ]
+  const spot = await Spot.findByPk(spotId, {
+    include: [{
+      model: SpotImage,
+      attributes: ['id', 'url', 'preview']
+    }, {
+      model: User,
+      as: 'Owner', //<<<<<<<
+      attributes: ['id', 'firstName', 'lastName']
+    }]
   })
 
-  if (!spotById) {
+  if (spot) {
+    const spotObj = spot.toJSON()
+
+    const numReviews = await Review.count({
+      where: { spotId }
+    })
+
+    spotObj.numReviews = numReviews
+
+    const rating = await Review.findAll({
+      where: { spotId },
+      attributes: [[sequelize.fn('AVG', sequelize.col("stars")), 'avgRating']]
+    })
+
+    spotObj.avgRating = rating[0].toJSON().avgRating
+
+    return res.json(spotObj)
+
+  } else {
+
     res.status(404)
     return res.json({
       "message": "Spot couldn't be found",
       "statusCode": 404
     })
-  } else {
-    const numReviews = await Review.count({ where: { spotId } })
-    const avgRating = await Review.findAll({
-      where: { spotId },
-      attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]]
-    })
+
   }
-
-
 
 })
 
@@ -302,15 +232,49 @@ router.get("/:spotId", async (req, res) => {
 
 
 
-// Create a Spot
-// Creates and returns a new spot.
+//create a spot
+//id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, and updatedAt
+router.post('/', [validSpot, requireAuth], async (req, res) => {
 
-//  An authenticated user is required for a successful response
-//  New spot exists in the database after request
-//  Spot data returned includes the id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, and updatedAt
-//  Error response with status 400 is given when body validations for the address, city, state, country, lat, lng, name, description, or price are violated
-router.post("/")
+  const { address, city, state, country,
+    lat, lng, name, description, price } = req.body
 
+  try {
+    const createSpot = await Spot.create({
+      ownerId: req.user.id,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price
+    })
+
+    res.status(201)
+    return res.json(createSpot)
+
+  } catch (error) {
+    res.status(400)
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {
+        "address": "Street address is required",
+        "city": "City is required",
+        "state": "State is required",
+        "country": "Country is required",
+        "lat": "Latitude is not valid",
+        "lng": "Longitude is not valid",
+        "name": "Name must be less than 50 characters",
+        "description": "Description is required",
+        "price": "Price per day is required"
+      }
+    })
+  }
+});
 
 
 module.exports = router;
