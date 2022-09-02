@@ -404,7 +404,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
 
 //------Reviews-------
 
-// Get all Reviews by a Spots id
+// Get all Reviews by a Spot id
 router.get("/:spotId/reviews", async (req, res) => {
   const { spotId } = req.params
 
@@ -473,6 +473,48 @@ router.post("/:spotId/reviews", [validReview, requireAuth], async (req, res) => 
 })
 
 
+//------Bookings-------
+
+// Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+  const { spotId } = req.params
+  const { user } = req
+
+  const spot = await Spot.findByPk(spotId)
+
+  if (!spot) {
+    res.status(404)
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+
+  if (spot.ownerId !== user.id) {
+    const notOwnerBooking = await Booking.findAll({
+      attributes: ["spotId", "startDate", "endDate"],
+      where: {
+        spotId: spot.id,
+        userId: user.id
+      }
+    })
+    return res.json({ Bookings: notOwnerBooking })
+
+  } else {
+    const ownerBookings = await Booking.findAll({
+      where: {
+        spotId: spotId,
+        // userId: user.id
+      },
+      include: {
+        model: User,
+        attributes: ['id', 'firstName', 'lastName'],
+      }
+    })
+    return res.json({ Bookings: ownerBookings })
+  }
+
+})
 
 
 module.exports = router;
