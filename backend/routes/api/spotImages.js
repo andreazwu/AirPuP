@@ -32,7 +32,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
   if (image.Spot.ownerId !== user.id) {
     res.status(403)
     return res.json({
-      "message": "This is NOT your property!!",
+      "message": "Forbidden. This is NOT your property!!",
       "statusCode": 403
     })
   }

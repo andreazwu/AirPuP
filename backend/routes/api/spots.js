@@ -381,7 +381,7 @@ router.put("/:spotId", [validSpot, requireAuth], async (req, res) => {
     if (spot.ownerId !== user.id) {
       res.status(403)
       return res.json({
-        "message": "This is NOT your property!!",
+        "message": "Forbidden. This is NOT your property!!",
         "statusCode": 403
       })
     }
@@ -440,7 +440,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
     if (spot.ownerId !== user.id) {
       res.status(403)
       return res.json({
-        "message": "This is NOT your property!!",
+        "message": "Forbidden. This is NOT your property!!",
         "statusCode": 403
       })
     }
@@ -590,7 +590,7 @@ router.post("/:spotId/bookings", [requireAuth], async (req, res) => {
   if (spot.ownerId === user.id) {
     res.status(403)
     return res.json({
-      "message": "You shouldn't book your own spot!!",
+      "message": "Forbidden. You shouldn't book your own spot!!",
       "statusCode": 403
     })
   }

@@ -85,7 +85,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
   if (booking.userId !== user.id) {
     res.status(403)
     return res.json({
-      "message": "This is NOT your booking!!",
+      "message": "Forbidden. This is NOT your booking!!",
       "statusCode": 403
     })
   }
@@ -174,7 +174,7 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
   if (booking.userId !== user.id && booking.Spot.ownerId !== user.id) {
     res.status(403)
     return res.json({
-      "message": "You do not have access to this booking",
+      "message": "Forbidden. You do not have access to this booking",
       "statusCode": 403
     })
   }
