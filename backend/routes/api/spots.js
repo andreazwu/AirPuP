@@ -61,15 +61,15 @@ const validSpot = [
 ]
 
 const validReview = [
-  check('review')
+  check("review")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage('Review text is required'),
-  check('stars')
+    .withMessage("Review text is required"),
+  check("stars")
     .exists({ checkFalsy: true })
     .notEmpty()
     .isInt({ min: 1, max: 5 })
-    .withMessage('Stars must be an integer from 1 to 5'),
+    .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrors
 ]
 
@@ -431,7 +431,7 @@ router.get("/:spotId/reviews", async (req, res) => {
 
 
 // Create a Review for a Spot based on the Spot id
-router.post('/:spotId/reviews', [validReview, requireAuth], async (req, res) => {
+router.post("/:spotId/reviews", [validReview, requireAuth], async (req, res) => {
 
   const { spotId } = req.params
   const { user } = req
