@@ -6,6 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 
 function App() {
+
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -13,8 +14,9 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return isLoaded && (
+  return (
     <>
+    {isLoaded &&
     <Switch>
 
       <Route exact path='/'>
@@ -30,6 +32,7 @@ function App() {
       </Route>
 
     </Switch>
+    }
     </>
   );
 }
