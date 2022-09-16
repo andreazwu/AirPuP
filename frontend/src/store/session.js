@@ -1,18 +1,3 @@
-
-/*
-{
-  user: {
-    id,
-    email,
-    username,
-    createdAt,
-    updatedAt
-  }
-}
-*/
-
-//const initialState = { user: null }
-
 import { csrfFetch } from './csrf';
 
 const SET_USER = 'session/setUser';
@@ -73,3 +58,20 @@ const sessionReducer = (state = initialState, action) => {
 };
 
 export default sessionReducer;
+
+
+/*
+state shape
+
+{
+  user: {
+    id,
+    email,
+    username,
+    createdAt,
+    updatedAt
+  }
+}
+
+initialState = { user: null }
+*/
