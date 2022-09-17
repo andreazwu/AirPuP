@@ -74,7 +74,8 @@ router.delete('/', (_req, res) => {
 
 
 // Restore session user & get current user
-router.get('/', [restoreUser, requireAuth], async (req, res) => {
+router.get('/', [restoreUser], async (req, res) => {
+  console.log("in the backend route")
   const { user } = req
 
   if (user) {
@@ -82,11 +83,12 @@ router.get('/', [restoreUser, requireAuth], async (req, res) => {
       user: user.toSafeObject()
     })
   } else {
-    res.status(401)
-    return res.json({
-      message: "Authentication required",
-      statusCode: 401
-    })
+    // res.status(401)
+    // return res.json({
+    //   message: "Authentication required",
+    //   statusCode: 401
+    // })
+    res.json({user:null})
   }
 })
 
