@@ -82,14 +82,7 @@ router.get('/', [restoreUser], async (req, res) => {
     return res.json({
       user: user.toSafeObject()
     })
-  } else {
-    // res.status(401)
-    // return res.json({
-    //   message: "Authentication required",
-    //   statusCode: 401
-    // })
-    res.json({user:null})
-  }
+  } else return res.json(null)
 })
 
 
