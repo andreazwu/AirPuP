@@ -5,23 +5,23 @@ import "./Spots.css"
 
 
 const LoadAllSpots = () => {
-  console.log("COMPONENT-LOADALLSPOTS RUNNING")
+  console.log("1 (2.2) COMPONENT-LOADALLSPOTS RUNNING")
   const dispatch = useDispatch()
 
   const spotsObj = useSelector((state)=>{
-    console.log("LOADALLSPOTS USE SELECTOR RUNNING")
+    console.log("2 (2.1/3) USE SELECTOR RUNNING")
     return state?.spots.allSpots
-  })
-  const spots = Object.values(spotsObj)
+  }) // {Spots: [{x}, {y}, {z}]}
+
+  const spots = Object.values(spotsObj) // [{x}, {y}, {z}]
 
   //dispatch THUNK AC
   useEffect(() => {
-    console.log("LOADALLSPOTS USE EFFECT RUNNING")
+    console.log("5 USE EFFECT RUNNING")
     dispatch(getAllSpots())
   }, [dispatch])
 
-  console.log("THIS IS THE CURRENT SPOTSOBJ RECEIVED FROM USE SELECTOR:", spotsObj)
-  console.log("THIS IS THE CURRENT SPOTS (object.values(spotsobj)) RECEIVED FROM USE SELECTOR:", spots)
+  console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "----------", spots)
 
   //conditional rendering:
   if (!spots) return null
@@ -32,8 +32,8 @@ const LoadAllSpots = () => {
         {
           spots.map((spot) => {
             <div key={spot.id} className="loadAllSpots-wrapper">
-              {console.log("RETURN COMPONENT LISTALLSPOTS:", spots)}
-              {spots}
+              {console.log("4 (2.5) RETURN:", spot)}
+              {spot}
             </div>
           })
         }

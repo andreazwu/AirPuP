@@ -25,17 +25,20 @@ export const getAllSpots = () => async (dispatch, getState) => {
 }
 
 // REDUCER:
+
 const initialState = {
   allSpots:{spotId:{}},
   // singleSpot:{}
 }
+
+// const initialState = {}
 
 const spotsReducer = (state = initialState, action) => {
   let newState
   switch (action.type){
     case LOAD_ALL_SPOTS:
       newState = {...state, allSpots:{...action.spots}}
-      // action.spots.forEach((spot) => newState[spot.id] = spot) //normalization
+      // action.spots.forEach((spot) => newState[spot.id] = spot)
       return newState
 
     default:
