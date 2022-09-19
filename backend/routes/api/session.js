@@ -89,6 +89,7 @@ router.get('/', [restoreUser], async (req, res) => {
     //   statusCode: 401
     // })
     res.json({user:null})
+    // res.json({})
   }
 })
 

@@ -13,7 +13,7 @@ const loadSpots = (spots) => {
 }
 
 
-// THUNKS:
+// THUNK ACs:
 // load all spots thunk
 export const getAllSpots = () => async (dispatch, getState) => {
   const response = await csrfFetch("/api/spots")
