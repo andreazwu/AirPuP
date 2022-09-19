@@ -3,7 +3,9 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation"
+import Navigation from "./components/Navigation";
+import LoadAllSpots from './components/Spots/LoadAllSpots';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -17,8 +19,10 @@ return (
     <Navigation isLoaded={isLoaded} />
     {isLoaded && (
       <Switch>
+
         <Route exact path='/'>
           <h1> Hello Yes I'm Still The Main Page... </h1>
+          <LoadAllSpots />
         </Route>
 
         <Route path="/signup">
