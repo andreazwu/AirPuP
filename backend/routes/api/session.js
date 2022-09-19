@@ -75,7 +75,7 @@ router.delete('/', (_req, res) => {
 
 // Restore session user & get current user
 router.get('/', [restoreUser], async (req, res) => {
-  console.log("in the backend route")
+  // console.log("in the backend route")
   const { user } = req
 
   if (user) {
