@@ -27,8 +27,8 @@ export const getAllSpots = () => async (dispatch, getState) => {
 // REDUCER:
 
 const initialState = {
-  allSpots:{spotId:{}},
-  // singleSpot:{}
+  allSpots:{},
+  singleSpot:{}
 }
 
 // const initialState = {}
@@ -37,8 +37,13 @@ const spotsReducer = (state = initialState, action) => {
   let newState
   switch (action.type){
     case LOAD_ALL_SPOTS:
-      newState = {...state, allSpots:{...action.spots}}
-      // action.spots.forEach((spot) => newState[spot.id] = spot)
+      console.log("SPOTSREDUCER LOADALLSPOTS BEGIN:", state)
+      newState = {...state}
+      const normalizedSpots = {}
+      // action.spots --> {Spots: [{x}, {y}, {z}]}
+      action.spots.Spots.forEach((spot) => normalizedSpots[spot.id] = spot)
+      newState.allSpots = normalizedSpots
+      console.log("SPOTSREDUCER LOADALLSPOTS END:", newState)
       return newState
 
     default:
@@ -48,3 +53,54 @@ const spotsReducer = (state = initialState, action) => {
 
 
 export default spotsReducer
+
+/*spots: {
+
+    allSpots: {
+      [spotId]: {
+         id,
+         ownerId,
+         address,
+         city,
+         state,
+         country
+         lat,
+         lng,
+         name,
+         description,
+         price,
+         avgRating,
+         previewImage
+      },
+      optionalOrderedList: []
+    },
+
+    singleSpot: {
+      id,
+      ownerId,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+      numReviews,
+      avgRating,
+      SpotImages: [
+         {
+            id,
+            url,
+            preview
+         }
+      ],
+      Owner: {
+         id,
+         firstName,
+         lastName
+      }
+    }
+  }
+ */
