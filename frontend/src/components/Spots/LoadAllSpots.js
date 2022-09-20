@@ -25,7 +25,8 @@ const LoadAllSpots = () => {
   console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "----------", spotsArr)
 
   //conditional rendering:
-  if (!spotsArr) return null
+  //recall empty arr/ obj is NOT falsy
+  if (!spotsArr.length) return null
 
   return (
     <>

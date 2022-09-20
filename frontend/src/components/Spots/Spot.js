@@ -17,7 +17,7 @@ const Spot = ({spot}) => {
 
         <div>
           {spot.avgRating ?
-            (<span>{spot.avgRating}</span>):
+            (<span>★{spot.avgRating}</span>):
             (<span>no rating</span>)
           }
         </div>

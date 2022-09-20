@@ -67,6 +67,7 @@ const spotsReducer = (state = initialState, action) => {
       console.log("SPOTSREDUCER LOADONESPOT BEGIN:", state)
       newState = {...state}
       newState.singleSpot = action.spot
+      console.log("SPOTSREDUCER LOADONESPOT END:", newState)
       return newState
 
 
