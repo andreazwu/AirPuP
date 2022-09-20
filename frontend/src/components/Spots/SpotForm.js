@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 import { createNewSpot } from "../../store/spots"
 import "./SpotForm.css"
 
@@ -7,6 +8,7 @@ const SpotForm = ({spot, formType}) => {
   console.log("1 COMPONENT-SPOTFORM RUNNING")
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const user = useSelector((state) => {
     console.log("2 USE SELECTOR RUNNING")
@@ -54,18 +56,27 @@ const SpotForm = ({spot, formType}) => {
 
 
 
-    const handleSubmit = async (e) => {
-      e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-      const newSpot = {
-        address, city, state, country, lat, lng, name, description, price
-      }
-      console.log("SPOTFORM - HANDLESUBMIT, NEWSPOT:", newSpot)
-
-      const result = await dispatch(createNewSpot(newSpot))
-      console.log("SPOTFORM - HANDLESUBMIT, RESULT AFTER DISPATCH:", result)
-
+    const spot = { ...spot,
+      address, city, state, country, lat, lng, name, description, price
     }
+
+    console.log("SPOTFORM HANDLESUBMIT, CURRENT SPOT:", spot)
+
+    if (formType==="create") {
+      const newSpot = await dispatch(createNewSpot(spot))
+      console.log("SPOTFORM HANDLESUBMIT - CREATE, RESULT AFTER DISPATCH:", newSpot)
+      //redirect to newly created spot
+      if (newSpot) history.push(`/spots/${newSpot.id}`)
+    }
+
+    else if (formType==="update") {
+      console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:")
+    }
+
+  }
 
 
 
