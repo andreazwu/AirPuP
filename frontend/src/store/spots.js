@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 // ACTION TYPES:
 const LOAD_ALL_SPOTS = "spots/LOAD_ALL_SPOTS"
+const LOAD_ONE_SPOT = "spots/LOAD_ONE_SPOT"
 
 
 // ACTION CREATORS:
@@ -12,6 +13,12 @@ const loadAllSpots = (spots) => {
   }
 }
 
+const loadOneSpot = (spot) => {
+  return {
+    type: LOAD_ONE_SPOT,
+    spot
+  }
+}
 
 // THUNK ACs:
 // load all spots thunk
@@ -23,6 +30,16 @@ export const getAllSpots = () => async (dispatch, getState) => {
     // return spots
   }
 }
+
+// load all spots thunk
+export const getOneSpot = (spotId) => async (dispatch, getState) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`)
+  if (response.ok) {
+    const spot = await response.json()
+    dispatch(loadOneSpot(spot))
+  }
+}
+
 
 // REDUCER:
 
@@ -45,6 +62,14 @@ const spotsReducer = (state = initialState, action) => {
       newState.allSpots = normalizedSpots
       console.log("SPOTSREDUCER LOADALLSPOTS END:", newState)
       return newState
+
+    case LOAD_ONE_SPOT:
+      console.log("SPOTSREDUCER LOADONESPOT BEGIN:", state)
+      newState = {...state}
+      newState.singleSpot = action.spot
+      return newState
+
+
 
     default:
       return state

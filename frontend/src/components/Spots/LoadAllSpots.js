@@ -41,6 +41,7 @@ const LoadAllSpots = () => {
         <div className="spot-container">
           {
             spotsArr.map((spot) => (
+              //implement spot in separate component; add prop
               <Spot key={spot.id} spot={spot}></Spot>
             ))
           }

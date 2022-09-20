@@ -8,7 +8,7 @@ const Spot = ({spot}) => {
 
         {spot.previewImage ?
           (<div><img src={spot.previewImage} /></div>) :
-          (<div>spot has no preview image</div>)
+          (<div><img src="" alt="spot has no preview image" /></div>)
         }
 
         <div>
@@ -23,7 +23,7 @@ const Spot = ({spot}) => {
         </div>
 
         <div>
-          <span>{spot.price}</span> night
+          $<span>{spot.price}</span> night
         </div>
 
 
