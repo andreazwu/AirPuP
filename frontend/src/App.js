@@ -6,6 +6,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import LoadAllSpots from './components/Spots/LoadAllSpots';
 import LoadOneSpot from './components/Spots/LoadOneSpot';
+import CreateSpot from './components/Spots/CreateSpot';
+// import EditSpot from './components/Spots/EditSpot';
 
 
 function App() {
@@ -30,6 +32,16 @@ return (
           <h1> Load One Spot~ </h1>
           <LoadOneSpot />
         </Route>
+
+        <Route path="/new">
+          <h1> Create A New Spot!! </h1>
+          <CreateSpot />
+        </Route>
+
+        {/* <Route path="/spots/:spotId/edit">
+          <h1> Edit A Spot~ </h1>
+          <EditSpot />
+        </Route> */}
 
         <Route path="/signup">
           <SignupFormPage />

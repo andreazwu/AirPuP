@@ -3,6 +3,8 @@ import { csrfFetch } from './csrf';
 // ACTION TYPES:
 const LOAD_ALL_SPOTS = "spots/LOAD_ALL_SPOTS"
 const LOAD_ONE_SPOT = "spots/LOAD_ONE_SPOT"
+const CREATE_SPOT = "spots/CREATE_SPOT"
+const UPDATE_SPOT = "spots/UPDATE_SPOT"
 
 
 // ACTION CREATORS:
@@ -20,6 +22,20 @@ const loadOneSpot = (spot) => {
   }
 }
 
+const createSpot = (spot) => {
+  return {
+    type: CREATE_SPOT,
+    spot
+  }
+}
+
+const updateSpot = (spot) => {
+  return {
+    type: UPDATE_SPOT,
+    spot
+  }
+}
+
 // THUNK ACs:
 // load all spots thunk
 export const getAllSpots = () => async (dispatch, getState) => {
@@ -31,12 +47,30 @@ export const getAllSpots = () => async (dispatch, getState) => {
   }
 }
 
-// load all spots thunk
+// load one spot thunk
 export const getOneSpot = (spotId) => async (dispatch, getState) => {
   const response = await csrfFetch(`/api/spots/${spotId}`)
   if (response.ok) {
     const spot = await response.json()
     dispatch(loadOneSpot(spot))
+  }
+}
+
+// create new spot thunk
+export const createNewSpot = (newspot) => async (dispatch, getState) => {
+  const response = await csrfFetch("/api/spots", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(newspot)
+  })
+
+  if (response.ok) {
+    const newspot = await response.json()
+    dispatch(createSpot(newspot))
+  } else {
+    //come back and do error handling logic <<<<<<<
+    const data = await response.json()
+    console.log(data)
   }
 }
 
@@ -70,7 +104,13 @@ const spotsReducer = (state = initialState, action) => {
       console.log("SPOTSREDUCER LOADONESPOT END:", newState)
       return newState
 
-
+    case CREATE_SPOT:
+      console.log("SPOTSREDUCER CREATESPOT BEGIN:", state)
+      newState = {...state}
+      //CREATE SPOT returns response: missing "avgRating", "previewImage"
+      newState.allSpots = {...state.allSpots, [action.spot.id]: action.spot}
+      console.log("SPOTSREDUCER CREATESPOT END:", newState)
+      return newState
 
     default:
       return state
@@ -79,6 +119,24 @@ const spotsReducer = (state = initialState, action) => {
 
 
 export default spotsReducer
+
+/* CREATE SPOT returns response: missing "avgRating", "previewImage":
+{
+  "id": 1,
+  "ownerId": 1,
+  "address": "123 Disney Lane",
+  "city": "San Francisco",
+  "state": "California",
+  "country": "United States of America",
+  "lat": 37.7645358,
+  "lng": -122.4730327,
+  "name": "App Academy",
+  "description": "Place where web developers are created",
+  "price": 123,
+  "createdAt": "2021-11-19 20:39:36",
+  "updatedAt": "2021-11-19 20:39:36"
+}
+ */
 
 /*spots: {
 
