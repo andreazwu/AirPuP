@@ -83,7 +83,7 @@ const LoadOneSpot = () => {
           </div>
           <div className="display-image">
             {displayImages.length ?
-              displayImages.map((image)=><img src={image.url}/>) :
+              displayImages.map((image)=><img key={image.id} src={image.url}/>) :
               // (<div></div>)
               (<div>listing has no other images</div>)
            }
