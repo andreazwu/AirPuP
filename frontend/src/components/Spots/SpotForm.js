@@ -49,7 +49,7 @@ const SpotForm = ({spot, formType}) => {
     if (!lng.length || lng > 180 || lng < -180) errorsArr.push("please enter a valid longitude between -180 and 180")
     if (!name.length || name.length > 50) errorsArr.push("please enter a valid name less than 50 characters")
     if (!description.length) errorsArr.push("please enter a description")
-    if (!price.length || price <=0 || !price.isInteger()) errorsArr.push("please enter a valid price per day - an integer greater than 0")
+    if (!price || price <=0) errorsArr.push("please enter a valid price per day - value must be greater than 0")
 
     setErrors(errorsArr)
   }, [address, city, state, country, lat, lng, name, description, price])
@@ -76,6 +76,7 @@ const SpotForm = ({spot, formType}) => {
       console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:")
     }
 
+    //setAttributes back to empty
   }
 
 
@@ -91,14 +92,86 @@ const SpotForm = ({spot, formType}) => {
         <h2>Become a host today!</h2>
 
         <div className="create-spot-container">
+
           <div>
-            {errors.map((error)=>(<div>{error}</div>))}
+            {errors?.map((error)=>(<div key={error}>{error}</div>))}
           </div>
 
-
-
-
+            <label>
+              Address:
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </label>
+            <label>
+              City:
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </label>
+            <label>
+              State:
+              <input
+                type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+            </label>
+            <label>
+              Country:
+              <input
+                type="text"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+            </label>
+            <label>
+              Latitude:
+              <input
+                type="number"
+                value={lat}
+                onChange={(e) => setLat(e.target.value)}
+              />
+            </label>
+            <label>
+              Longitude:
+              <input
+                type="number"
+                value={lng}
+                onChange={(e) => setLng(e.target.value)}
+              />
+            </label>
+            <label>
+              Name:
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+            <label>
+              Description:
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </label>
+            <label>
+              Price:
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </label>
         </div>
+
+        <button type="submit">Create Spot!</button>
 
       </form>
     </>
