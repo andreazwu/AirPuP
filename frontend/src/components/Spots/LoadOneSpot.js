@@ -24,17 +24,36 @@ const LoadOneSpot = () => {
 
   console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
 
+
+
+
+
+
   //conditional rendering:
   // if (!spot) return null
   if (!Object.values(spot).length) return null
 
+
+
+  //organize images (AFTER conditional rendering)
+  //SpotImages: [{id, url, preview}]
+  let displayImages = [...spot.SpotImages]
+  let previewImage = displayImages.find((image)=>{
+    return image.preview===true
+  })
+  if (!previewImage) previewImage = displayImages[0]
+  else displayImages.splice(displayImages.indexOf(previewImage),1)
+
+  console.log(`THIS IS THE DISPLAY IMAGES ARR: ${displayImages}; THIS IS THE PREVIEW IMAGE: ${previewImage}`)
+
+
+
   return (
     <>
       <div className="whole-container">
-        <div className="spot-container">
         Heyaa this is spot # {spotId}
 
-
+        <div className="title-whole">
           <div>
             <h2>{spot.name}</h2>
           </div>
@@ -53,8 +72,39 @@ const LoadOneSpot = () => {
               {spot.city}, {spot.state}, {spot.country}
             </span>
           </div>
-
         </div>
+
+        <div className="pictures-container">
+          <div className="preview-image">
+            {previewImage ?
+              (<img src={previewImage.url}/>) :
+              (<div>listing has no images</div>)
+            }
+          </div>
+          <div className="display-image">
+            {displayImages.length ?
+              displayImages.map((image)=><img src={image.url}/>) :
+              // (<div></div>)
+              (<div>listing has no other images</div>)
+           }
+          </div>
+        </div>
+
+        <div className="below-pictures">
+          <div>
+            Hosted by: {spot.Owner.firstName}
+          </div>
+          <div>
+            {spot.description}
+          </div>
+          <div>
+            ${spot.price}
+          </div>
+        </div>
+
+
+
+
       </div>
     </>
   )
