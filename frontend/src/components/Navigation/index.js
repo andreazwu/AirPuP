@@ -1,35 +1,50 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal';
-import './Navigation.css';
+import React, { useState } from "react"
+import { NavLink, Link, useHistory } from "react-router-dom"
+import { useSelector } from "react-redux"
+import ProfileButton from "./ProfileButton"
+import LoginFormModal from "../LoginFormModal"
+import "./Navigation.css"
+
 
 function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+  console.log("1 COMPONENT-NAVIGATION RUNNING")
+  const history = useHistory()
+  const sessionUser = useSelector(state => state.session.user)
 
-  let sessionLinks;
+  let sessionLinks
   if (sessionUser) {
     sessionLinks = (
       <ProfileButton user={sessionUser} />
-    );
+    )
   } else {
     sessionLinks = (
       <>
         <LoginFormModal />
         <NavLink to="/signup">Sign Up</NavLink>
       </>
-    );
+    )
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
-  );
+    <div>
+      <ul>
+
+        <div className="home-logo">
+          <li>
+            <i className="fa fa-tree" aria-hidden="true"></i>
+            <NavLink exact to="/">FodlanBnB</NavLink>
+            {isLoaded && sessionLinks}
+          </li>
+        </div>
+
+        <div className="navbar">
+          <Link to="/new">Become A Host</Link>
+        </div>
+
+      </ul>
+    </div>
+
+  )
 }
 
-export default Navigation;
+export default Navigation

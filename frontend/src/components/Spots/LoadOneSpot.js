@@ -26,9 +26,6 @@ const LoadOneSpot = () => {
 
 
 
-
-
-
   //conditional rendering:
   // if (!spot) return null
   if (!Object.values(spot).length) return null
