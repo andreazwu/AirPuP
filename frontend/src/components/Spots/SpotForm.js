@@ -65,9 +65,15 @@ const SpotForm = ({spot, formType}) => {
 
     if (formType==="create") {
       const newSpot = await dispatch(createNewSpot(spot))
-      console.log("SPOTFORM HANDLESUBMIT - CREATE, RESULT AFTER DISPATCH:", newSpot)
+      console.log("SPOTFORM HANDLESUBMIT - CREATE, RESULT AFTER DISPATCH:", newSpot) //<<< newSpot undefined at time of console-logging
+
+      // history.push("/")
       //redirect to newly created spot -- cannot read id <<<<<<
-      // history.push(`/spots/${newSpot.id}`)
+      if (newSpot) history.push(`/spots/${newSpot.id}`)
+
+      // //doesn't work:
+      // await dispatch(createNewSpot(spot))
+      //   .then((newSpot)=>history.push(`/spots/${newSpot.id}`))
     }
 
     else if (formType==="update") {
@@ -88,7 +94,7 @@ const SpotForm = ({spot, formType}) => {
     setErrors([])
     setHasSubmitted(false)
 
-    history.push("/")
+    // history.push("/")
   }
 
 
@@ -100,12 +106,19 @@ const SpotForm = ({spot, formType}) => {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <h2>Become a host today!</h2>
+        <h2>Please Enter Your Spot Info: </h2>
 
         <div className="create-spot-container">
 
 
-
+            <label>
+              Name:
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
             <label>
               Address:
               <input
@@ -155,14 +168,6 @@ const SpotForm = ({spot, formType}) => {
               />
             </label>
             <label>
-              Name:
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-            <label>
               Description:
               <input
                 type="text"
@@ -180,7 +185,7 @@ const SpotForm = ({spot, formType}) => {
             </label>
         </div>
 
-        <button type="submit">Create Spot!</button>
+        <button type="submit">Submit</button>
 
       </form>
     </>

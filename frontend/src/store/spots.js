@@ -76,6 +76,7 @@ export const createNewSpot = (newspot) => async (dispatch, getState) => {
   if (response.ok) {
     const newspot = await response.json()
     dispatch(createSpot(newspot))
+    return newspot //<<<<<<
   } else {
     //come back and do error handling logic <<<<<<<
     const data = await response.json()
