@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 import LoadAllSpots from './components/Spots/LoadAllSpots';
 import LoadOneSpot from './components/Spots/LoadOneSpot';
 import CreateSpot from './components/Spots/CreateSpot';
-// import EditSpot from './components/Spots/EditSpot';
+import EditSpot from './components/Spots/EditSpot';
 
 
 function App() {
@@ -37,10 +37,10 @@ return (
           <CreateSpot />
         </Route>
 
-        {/* <Route path="/spots/:spotId/edit">
+        <Route path="/edit/:spotId">
           <h1> Edit A Spot~ </h1>
           <EditSpot />
-        </Route> */}
+        </Route>
 
       </Switch>
     )}

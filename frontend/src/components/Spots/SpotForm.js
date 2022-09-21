@@ -57,7 +57,7 @@ const SpotForm = ({spot, formType}) => {
     if (errors.length) alert ("Please provide a valid entry!")
 
     const spot = {
-      ...spot,
+      // ...spot, //Cannot access 'spot' before initialization <<<<
       address, city, state, country, lat, lng, name, description, price
     }
 
@@ -68,13 +68,11 @@ const SpotForm = ({spot, formType}) => {
       console.log("SPOTFORM HANDLESUBMIT - CREATE, RESULT AFTER DISPATCH:", newSpot)
       //redirect to newly created spot -- cannot read id <<<<<<
       // history.push(`/spots/${newSpot.id}`)
-      history.push(`/`)
     }
 
     else if (formType==="update") {
       const modifiedSpot = await dispatch(editSpot(spot))
       console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:", modifiedSpot)
-      history.push(`/`)
     }
 
     //setAttributes back to empty
@@ -89,6 +87,8 @@ const SpotForm = ({spot, formType}) => {
     setPrice("")
     setErrors([])
     setHasSubmitted(false)
+
+    history.push("/")
   }
 
 
