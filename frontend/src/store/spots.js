@@ -76,7 +76,7 @@ export const createNewSpot = (newspot) => async (dispatch, getState) => {
   if (response.ok) {
     const newspot = await response.json()
     dispatch(createSpot(newspot))
-    return newspot //<<<<<<
+    return newspot //<<<<<< must return (for spotform line 67)
   } else {
     //come back and do error handling logic <<<<<<<
     const data = await response.json()
@@ -95,6 +95,7 @@ export const editSpot = (myspot) => async (dispatch, getState) => {
   if (response.ok) {
     const spot = await response.json()
     dispatch(updateSpot(spot))
+    return spot
   } else {
     //come back and do error handling logic <<<<<<<
   }

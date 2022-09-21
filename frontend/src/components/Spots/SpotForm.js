@@ -67,18 +67,14 @@ const SpotForm = ({spot, formType}) => {
       const newSpot = await dispatch(createNewSpot(spot))
       console.log(newSpot) //<<< newSpot undefined at time of console-logging
 
-      // history.push("/")
       //redirect to newly created spot -- cannot read id <<<<<<
       if (newSpot) history.push(`/spots/${newSpot.id}`)
-
-      // //doesn't work:
-      // await dispatch(createNewSpot(spot))
-      //   .then((newSpot)=>history.push(`/spots/${newSpot.id}`))
     }
 
     else if (formType==="update") {
       const modifiedSpot = await dispatch(editSpot(spot))
       console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:", modifiedSpot)
+      if (modifiedSpot) history.push(`/spots/${modifiedSpot.id}`)
     }
 
     //setAttributes back to empty
@@ -94,7 +90,7 @@ const SpotForm = ({spot, formType}) => {
     setErrors([])
     setHasSubmitted(false)
 
-    // history.push("/")
+    history.push("/")
   }
 
 
