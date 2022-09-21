@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { getOneSpot } from "../../store/spots"
+import { useHistory, useParams } from "react-router-dom"
+import { getOneSpot, removeSpot } from "../../store/spots"
 import "./LoadOneSpot.css"
 
 const LoadOneSpot = () => {
   console.log("1 COMPONENT-LOADONESPOT RUNNING")
   const dispatch = useDispatch()
+  const history = useHistory()
   // const params = useParams()
   // const [spotId, setSpotId] = useState(+params.spotId)
   const { spotId } = useParams()
@@ -24,6 +25,12 @@ const LoadOneSpot = () => {
 
   console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
 
+
+  //handle delete spot click
+  const deleteSpotHandleClick = async () => {
+    await dispatch(removeSpot(spot.id))
+    history.push("/")
+  }
 
 
   //conditional rendering:
@@ -100,6 +107,14 @@ const LoadOneSpot = () => {
         </div>
 
 
+        <div>
+        <button onClick={() => history.push(`/edit/${spot.id}`)}>
+            Edit Spot
+          </button>
+          <button onClick={deleteSpotHandleClick}>
+            Delete Spot
+          </button>
+        </div>
 
 
       </div>
