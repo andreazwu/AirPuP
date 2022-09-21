@@ -65,7 +65,7 @@ const SpotForm = ({spot, formType}) => {
 
     if (formType==="create") {
       const newSpot = await dispatch(createNewSpot(spot))
-      console.log("SPOTFORM HANDLESUBMIT - CREATE, RESULT AFTER DISPATCH:", newSpot) //<<< newSpot undefined at time of console-logging
+      console.log(newSpot) //<<< newSpot undefined at time of console-logging
 
       // history.push("/")
       //redirect to newly created spot -- cannot read id <<<<<<
