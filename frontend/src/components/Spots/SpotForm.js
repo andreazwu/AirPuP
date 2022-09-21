@@ -69,7 +69,7 @@ const SpotForm = ({spot, formType}) => {
       const newSpot = await dispatch(createNewSpot(spot))
       console.log("SPOTFORM HANDLESUBMIT - CREATE, RESULT AFTER DISPATCH:", newSpot)
       //redirect to newly created spot
-      if (newSpot) history.push(`/spots/${newSpot.id}`)
+      history.push(`/spots/${newSpot.id}`)
     }
 
     else if (formType==="update") {
@@ -87,15 +87,16 @@ const SpotForm = ({spot, formType}) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <div>
+        {errors?.map((error)=>(<div key={error}>{error}</div>))}
+      </div>
 
+      <form onSubmit={handleSubmit}>
         <h2>Become a host today!</h2>
 
         <div className="create-spot-container">
 
-          <div>
-            {errors?.map((error)=>(<div key={error}>{error}</div>))}
-          </div>
+
 
             <label>
               Address:

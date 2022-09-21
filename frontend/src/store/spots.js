@@ -5,6 +5,7 @@ const LOAD_ALL_SPOTS = "spots/LOAD_ALL_SPOTS"
 const LOAD_ONE_SPOT = "spots/LOAD_ONE_SPOT"
 const CREATE_SPOT = "spots/CREATE_SPOT"
 const UPDATE_SPOT = "spots/UPDATE_SPOT"
+const DELETE_SPOT = "spots/DELETE_SPOT"
 
 
 // ACTION CREATORS:
@@ -35,6 +36,14 @@ const updateSpot = (spot) => {
     spot
   }
 }
+
+const deleteSpot = (spotId) => {
+  return {
+    type: DELETE_SPOT,
+    spotId
+  }
+}
+
 
 // THUNK ACs:
 // load all spots thunk
@@ -74,6 +83,33 @@ export const createNewSpot = (newspot) => async (dispatch, getState) => {
   }
 }
 
+// update spot thunk
+export const editSpot = (myspot) => async (dispatch, getState) => {
+  const response = await csrfFetch(`/api/spots/${myspot.id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(myspot)
+  })
+
+  if (response.ok) {
+    const spot = await response.json()
+    dispatch(updateSpot(spot))
+  } else {
+    //come back and do error handling logic <<<<<<<
+  }
+}
+
+// delete spot thunk
+export const removeSpot = (spotId) => async (dispatch, getState) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE"
+  })
+
+  if (response.ok) {
+    dispatch(deleteSpot(spotId))
+  }
+}
+
 
 // REDUCER:
 
@@ -110,6 +146,28 @@ const spotsReducer = (state = initialState, action) => {
       //CREATE SPOT returns response: missing "avgRating", "previewImage"
       newState.allSpots = {...state.allSpots, [action.spot.id]: action.spot}
       console.log("SPOTSREDUCER CREATESPOT END:", newState)
+      return newState
+
+    case UPDATE_SPOT:
+      console.log("SPOTSREDUCER UPDATESPOT BEGIN:", state)
+      newState = {...state}
+      // if (newState.allSpots[action.spot.id])
+      const updatedSpot = {...newState.allSpots[action.spot.id], ...action.spot}
+      console.log("SPOTSREDUCER UPDATESPOT UPDATED SPOT:", updatedSpot)
+
+      newState.singleSpot = {...state.singleSpot, ...updateSpot}
+      newState.allSpots = {...state.allSpots, [action.spot.id]: updatedSpot}
+      console.log("SPOTSREDUCER UPDATESPOT END:", newState)
+      return newState
+
+    case DELETE_SPOT:
+      console.log("SPOTSREDUCER DELETESPOT BEGIN:", state)
+      newState = {...state}
+      newState.allSpots = {...state.allSpots}
+      newState.singleSpot = {...state.singleSpot}
+      delete newState.allSpots[action.spotId]
+      if (newState.singleSpot.id === action.spotId) newState.singleSpot = {}
+      console.log("SPOTSREDUCER DELETESPOT END:", newState)
       return newState
 
     default:
