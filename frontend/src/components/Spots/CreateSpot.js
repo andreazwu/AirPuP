@@ -1,6 +1,4 @@
 import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { createNewSpot } from "../../store/spots"
 import SpotForm from "./SpotForm"
 import "./CreateSpot.css"
 
