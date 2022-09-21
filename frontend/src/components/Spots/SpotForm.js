@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { createNewSpot } from "../../store/spots"
+import { createNewSpot, editSpot } from "../../store/spots"
 import "./SpotForm.css"
 
 const SpotForm = ({spot, formType}) => {
@@ -30,13 +30,6 @@ const SpotForm = ({spot, formType}) => {
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  // //check if user is logged in
-  // useEffect(() => {
-  //   if (user) setErrors([])
-  //   else setErrors(["Must log in to create a spot"])
-  // }, [user]);
-  // //instead of useEffect, maybe try implement in onSubmit??
-
   //check for validation errors
   useEffect(() => {
     let errorsArr = []
@@ -58,8 +51,13 @@ const SpotForm = ({spot, formType}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setHasSubmitted(true)
 
-    const spot = { ...spot,
+    if (!user) alert ("You must log in/ sign up to become a host!")
+    if (errors.length) alert ("Please provide a valid entry!")
+
+    const spot = {
+      ...spot,
       address, city, state, country, lat, lng, name, description, price
     }
 
@@ -68,27 +66,37 @@ const SpotForm = ({spot, formType}) => {
     if (formType==="create") {
       const newSpot = await dispatch(createNewSpot(spot))
       console.log("SPOTFORM HANDLESUBMIT - CREATE, RESULT AFTER DISPATCH:", newSpot)
-      //redirect to newly created spot
-      history.push(`/spots/${newSpot.id}`)
+      //redirect to newly created spot -- cannot read id <<<<<<
+      // history.push(`/spots/${newSpot.id}`)
+      history.push(`/`)
     }
 
     else if (formType==="update") {
-      console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:")
+      const modifiedSpot = await dispatch(editSpot(spot))
+      console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:", modifiedSpot)
+      history.push(`/`)
     }
 
     //setAttributes back to empty
+    setAddress("")
+    setCity("")
+    setState("")
+    setCountry("")
+    setLat("")
+    setLng("")
+    setName("")
+    setDescription("")
+    setPrice("")
+    setErrors([])
+    setHasSubmitted(false)
   }
-
-
-
-
 
 
 
   return (
     <>
       <div>
-        {errors?.map((error)=>(<div key={error}>{error}</div>))}
+        {hasSubmitted && errors.map((error)=>(<div key={error}>{error}</div>))}
       </div>
 
       <form onSubmit={handleSubmit}>
