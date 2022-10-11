@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 // ACTION TYPES:
 const LOAD_ALL_SPOTS = "spots/LOAD_ALL_SPOTS"
+const LOAD_USER_SPOTS = "spots/LOAD_USER_SPOTS"
 const LOAD_ONE_SPOT = "spots/LOAD_ONE_SPOT"
 const CREATE_SPOT = "spots/CREATE_SPOT"
 const UPDATE_SPOT = "spots/UPDATE_SPOT"
@@ -12,6 +13,13 @@ const DELETE_SPOT = "spots/DELETE_SPOT"
 const loadAllSpots = (spots) => {
   return {
     type: LOAD_ALL_SPOTS,
+    spots
+  }
+}
+
+const loadUserSpots = (spots) => {
+  return {
+    type: LOAD_USER_SPOTS,
     spots
   }
 }
@@ -53,6 +61,15 @@ export const getAllSpots = () => async (dispatch, getState) => {
     const spots = await response.json() //array
     dispatch(loadAllSpots(spots))
     // return spots
+  }
+}
+
+//load user spots thunk
+export const getUserSpots = () => async (dispatch, getState) => {
+  const response = await csrfFetch("/api/spots/current")
+  if (response.ok) {
+    const spots = await response.json() //array
+    dispatch(loadAllSpots(spots))
   }
 }
 
@@ -132,6 +149,16 @@ const spotsReducer = (state = initialState, action) => {
       // action.spots --> {Spots: [{x}, {y}, {z}]}
       action.spots.Spots.forEach((spot) => normalizedSpots[spot.id] = spot)
       newState.allSpots = normalizedSpots
+      console.log("SPOTSREDUCER LOADALLSPOTS END:", newState)
+      return newState
+
+    case LOAD_USER_SPOTS:
+      console.log("SPOTSREDUCER LOADUSERSPOTS BEGIN:", state)
+      newState = {...state}
+      const normalizedUserSpots = {}
+      // action.spots --> {Spots: [{x}, {y}, {z}]}
+      action.spots.Spots.forEach((spot) => normalizedUserSpots[spot.id] = spot)
+      newState.allSpots = normalizedUserSpots
       console.log("SPOTSREDUCER LOADALLSPOTS END:", newState)
       return newState
 

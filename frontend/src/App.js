@@ -12,6 +12,7 @@ import EditSpot from './components/Spots/EditSpot';
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -22,7 +23,7 @@ return (
     {isLoaded && (
       <Switch>
 
-        <Route exact path='/'>
+        <Route exact path="/">
           <h1> Hello Yes I'm Still The Main Page... </h1>
           <LoadAllSpots />
         </Route>
