@@ -30,7 +30,7 @@ const LoadUserSpots = () => {
       </div>
 
       <div className="spot-container">
-          {
+          {/* {
             spotsArr.length === 0 ?
 
             <div>You're not currently hosting any spots.</div> :
@@ -39,7 +39,7 @@ const LoadUserSpots = () => {
               //implement spot in separate component; add prop
               <MySpot key={spot.id} spot={spot}></MySpot>
             ))
-          }
+          } */}
       </div>
 
     </>

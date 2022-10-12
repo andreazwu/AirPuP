@@ -7,6 +7,7 @@ import LoadAllSpots from './components/Spots/LoadAllSpots';
 import LoadOneSpot from './components/Spots/LoadOneSpot';
 import CreateSpot from './components/Spots/CreateSpot';
 import EditSpot from './components/Spots/EditSpot';
+// import LoadUserSpots from "./components/Spots/LoadUserSpots";
 
 
 function App() {
@@ -33,9 +34,13 @@ return (
           <LoadOneSpot />
         </Route>
 
-        <Route path="/new">
+        <Route path="/newspot">
           <h1> Create A New Spot!! </h1>
           <CreateSpot />
+        </Route>
+
+        <Route path='/myspots'>
+          {/* <LoadUserSpots /> */}
         </Route>
 
         <Route path="/edit/:spotId">

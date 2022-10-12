@@ -46,13 +46,31 @@ const ProfileButton = ({ user }) => {
           showMenu && (
 
           <div className="pfdropdown">
-            <div >
-              <div>{user.username}</div>
-              <div>{user.email}</div>
-              <div className="logoutbutton">
-                <div onClick={logoutUser}>Log Out</div>
-              </div>
+
+            <div className="currentuser-wrapper">
+              <div className="currentuser">{user.username}</div>
+              <div className="currentuser">{user.email}</div>
             </div>
+
+            <div className='middleline'></div>
+
+            <div className="menu-select">
+              <div onClick={()=>history.push("/newspot")}>Host New Spot</div>
+            </div>
+
+            <div className="menu-select">
+              <div onClick={()=>history.push("/myspots")}>My Spots</div>
+            </div>
+
+            <div className="menu-select">
+              <div >My Reviews</div>
+            </div>
+
+            <div className="menu-select">
+              <div onClick={logoutUser}>Log Out</div>
+            </div>
+
+
           </div>
 
 
