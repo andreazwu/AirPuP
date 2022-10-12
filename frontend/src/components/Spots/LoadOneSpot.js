@@ -8,8 +8,6 @@ const LoadOneSpot = () => {
   console.log("1 COMPONENT-LOADONESPOT RUNNING")
   const dispatch = useDispatch()
   const history = useHistory()
-  // const params = useParams()
-  // const [spotId, setSpotId] = useState(+params.spotId)
   const { spotId } = useParams()
 
   const spot = useSelector((state)=>{
@@ -26,10 +24,10 @@ const LoadOneSpot = () => {
   console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
 
 
-  //verify if current logged in user is owner of spot
-  const user = useSelector((state) => state.session.user)
+  //verify if currentUser is owner of spot
+  const currentUser = useSelector((state) => state.session.user)
   let owner = false
-  if (user.id === spot.ownerId) owner = true
+  if (currentUser.id === spot.ownerId) owner = true
 
   //handle delete spot click
   const deleteSpotHandleClick = async () => {

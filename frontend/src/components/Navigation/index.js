@@ -11,12 +11,12 @@ import "./Navigation.css"
 function Navigation({ isLoaded }){
   console.log("1 COMPONENT-NAVIGATION RUNNING")
   const history = useHistory()
-  const sessionUser = useSelector(state => state.session.user)
+  const currentUser = useSelector(state => state.session.user)
 
   let sessionLinks
-  if (sessionUser) {
+  if (currentUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <ProfileButton user={currentUser} />
     )
   } else {
     sessionLinks = (

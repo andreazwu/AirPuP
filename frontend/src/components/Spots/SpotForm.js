@@ -10,12 +10,12 @@ const SpotForm = ({spot, formType}) => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const user = useSelector((state) => {
+  const currentUser = useSelector((state) => {
     console.log("2 USE SELECTOR RUNNING")
     return state.session.user
   })
 
-  console.log(`3 THIS IS THE USER FROM USE SELECTOR: ${user}`)
+  console.log(`3 THIS IS THE USER FROM USE SELECTOR: ${currentUser}`)
 
   const [address, setAddress] = useState(spot.address || "")
   const [city, setCity] = useState(spot.city || "")
@@ -53,7 +53,7 @@ const SpotForm = ({spot, formType}) => {
     e.preventDefault()
     setHasSubmitted(true)
 
-    if (!user) alert ("You must log in/ sign up to become a host!")
+    if (!currentUser) alert ("You must log in/ sign up to become a host!")
     if (errors.length) alert ("Please provide a valid entry!")
 
     const spot = {
