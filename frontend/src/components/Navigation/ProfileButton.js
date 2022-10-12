@@ -32,7 +32,7 @@ const ProfileButton = ({ user }) => {
 
   return (
     <>
-      <div className="dropdown">
+      <div className="wrapper">
 
         {/* <div className="pfbuttonwrapper"> */}
           <button onClick={openMenu} className="pfbutton">
@@ -41,15 +41,21 @@ const ProfileButton = ({ user }) => {
           </button>
         {/* </div> */}
 
+
         {
           showMenu && (
-          <ul className= "profile-dropdown" >
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logoutUser}>Log Out</button>
-            </li>
-          </ul>
+
+          <div className="pfdropdown">
+            <div >
+              <div>{user.username}</div>
+              <div>{user.email}</div>
+              <div className="logoutbutton">
+                <div onClick={logoutUser}>Log Out</div>
+              </div>
+            </div>
+          </div>
+
+
         )}
 
       </div>
