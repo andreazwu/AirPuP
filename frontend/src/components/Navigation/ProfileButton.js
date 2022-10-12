@@ -23,19 +23,27 @@ const ProfileButton = ({ user }) => {
     return () => document.removeEventListener("click", closeMenu)
   }, [showMenu])
 
+
   const logoutUser = (e) => {
     e.preventDefault()
     dispatch(logout())
   }
 
+
   return (
     <>
       <div className="dropdown">
-        <button onClick={openMenu}>
-          <i className="fas fa-user-circle" />
-        </button>
-        {showMenu && (
-          <ul className="profile-dropdown">
+
+        {/* <div className="pfbuttonwrapper"> */}
+          <button onClick={openMenu} className="pfbutton">
+              <i id='bars' className="fa-solid fa-bars"></i>
+              <i className="fa-solid fa-user"></i>
+          </button>
+        {/* </div> */}
+
+        {
+          showMenu && (
+          <ul className= "profile-dropdown" >
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
@@ -43,6 +51,7 @@ const ProfileButton = ({ user }) => {
             </li>
           </ul>
         )}
+
       </div>
     </>
   )

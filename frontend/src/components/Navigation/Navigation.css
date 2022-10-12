@@ -5,3 +5,27 @@
   margin: -20px 10px 0px 0px;
   /* top right bottom left  */
 }
+
+.pfbutton {
+  width: 70px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid #bbc8e4;
+  justify-self: left;
+  background-color: white;
+}
+
+.pfbutton:hover {
+  box-shadow: 1px 2px 5px #bbc8e4;
+  cursor: pointer;
+}
+
+.fa-user {
+  color: #bbc8e4;
+  margin-left: 5px;
+}
+
+.fa-bars {
+  color: #bbc8e4;
+  margin-right: 8px;
+}
