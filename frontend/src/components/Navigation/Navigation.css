@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin: -20px 10px 0px 0px;
+  margin: -40px 10px 0px 0px;
   /* top right bottom left  */
 }
 
@@ -74,4 +74,21 @@
 .menu-select:hover {
   background-color: rgb(187, 200, 228, 0.3);
   cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-left: 80px;
+  margin-right: 100px;
+  width: 130px;
+}
+
+.sessionlinks {
+  padding-right: 10px;
+}
+
+.sessionlinks span {
+  padding: 20px;
 }

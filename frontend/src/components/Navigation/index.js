@@ -1,10 +1,11 @@
 import React, { useState } from "react"
-import { NavLink, Link, useHistory } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import ProfileButton from "./ProfileButton"
-import LoginFormModal from "../LoginFormModal"
-import SignupFormModal from "../SignupFormModal"
+import FunctionButton from "./FunctionButton"
 import DemoUser from "../DemoUser"
+import logo from "../../images/logo.jpg"
+
 import "./Navigation.css"
 
 
@@ -19,33 +20,24 @@ const Navigation = ({ isLoaded }) => {
     )
   } else {
     sessionLinks = (
-      <>
-        <LoginFormModal />
-        <SignupFormModal />
-        <DemoUser />
-      </>
+      <FunctionButton />
     )
   }
 
   return (
     <div>
-      <ul>
 
-        <div className="home-logo">
-          <li>
-            <i className="fa fa-tree" aria-hidden="true"></i>
-            <NavLink exact to="/">FodlanBnB</NavLink>
-            {isLoaded && sessionLinks}
-          </li>
-        </div>
+        <NavLink exact to="/">
+          <img className="logo" src={logo} />
+        </NavLink>
 
-        <div className="navbar">
-          <Link to="/new">Become A Host</Link>
-        </div>
+        {isLoaded && (
+          <div className="sessionlinks">
+            {sessionLinks}
+          </div>
+        )}
 
-      </ul>
     </div>
-
   )
 }
 
