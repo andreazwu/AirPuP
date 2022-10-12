@@ -8,12 +8,11 @@ import DemoUser from "../DemoUser"
 import "./Navigation.css"
 
 
-function Navigation({ isLoaded }){
-  console.log("1 COMPONENT-NAVIGATION RUNNING")
-  const history = useHistory()
+const Navigation = ({ isLoaded }) => {
   const currentUser = useSelector(state => state.session.user)
 
   let sessionLinks
+
   if (currentUser) {
     sessionLinks = (
       <ProfileButton user={currentUser} />
