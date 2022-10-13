@@ -56,10 +56,15 @@ const acDeleteSpot = (spotId) => {
 // THUNK ACs:
 // load all spots thunk
 export const thunkGetAllSpots = () => async (dispatch) => {
+  console.log("THUNK STARTS RUNNING, BEFORE FETCH FROM BACKEND")
   const response = await csrfFetch("/api/spots")
+  console.log("THUNK STARTS RUNNING, AFTER FETCH FROM BACKEND")
+
   if (response.ok) {
+    console.log("THUNK, BEFORE DISPATCH ACTION CREATOR")
     const spots = await response.json() //array
     dispatch(acLoadAllSpots(spots))
+    console.log("THUNK, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
     // return spots
   }
 }

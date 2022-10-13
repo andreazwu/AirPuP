@@ -9,3 +9,7 @@ form {
 /* .login-button {
   color: red;
 } */
+
+.modal-wrapper {
+  z-index: 500;
+}

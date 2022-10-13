@@ -6,11 +6,11 @@ import "./LoadAllSpots.css"
 
 
 const LoadAllSpots = () => {
-  console.log("1 (2.2) COMPONENT-LOADALLSPOTS RUNNING")
+  console.log("1 (2.2) COMPONENT-LOADALLSPOTS STARTS")
   const dispatch = useDispatch()
 
   const spotsObj = useSelector((state)=>{
-    console.log("2 (2.1/3) USE SELECTOR RUNNING")
+    console.log("2 (2.1/3) USE SELECTOR RUNNING: DETECTS CHANGES IN STATE")
     return state.spots.allSpots
   }) // {1:{x}, 2:{y}, 3:{z}}
 
@@ -18,7 +18,7 @@ const LoadAllSpots = () => {
 
   //dispatch THUNK AC
   useEffect(() => {
-    console.log("5 USE EFFECT RUNNING")
+    console.log("5 USE EFFECT RUNNING: DISPATCH THUNK")
     dispatch(thunkGetAllSpots())
   }, [dispatch])
 
@@ -50,6 +50,9 @@ const LoadAllSpots = () => {
           }
         </div>
       </div>
+
+  {console.log("END OF LOADALLSPOTS COMPONENT")}
+
     </>
   )
 }
