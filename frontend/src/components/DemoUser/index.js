@@ -9,16 +9,10 @@ const DemoUser = () => {
 
   const loginDemoUser = () => {
     return dispatch(login({
-      credential: "Demo-lition1",
+      credential: "Andrea Wu",
       password: "password1"
     }))
   }
-  // const loginDemoUser = async () => {
-  //   return await dispatch(login({
-  //     credential: "Demo-lition1",
-  //     password: "password1"
-  //   }))
-  // }
 
   return (
     <>
