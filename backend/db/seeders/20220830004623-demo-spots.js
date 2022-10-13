@@ -16,7 +16,7 @@ module.exports = {
         price: 188
       },
       {
-        ownerId: 2,
+        ownerId: 1,
         address: "456 Garreg Rd",
         city: "Los Angeles",
         state: "California",
@@ -28,7 +28,7 @@ module.exports = {
         price: 204
       },
       {
-        ownerId: 3,
+        ownerId: 1,
         address: "333 Eagles Blvd",
         city: "Los Angeles",
         state: "California",
@@ -52,7 +52,7 @@ module.exports = {
         price: 65
       },
       {
-        ownerId: 4,
+        ownerId: 2,
         address: "555 Ashen Lane",
         city: "Los Angeles",
         state: "California",

@@ -24,16 +24,16 @@ const LoadOneSpot = () => {
   console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
 
 
-  //verify if currentUser is owner of spot
-  const currentUser = useSelector((state) => state.session.user)
-  let owner = false
-  if (currentUser?.id === spot.ownerId) owner = true
+  // //verify if currentUser is owner of spot
+  // const currentUser = useSelector((state) => state.session.user)
+  // let owner = false
+  // if (currentUser?.id === spot.ownerId) owner = true
 
-  //handle delete spot click
-  const deleteSpotHandleClick = async () => {
-    await dispatch(thunkRemoveSpot(spot.id))
-    history.push("/")
-  }
+  // //handle delete spot click
+  // const deleteSpotHandleClick = async () => {
+  //   await dispatch(thunkRemoveSpot(spot.id))
+  //   history.push("/")
+  // }
 
 
   //conditional rendering:
@@ -112,7 +112,7 @@ const LoadOneSpot = () => {
 
 
         {/* only show edit/delete buttons to owner of spot */}
-        <div>
+        {/* <div>
           {owner && (
             <>
               <button onClick={() => history.push(`/edit/${spot.id}`)}>
@@ -123,7 +123,7 @@ const LoadOneSpot = () => {
               </button>
             </>
           )}
-        </div>
+        </div> */}
 
 
       </div>

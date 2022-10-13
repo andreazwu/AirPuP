@@ -57,27 +57,31 @@ const SpotForm = ({spot, formType}) => {
     if (errors.length) alert ("Please provide a valid entry!")
 
     const spot = {
-      // ...spot, //Cannot access 'spot' before initialization <<<<
+      // ...spot, //ReferenceError: Cannot access 'spot' before initialization
       address, city, state, country, lat, lng, name, description, price
     }
 
     console.log("SPOTFORM HANDLESUBMIT, CURRENT SPOT:", spot)
 
     if (formType==="create") {
-      const newSpot = await dispatch(thunkCreateNewSpot(spot))
+      const newSpot = await dispatch(thunkCreateNewSpot(spot)) // MUST await
       console.log(newSpot) //<<< newSpot undefined at time of console-logging
 
       //redirect to newly created spot -- cannot read id <<<<<<
-      if (newSpot) history.push(`/spots/${newSpot.id}`)
+      if (newSpot) history.push(`/spots/${newSpot.id}`) // not working
     }
 
     else if (formType==="update") {
       const modifiedSpot = await dispatch(thunkEditSpot(spot))
       console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:", modifiedSpot)
-      if (modifiedSpot) history.push(`/spots/${modifiedSpot.id}`)
+      if (modifiedSpot) history.push(`/spots/${modifiedSpot.id}`) // not working
     }
 
-    //setAttributes back to empty
+    if (spot) reset()
+    history.push("/myspots")
+  }
+
+  const reset = () => {
     setAddress("")
     setCity("")
     setState("")
@@ -89,10 +93,7 @@ const SpotForm = ({spot, formType}) => {
     setPrice("")
     setErrors([])
     setHasSubmitted(false)
-
-    history.push("/")
   }
-
 
 
   return (

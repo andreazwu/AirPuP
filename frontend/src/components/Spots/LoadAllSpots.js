@@ -31,14 +31,6 @@ const LoadAllSpots = () => {
   return (
     <>
       <div className="allspots-wrapper">
-        {/* {
-          spotsArr.map((spot) => {
-            <div key={spot.id} className="loadAllSpots-wrapper">
-              {console.log("4 (2.5) RETURN:", spot)}
-              {spot}
-            </div>
-          })
-        } */}
         <div className="allspots-container">
           {
             spotsArr.map((spot) => (
