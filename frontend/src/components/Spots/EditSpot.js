@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
 import SpotForm from "./SpotForm"
-import "./EditSpot.css"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkGetOneSpot } from "../../store/spots"
+import "./Spots.css"
 
 
 const EditSpot = () => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { thunkCreateNewSpot, thunkEditSpot } from "../../store/spots"
-import "./SpotForm.css"
+import "./Spots.css"
 
 const SpotForm = ({spot, formType}) => {
   console.log("1 COMPONENT-SPOTFORM RUNNING")

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { thunkGetOneSpot, thunkRemoveSpot } from "../../store/spots"
-import "./LoadOneSpot.css"
+import "./Spots.css"
 
 const LoadOneSpot = () => {
   console.log("1 COMPONENT-LOADONESPOT RUNNING")

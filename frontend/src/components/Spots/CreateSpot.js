@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import SpotForm from "./SpotForm"
-import "./CreateSpot.css"
+import "./Spots.css"
 // import { thunkGetOneSpot } from "../../store/spots"
 
 const CreateSpot = () => {

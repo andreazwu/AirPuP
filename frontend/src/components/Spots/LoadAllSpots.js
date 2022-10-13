@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllSpots } from "../../store/spots";
 import Spot from "./Spot"
-import "./LoadAllSpots.css"
+import "./Spots.css"
 
 
 const LoadAllSpots = () => {
@@ -30,7 +30,7 @@ const LoadAllSpots = () => {
 
   return (
     <>
-      <div className="whole-container">
+      <div className="allspots-wrapper">
         {/* {
           spotsArr.map((spot) => {
             <div key={spot.id} className="loadAllSpots-wrapper">
@@ -39,7 +39,7 @@ const LoadAllSpots = () => {
             </div>
           })
         } */}
-        <div className="spot-container">
+        <div className="allspots-container">
           {
             spotsArr.map((spot) => (
               //implement spot in separate component; add prop

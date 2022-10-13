@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { thunkGetUserSpots } from "../../store/spots";
 //import MySpot
-import "./LoadUserSpots.css"
+import "./Spots.css"
 
 
 const LoadUserSpots = () => {

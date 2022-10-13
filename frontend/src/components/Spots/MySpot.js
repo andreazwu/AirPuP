@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import "./MySpot.css"
+import "./Spots.css"
 
 const MySpot = ({spot}) => {
   return (

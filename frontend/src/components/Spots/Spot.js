@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom"
-import "./Spot.css"
+import "./Spots.css"
 
 const Spot = ({spot}) => {
   return (
     <div>
       <Link to={`/spots/${spot.id}`}>
 
+        <div className="allspots-spot-image-container">
         {spot.previewImage ?
           (<div><img src={spot.previewImage} /></div>) :
           (<div><img src="https://bitsofco.de/content/images/2018/12/broken-1.png" alt="spot has no preview image" /></div>)
         }
+        </div>
 
         <div>
           {spot.city}, {spot.state}
