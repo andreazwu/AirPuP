@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { NavLink, Link } from "react-router-dom"
+import React from "react"
+import { NavLink } from "react-router-dom"
 import { useSelector } from "react-redux"
 import ProfileButton from "./ProfileButton"
 import FunctionButton from "./FunctionButton"
@@ -19,9 +19,7 @@ const Navigation = ({ isLoaded }) => {
     )
   } else {
     sessionLinks = (
-      <>
-        <FunctionButton />
-      </>
+      <FunctionButton />
     )
   }
 
@@ -32,12 +30,13 @@ const Navigation = ({ isLoaded }) => {
           <img className="logo" src={logo} />
         </NavLink>
 
-        {isLoaded && (
+        {/* {isLoaded && ( // breaks DemoUser */ }
           <div className="sessionlinks">
             {sessionLinks}
           </div>
-        )}
+        {/* )} */}
 
+        <div className="headerbreak"></div>
     </div>
   )
 }

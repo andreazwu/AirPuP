@@ -44,8 +44,8 @@ const ProfileButton = ({ user }) => {
           <div className="pfdropdown">
 
             <div className="currentuser-wrapper">
-              <div className="currentuser">{user.username}</div>
-              <div className="currentuser">{user.email}</div>
+              <div className="currentuser">{user?.username}</div>
+              <div className="currentuser">{user?.email}</div>
             </div>
 
             <div className='middleline'></div>

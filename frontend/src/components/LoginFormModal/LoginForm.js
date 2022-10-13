@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux"
 import "./LoginForm.css"
 
 function LoginForm() {
+  console.log("LOGINFORM COMPONENT STARTS")
   const dispatch = useDispatch()
   const [credential, setCredential] = useState("")
   const [password, setPassword] = useState("")

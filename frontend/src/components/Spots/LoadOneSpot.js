@@ -27,7 +27,7 @@ const LoadOneSpot = () => {
   //verify if currentUser is owner of spot
   const currentUser = useSelector((state) => state.session.user)
   let owner = false
-  if (currentUser.id === spot.ownerId) owner = true
+  if (currentUser?.id === spot.ownerId) owner = true
 
   //handle delete spot click
   const deleteSpotHandleClick = async () => {
