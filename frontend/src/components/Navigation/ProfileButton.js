@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { logout } from "../../store/session"
 
+
 const ProfileButton = ({ user }) => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -32,13 +33,10 @@ const ProfileButton = ({ user }) => {
     <>
       <div className="wrapper">
 
-        {/* <div className="pfbuttonwrapper"> */}
-          <button onClick={openMenu} className="pfbutton">
-              <i id='bars' className="fa-solid fa-bars"></i>
-              <i className="fa-solid fa-user"></i>
-          </button>
-        {/* </div> */}
-
+        <button onClick={openMenu} className="pfbutton">
+            <i id='bars' className="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-user"></i>
+        </button>
 
         {
           showMenu && (
@@ -70,7 +68,6 @@ const ProfileButton = ({ user }) => {
 
 
           </div>
-
 
         )}
 

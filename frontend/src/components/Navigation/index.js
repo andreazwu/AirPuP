@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import ProfileButton from "./ProfileButton"
 import FunctionButton from "./FunctionButton"
-import DemoUser from "../DemoUser"
 import logo from "../../images/logo.jpg"
 
 import "./Navigation.css"
@@ -20,7 +19,9 @@ const Navigation = ({ isLoaded }) => {
     )
   } else {
     sessionLinks = (
-      <FunctionButton />
+      <>
+        <FunctionButton />
+      </>
     )
   }
 

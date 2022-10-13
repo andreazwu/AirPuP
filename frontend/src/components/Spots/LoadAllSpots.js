@@ -22,7 +22,7 @@ const LoadAllSpots = () => {
     dispatch(getAllSpots())
   }, [dispatch])
 
-  console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "----------", spotsArr)
+  console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "ARRAY:", spotsArr)
 
   //conditional rendering:
   //recall empty arr/ obj is NOT falsy
@@ -43,7 +43,9 @@ const LoadAllSpots = () => {
           {
             spotsArr.map((spot) => (
               //implement spot in separate component; add prop
-              <Spot key={spot.id} spot={spot}></Spot>
+              <Spot key={spot.id} spot={spot}>
+                {console.log("4 (2.5) RETURN:", spot)}
+              </Spot>
             ))
           }
         </div>

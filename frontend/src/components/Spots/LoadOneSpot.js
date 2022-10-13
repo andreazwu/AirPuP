@@ -17,7 +17,7 @@ const LoadOneSpot = () => {
 
   //dispatch THUNK AC
   useEffect(() => {
-    console.log("5 USE EFFECT RUNNING")
+    console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
     dispatch(getOneSpot(+spotId)) //<<<< spotId =__=|||
   }, [dispatch, spotId])
 
@@ -59,6 +59,7 @@ const LoadOneSpot = () => {
     <>
       <div className="whole-container">
         Heyaa this is spot # {spotId}
+        {console.log("4 (2.5) RETURN:", spot)}
 
         <div className="title-whole">
           <div>

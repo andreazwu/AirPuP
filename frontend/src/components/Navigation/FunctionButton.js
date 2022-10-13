@@ -1,12 +1,10 @@
-import React from "react"
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import React, { useState, useEffect } from "react"
 import LoginFormModal from "../LoginFormModal"
 import SignupFormModal from "../SignupFormModal"
+import DemoUser from "../DemoUser"
 
 
 const FunctionButton = () => {
-  const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false)
 
   const openMenu = () => {
@@ -23,10 +21,36 @@ const FunctionButton = () => {
   }, [showMenu])
 
 
-
-
   return (
-    <div>FunctionButton</div>
+    <>
+      <div className="wrapper">
+
+        <button onClick={openMenu} className="pfbutton">
+            <i id='bars' className="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-user"></i>
+        </button>
+
+        {
+          showMenu && (
+
+          <div className="logindropdown">
+            <div className="login-select">
+              <LoginFormModal />
+            </div>
+
+            <div className="login-select">
+              <SignupFormModal />
+            </div>
+
+            <div className="login-select">
+              <DemoUser />
+            </div>
+          </div>
+
+        )}
+
+      </div>
+    </>
   )
 }
 

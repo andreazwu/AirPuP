@@ -13,6 +13,7 @@
   border: 1px solid rgb(187, 200, 228);
   justify-self: left;
   background-color: white;
+  transition: box-shadow 0.5s;
 }
 
 .pfbutton:hover {
@@ -35,9 +36,21 @@
   box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.7);
   background-color: white;
   border-radius: 15px;
-  top: 70px;
+  top: 83px;
   position: absolute;
   height: 260px;
+  width: 200px;
+  z-index: 5000;
+}
+
+.logindropdown {
+  border: solid rgb(187, 200, 228, 0.3) 0.1px;
+  box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.7);
+  background-color: white;
+  border-radius: 15px;
+  top: 83px;
+  position: absolute;
+  height: 200px;
   width: 200px;
   z-index: 5000;
 }
@@ -72,6 +85,19 @@
 }
 
 .menu-select:hover {
+  background-color: rgb(187, 200, 228, 0.3);
+  cursor: pointer;
+}
+
+.login-select {
+  margin-top: 20px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 15px;
+  height: 20px;
+}
+
+.login-select:hover {
   background-color: rgb(187, 200, 228, 0.3);
   cursor: pointer;
 }
