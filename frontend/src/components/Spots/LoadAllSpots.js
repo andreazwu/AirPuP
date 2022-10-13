@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSpots } from "../../store/spots";
+import { thunkGetAllSpots } from "../../store/spots";
 import Spot from "./Spot"
 import "./LoadAllSpots.css"
 
@@ -19,7 +19,7 @@ const LoadAllSpots = () => {
   //dispatch THUNK AC
   useEffect(() => {
     console.log("5 USE EFFECT RUNNING")
-    dispatch(getAllSpots())
+    dispatch(thunkGetAllSpots())
   }, [dispatch])
 
   console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "ARRAY:", spotsArr)

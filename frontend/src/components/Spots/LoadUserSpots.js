@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getUserSpots } from "../../store/spots";
+import { thunkGetUserSpots } from "../../store/spots";
 //import MySpot
 import "./LoadUserSpots.css"
 
@@ -15,7 +15,7 @@ const LoadUserSpots = () => {
 
   //dispatch THUNK AC
   useEffect(() => {
-    dispatch(getUserSpots())
+    dispatch(thunkGetUserSpots())
   }, [dispatch])
 
   //conditional rendering:

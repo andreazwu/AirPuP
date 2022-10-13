@@ -1,13 +1,13 @@
 #demo-user {
-  border: solid #4676dd 1px;
-  background-color: #4676dd;
-  color: white;
-  font-family: 'Poppins', sans-serif;
+  /* border: solid #4676dd 1px;
+  background-color: #4676dd; */
+  color: red;
+  /* font-family: 'Poppins', sans-serif;
   padding: 3px;
   padding-left: 9px;
   padding-right: 9px;
   border: none;
-  border-radius: 4px;
+  border-radius: 4px; */
 }
 
 /* #demo-user-container :hover {

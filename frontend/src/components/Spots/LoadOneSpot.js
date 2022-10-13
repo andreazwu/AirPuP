@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { getOneSpot, removeSpot } from "../../store/spots"
+import { thunkGetOneSpot, thunkRemoveSpot } from "../../store/spots"
 import "./LoadOneSpot.css"
 
 const LoadOneSpot = () => {
@@ -18,7 +18,7 @@ const LoadOneSpot = () => {
   //dispatch THUNK AC
   useEffect(() => {
     console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
-    dispatch(getOneSpot(+spotId)) //<<<< spotId =__=|||
+    dispatch(thunkGetOneSpot(+spotId)) //<<<< spotId =__=|||
   }, [dispatch, spotId])
 
   console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
@@ -31,7 +31,7 @@ const LoadOneSpot = () => {
 
   //handle delete spot click
   const deleteSpotHandleClick = async () => {
-    await dispatch(removeSpot(spot.id))
+    await dispatch(thunkRemoveSpot(spot.id))
     history.push("/")
   }
 

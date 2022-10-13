@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { createNewSpot, editSpot } from "../../store/spots"
+import { thunkCreateNewSpot, thunkEditSpot } from "../../store/spots"
 import "./SpotForm.css"
 
 const SpotForm = ({spot, formType}) => {
@@ -64,7 +64,7 @@ const SpotForm = ({spot, formType}) => {
     console.log("SPOTFORM HANDLESUBMIT, CURRENT SPOT:", spot)
 
     if (formType==="create") {
-      const newSpot = await dispatch(createNewSpot(spot))
+      const newSpot = await dispatch(thunkCreateNewSpot(spot))
       console.log(newSpot) //<<< newSpot undefined at time of console-logging
 
       //redirect to newly created spot -- cannot read id <<<<<<
@@ -72,7 +72,7 @@ const SpotForm = ({spot, formType}) => {
     }
 
     else if (formType==="update") {
-      const modifiedSpot = await dispatch(editSpot(spot))
+      const modifiedSpot = await dispatch(thunkEditSpot(spot))
       console.log("SPOTFORM HANDLESUBMIT - UPDATE, RESULT AFTER DISPATCH:", modifiedSpot)
       if (modifiedSpot) history.push(`/spots/${modifiedSpot.id}`)
     }

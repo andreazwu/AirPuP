@@ -14,9 +14,9 @@ const DemoUser = () => {
 
   return (
     <span id="demo-user-container">
-      <button id="demo-user" onClick={loginDemoUser}>
+      <div id="demo-user" onClick={loginDemoUser}>
         Login as Demo User
-      </button>
+      </div>
     </span>
   )
 }

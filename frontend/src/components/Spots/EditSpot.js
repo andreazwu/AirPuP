@@ -3,7 +3,7 @@ import SpotForm from "./SpotForm"
 import "./EditSpot.css"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { getOneSpot } from "../../store/spots"
+import { thunkGetOneSpot } from "../../store/spots"
 
 
 const EditSpot = () => {
@@ -19,7 +19,7 @@ const EditSpot = () => {
   //dispatch THUNK AC
   useEffect(() => {
     console.log("5 USE EFFECT RUNNING")
-    dispatch(getOneSpot(+spotId)) //<<<< spotId =__=|||
+    dispatch(thunkGetOneSpot(+spotId)) //<<<< spotId =__=|||
   }, [dispatch, spotId])
 
   console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
