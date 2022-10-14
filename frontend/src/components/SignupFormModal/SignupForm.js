@@ -1,40 +1,48 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../store/session";
+import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Redirect } from "react-router-dom"
+import * as sessionActions from "../../store/session"
 
-import './SignupForm.css';
+import './SignupForm.css'
 
-function SignupFormPage() {
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstname] = useState("");
-  const [lastName, setLastname] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+function SignupFormPage({setShowSignupModal}) {
+  const dispatch = useDispatch()
 
-  if (currentUser) return <Redirect to="/" />;
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [firstName, setFirstname] = useState("")
+  const [lastName, setLastname] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [errors, setErrors] = useState([])
+
+  const currentUser = useSelector((state) => state.session.user)
+  if (currentUser) {
+    dispatch(sessionActions.login({ email, password }))
+    return <Redirect to="/" />
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (password === confirmPassword) {
-      setErrors([]);
+      setErrors([])
       return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+        .then(() => setShowSignupModal(false))
+        .catch(
+          async (res) => {
+          const data = await res.json()
+          if (data && data.errors) setErrors(data.errors)
+        })
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
-  };
+    return setErrors(['Confirm Password field must be the same as the Password field'])
+  }
 
   return (
     <form onSubmit={handleSubmit}>
       <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
       </ul>
       <label>
         Email
@@ -90,9 +98,9 @@ function SignupFormPage() {
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      <button id="signup-button" type="submit">Sign Up</button>
     </form>
-  );
+  )
 }
 
-export default SignupFormPage;
+export default SignupFormPage

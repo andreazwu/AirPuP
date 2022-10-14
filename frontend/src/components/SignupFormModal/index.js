@@ -4,20 +4,20 @@ import SignupForm from './SignupForm';
 
 import './SignupForm.css';
 
-function SignupFormModal() {
-  const [showModal, setShowModal] = useState(false);
+function SignupFormModal({showSignupModal, setShowSignupModal}) {
+  // const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       {/* <button onClick={() => setShowModal(true)}>Sign Up</button> */}
 
-      <div className="signup-button" onClick={() => setShowModal(true)}>
+      {/* <div className="signup-button" onClick={() => setShowModal(true)}>
         Sign Up
-      </div>
+      </div> */}
 
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <SignupForm />
+      {showSignupModal && (
+        <Modal onClose={() => setShowSignupModal(false)}>
+          <SignupForm setShowSignupModal={setShowSignupModal}/>
         </Modal>
       )}
     </>

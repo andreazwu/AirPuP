@@ -5,14 +5,13 @@ import "./LoginForm.css"
 
 
 function LoginFormModal({showLoginModal, setShowLoginModal}) {
-  console.log("LOGINFORMMODAL COMPONENT STARTS")
   // const [showModal, setShowModal] = useState(false)
 
   return (
     <>
       {/* <button onClick={() => setShowModal(true)}>Log In</button> */}
-{/*
-      <div className="login-button"
+
+      {/* <div className="login-button"
           onClick={() => setShowLoginModal(true)}>
         Log In
       </div> */}

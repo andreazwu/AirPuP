@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
-import LoginFormModal from "../LoginFormModal"
-import SignupFormModal from "../SignupFormModal"
+// import LoginFormModal from "../LoginFormModal"
+// import SignupFormModal from "../SignupFormModal"
 import DemoUser from "../DemoUser"
 
 
-const FunctionButton = ({setShowLoginModal}) => {
+const FunctionButton = ({setShowLoginModal, setShowSignupModal}) => {
   const [showMenu, setShowMenu] = useState(false)
 
   const openMenu = () => {
@@ -15,7 +15,7 @@ const FunctionButton = ({setShowLoginModal}) => {
   useEffect(() => {
     if (!showMenu) return
     const closeMenu = () => setShowMenu(false)
-    // this event listener includes the login button to...
+    // this event listener includes the login/signup buttons too
     document.addEventListener("click", closeMenu)
     // MUST include cleanup fn
     return () => document.removeEventListener("click", closeMenu)
@@ -35,16 +35,22 @@ const FunctionButton = ({setShowLoginModal}) => {
           showMenu && (
 
           <div className="logindropdown">
+
             <div className="login-select">
               {/* <LoginFormModal /> */}
               <div className="login-button"
-          onClick={() => setShowLoginModal(true)}>
-              Log In
-            </div>
+              onClick={() => setShowLoginModal(true)}>
+                Log In
+              </div>
             </div>
 
             <div className="login-select">
-              <SignupFormModal />
+              {/* <SignupFormModal /> */}
+              <div className="signup-button"
+              onClick={() => setShowSignupModal(true)}>
+                Sign Up
+              </div>
+
             </div>
 
             <div className="login-select">
