@@ -24,7 +24,7 @@ const MySpot = ({spot}) => {
         <div className="allspots-spot-image-container">
           {spot.previewImage ?
             (<div><img src={spot.previewImage} /></div>) :
-            (<div><img src="https://bitsofco.de/content/images/2018/12/broken-1.png" alt="spot has no preview image" /></div>)
+            (<div><img src="../images/no-image.png" alt="spot has no preview image" /></div>)
           }
         </div>
 
