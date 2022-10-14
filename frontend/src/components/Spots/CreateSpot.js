@@ -46,14 +46,15 @@ const CreateSpot = () => {
     if (!country.length) errorsArr.push("please enter country")
     // if (!lat.length || lat > 90 || lat < -90) errorsArr.push("please enter a valid latitude between -90 and 90")
     // if (!lng.length || lng > 180 || lng < -180) errorsArr.push("please enter a valid longitude between -180 and 180")
-    if (!name.length || name.length > 50) errorsArr.push("please enter a valid name less than 50 characters")
+    if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
     if (!description.length) errorsArr.push("please enter a description")
     if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
+    if (!url || url > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
     console.log("USE EFFECT FOR VALIDATION ERRORS ENDS, ERRORS ARR:", errorsArr)
 
     setErrors(errorsArr)
-  }, [address, city, state, country, name, description, price])
+  }, [address, city, state, country, name, description, price, url])
 
 
   // handleSubmit is ASYNCHRONOUS
@@ -79,16 +80,15 @@ const CreateSpot = () => {
     if (newSpot) {
       console.log("COMPONENT HANDLESUBMIT, AFTER THUNK AC RETURNS PROMISE, NEWSPOT:", newSpot)
 
-      reset()
-
       const imageObj = ({ url: url, preview: true})
 
       console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK FOR ADD SPOT IMAGE, IMAGEOBJ:", imageObj)
-      // breaks here: thunk called --> server error
+
       await dispatch(thunkAddSpotImage(newSpot.id, imageObj))
 
       // history.push(`/spots/${newSpot.id}`) // ?? type err: cannot read properties of undefined in LoadOneSpot
 
+      reset()
       history.push("/myspots")
     }
     console.log("COMPONENT HANDLESUBMIT ENDS")
@@ -104,6 +104,7 @@ const CreateSpot = () => {
     setName("")
     setDescription("")
     setPrice("")
+    setUrl("")
     setErrors([])
     setHasSubmitted(false)
   }
