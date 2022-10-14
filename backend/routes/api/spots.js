@@ -285,11 +285,12 @@ router.get("/:spotId", async (req, res) => {
 
 // Add an Image to a Spot based on the Spots id
 router.post("/:spotId/images", requireAuth, async (req, res) => {
-
+  console.log("BACKEND!! /:spotId/images!! STARTS!!")
   const { spotId } = req.params
   const { url, preview } = req.body
 
   const spot = await Spot.findByPk(spotId)
+  console.log("BACKEND!! await Spot.findByPk(spotId) --> SPOT:", spot)
 
   if (spot) {
     const addedImage = await SpotImage.create({ //<<<<<
@@ -297,10 +298,13 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
       "url": url,
       "preview": preview
     })
+    console.log("BACKEND!! await SpotImage.Create --> ADDEDIMAGE:", addedImage)
 
     const image = await SpotImage.findByPk(addedImage.id, {
       attributes: ["id", "url", "preview"]
     })
+
+    console.log("BACKEND!! await SpotImage.findByPk(addedImage.id) --> IMAGE:", image)
 
     res.status(200)
     return res.json(image)

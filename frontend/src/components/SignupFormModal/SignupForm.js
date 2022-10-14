@@ -7,7 +7,7 @@ import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  const currentUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstname] = useState("");
@@ -16,7 +16,7 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (currentUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch} from "react-redux";
+import React, { useState } from "react"
+import * as sessionActions from "../../store/session"
+import { useDispatch } from "react-redux"
+
 import "./LoginForm.css"
+<<<<<<< HEAD
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
@@ -13,19 +15,29 @@ function LoginForm() {
 
   const user = useSelector(state => state.session.user);
   if (user) return <Redirect to="/" />;
+=======
+
+function LoginForm() {
+  console.log("LOGINFORM COMPONENT STARTS")
+  const dispatch = useDispatch()
+  const [credential, setCredential] = useState("")
+  const [password, setPassword] = useState("")
+  const [errors, setErrors] = useState([])
+>>>>>>> dev-front
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors([]);
+    e.preventDefault()
+    setErrors([])
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        const data = await res.json()
+        if (data && data.errors) setErrors(data.errors)
       }
-    );
-  };
+    )
+  }
 
   return (
+    <div className="modal-wrapper">
     <form onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
@@ -50,9 +62,10 @@ function LoginForm() {
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      <button id="login-button" type="submit">Log In</button>
     </form>
-  );
+    </div>
+  )
 }
 
-export default LoginForm;
+export default LoginForm

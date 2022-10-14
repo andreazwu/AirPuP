@@ -82,6 +82,7 @@ router.get('/', [restoreUser], async (req, res) => {
     return res.json({
       user: user.toSafeObject()
     })
+<<<<<<< HEAD
   } else {
     // res.status(401)
     // return res.json({
@@ -91,6 +92,9 @@ router.get('/', [restoreUser], async (req, res) => {
     res.json({user:null})
     // res.json({})
   }
+=======
+  } else return res.json(null)
+>>>>>>> dev-front
 })
 
 

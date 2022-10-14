@@ -1,49 +1,79 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { useHistory } from "react-router-dom"
+import { logout } from "../../store/session"
 
-function ProfileButton({ user }) {
-  const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(false);
+
+const ProfileButton = ({ user }) => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const [showMenu, setShowMenu] = useState(false)
 
   const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+    if (showMenu) return
+    setShowMenu(true)
+  }
 
   useEffect(() => {
-    if (!showMenu) return;
+    if (!showMenu) return
+    const closeMenu = () => setShowMenu(false)
+    document.addEventListener("click", closeMenu)
+    // MUST include cleanup fn
+    return () => document.removeEventListener("click", closeMenu)
+  }, [showMenu])
 
-    const closeMenu = () => {
-      setShowMenu(false);
-    };
 
-    document.addEventListener('click', closeMenu);
+  const logoutUser = (e) => {
+    e.preventDefault()
+    dispatch(logout())
+  }
 
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
-
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
+      <div className="wrapper">
+
+        <button onClick={openMenu} className="pfbutton">
+            <i id='bars' className="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-user"></i>
+        </button>
+
+        {
+          showMenu && (
+
+          <div className="pfdropdown">
+
+            <div className="currentuser-wrapper">
+              <div className="currentuser">{user?.username}</div>
+              <div className="currentuser">{user?.email}</div>
+            </div>
+
+            <div className='middleline'></div>
+
+            <div className="menu-select">
+              <div onClick={()=>history.push("/newspot")}>Host New Spot</div>
+            </div>
+
+            <div className="menu-select">
+              <div onClick={()=>history.push("/myspots")}>My Spots</div>
+            </div>
+
+            <div className="menu-select">
+              <div >My Reviews</div>
+            </div>
+
+            <div className="menu-select">
+              <div onClick={logoutUser}>Log Out</div>
+            </div>
+
+
+          </div>
+
+        )}
+
+      </div>
     </>
-  );
+  )
 }
 
-export default ProfileButton;
+export default ProfileButton
