@@ -36,24 +36,3 @@ const Spot = ({spot}) => {
 }
 
 export default Spot
-
-/*
-    allSpots: {
-      [spotId]: {
-         id,
-         ownerId,
-         address,
-         city,
-         state,
-         country
-         lat,
-         lng,
-         name,
-         description,
-         price,
-         avgRating,
-         previewImage
-      },
-      optionalOrderedList: []
-    }
- */

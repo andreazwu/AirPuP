@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { thunkGetOneSpot, thunkRemoveSpot } from "../../store/spots"
+import { thunkGetOneSpot, acResetSpots } from "../../store/spots"
 import "./Spots.css"
 
 const LoadOneSpot = () => {
@@ -19,6 +19,7 @@ const LoadOneSpot = () => {
   useEffect(() => {
     console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
     dispatch(thunkGetOneSpot(+spotId)) //<<<< spotId =__=|||
+    return () => dispatch(acResetSpots())
   }, [dispatch, spotId])
 
   console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
