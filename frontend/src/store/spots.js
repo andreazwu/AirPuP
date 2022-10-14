@@ -55,6 +55,7 @@ const acDeleteSpot = (spotId) => {
 }
 
 const acAddSpotImage = (image) => {
+  console.log("ACTION CREATOR ADD SPOT IMAGE, PAYLOAD:", image)
   return {
     type: ADD_SPOT_IMAGE,
     image
@@ -105,15 +106,21 @@ export const thunkGetOneSpot = (spotId) => async (dispatch) => {
 
 // create new spot thunk
 export const thunkCreateNewSpot = (newspot) => async (dispatch) => {
+  console.log("THUNK CREATESPOT STARTS RUNNING, BEFORE POST TO BACKEND")
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(newspot)
   })
+  console.log("THUNK CREATESPOT STARTS RUNNING, AFTER POST TO BACKEND")
 
   if (response.ok) {
     const newspot = await response.json()
+    console.log("THUNK CREATESPOT BEFORE DISPATCH AC")
+
     dispatch(acCreateSpot(newspot))
+    console.log("THUNK CREATESPOT AFTER DISPATCH AC")
+
     return newspot //<<<<<< must return (for spotform line 67) handlesubmit: newSpot = await dispatch(thunkCreateNewSpot(spot))
   } else {
     //come back and do error handling logic <<<<<<<
@@ -149,18 +156,22 @@ export const thunkRemoveSpot = (spotId) => async (dispatch) => {
 }
 
 // add image thunk
-export const thunkAddSpotImage = (spotId, url, preview = true) => async (dispatch) => {
+export const thunkAddSpotImage = (spotId, imageObj) => async (dispatch) => {
+  console.log("THUNK ADDSPOTIMAGE STARTS RUNNING, BEFORE POST TO BACKEND")
   const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify (
-      {url, preview}
+      imageObj
     )
   })
+  console.log("THUNK ADDSPOTIMAGE STARTS RUNNING, AFTER FETCH FROM BACKEND, RES:", response)
 
   if (response.ok) {
+    console.log("THUNK ADDSPOTIMAGE, BEFORE DISPATCH ACTION CREATOR (add spot image)")
     const image = await response.json()
     dispatch(acAddSpotImage(image))
+    console.log("THUNK ADDSPOTIMAGE, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
     return image
   }
 }
@@ -234,11 +245,14 @@ const spotsReducer = (state = initialState, action) => {
       return newState
 
     case ADD_SPOT_IMAGE:
+      console.log("SPOTSREDUCER ADD SPOT IMAGE BEGIN:", state)
+
       newState = {...state}
       newState.allSpots = {...state.allSpots}
       newState.singleSpot = {...state.singleSpot,
                             SpotImages: [...state.singleSpot.SpotImages,
                                           action.image]}
+      console.log("SPOTSREDUCER ADD SPOT IMAGE END:", newState)
       return newState
 
     case RESET_SPOTS:
