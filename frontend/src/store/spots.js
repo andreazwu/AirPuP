@@ -249,9 +249,10 @@ const spotsReducer = (state = initialState, action) => {
 
       newState = {...state}
       newState.allSpots = {...state.allSpots}
-      newState.singleSpot = {...state.singleSpot,
-                            SpotImages: [...state.singleSpot.SpotImages,
-                                          action.image]}
+      newState.singleSpot = {...state.singleSpot}
+      // newState.singleSpot.SpotImages = [...state.singleSpot.SpotImages, action.image] // ?? err: not iterable
+      newState.singleSpot.SpotImages = [action.image]
+
       console.log("SPOTSREDUCER ADD SPOT IMAGE END:", newState)
       return newState
 

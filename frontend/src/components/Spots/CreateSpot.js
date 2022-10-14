@@ -10,7 +10,10 @@ const CreateSpot = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const currentUser = useSelector((state) => state.session.user)
+  const currentUser = useSelector((state) => {
+    console.log("USE SELECTOR DETECTS STATE CHANGE")
+    return state.session.user
+  })
 
   const [address, setAddress] = useState("")
   const [city, setCity] = useState("")
@@ -81,10 +84,12 @@ const CreateSpot = () => {
       const imageObj = ({ url: url, preview: true})
 
       console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK FOR ADD SPOT IMAGE, IMAGEOBJ:", imageObj)
-
+      // breaks here: thunk called --> server error
       await dispatch(thunkAddSpotImage(newSpot.id, imageObj))
 
-      history.push(`/spots/${newSpot.id}`) // works
+      // history.push(`/spots/${newSpot.id}`) // ?? type err: cannot read properties of undefined in LoadOneSpot
+
+      history.push("/myspots")
     }
     console.log("COMPONENT HANDLESUBMIT ENDS")
   }
