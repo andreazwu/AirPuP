@@ -7,7 +7,7 @@ module.exports = {
         ownerId: 1,
         address: "123 BlueLions Lane",
         city: "Los Angeles",
-        state: "California",
+        state: "CA",
         country: "United States",
         lat: 37.7645358,
         lng: -122.4730327,
@@ -16,10 +16,10 @@ module.exports = {
         price: 188
       },
       {
-        ownerId: 1,
+        ownerId: 2,
         address: "456 Garreg Rd",
-        city: "Los Angeles",
-        state: "California",
+        city: "New York",
+        state: "NY",
         country: "United States",
         lat: 38.7645351,
         lng: -123.4730322,
@@ -30,8 +30,8 @@ module.exports = {
       {
         ownerId: 1,
         address: "333 Eagles Blvd",
-        city: "Los Angeles",
-        state: "California",
+        city: "Milwaukee",
+        state: "WI",
         country: "United States",
         lat: 39.7645353,
         lng: -124.4730324,
@@ -40,10 +40,10 @@ module.exports = {
         price: 120
       },
       {
-        ownerId: 4,
+        ownerId: 1,
         address: "444 Golden Deer",
         city: "Los Angeles",
-        state: "California",
+        state: "CA",
         country: "United States",
         lat: 40.7645355,
         lng: -125.4730326,
@@ -54,8 +54,8 @@ module.exports = {
       {
         ownerId: 2,
         address: "555 Ashen Lane",
-        city: "Los Angeles",
-        state: "California",
+        city: "Seattle",
+        state: "WA",
         country: "United States",
         lat: 41.7645357,
         lng: -126.4730328,

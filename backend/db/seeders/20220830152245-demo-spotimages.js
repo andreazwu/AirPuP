@@ -31,7 +31,27 @@ module.exports = {
       },
       {
         spotId: 4,
-        url: 'https://www.travelandleisure.com/thmb/bTgj4N2NCYaT3cdZTARduGPhFwE=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/victoria-falls-zimbabwe-zambia-MOSTBEAUTIFUL0921-0c0230b660a04cbabe6a1536df38a313.jpg',
+        url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-53680271/original/e0edb6f7-f9ab-4126-a54a-5a3acc05c638.jpeg?im_w=960',
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/prohost-api/Hosting-53680271/original/580effb6-4ce9-4807-835f-901c4c14fb56.jpeg?im_w=480",
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/prohost-api/Hosting-53680271/original/f4b337ca-a8f0-4b02-be0d-3b2fd3a39691.jpeg?im_w=480",
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/prohost-api/Hosting-53680271/original/c4f2da8c-9837-4b77-82a4-4452129fd280.jpeg?im_w=480",
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/prohost-api/Hosting-53680271/original/097aea4b-4be8-404b-8f4f-ae30e37fd16d.jpeg?im_w=480",
         preview: false
       },
       {
