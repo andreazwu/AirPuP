@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 
 import "./LoginForm.css"
 
-function LoginForm() {
+function LoginForm({setShowLoginModal}) {
   console.log("LOGINFORM COMPONENT STARTS")
   const dispatch = useDispatch()
   const [credential, setCredential] = useState("")
@@ -15,8 +15,9 @@ function LoginForm() {
     e.preventDefault()
     setErrors([])
     return dispatch(sessionActions.login({ credential, password }))
-
+    .then(()=> setShowLoginModal(false))
     .catch(
+      // come back and implement errror message
       async (res) => {
         const data = await res.json()
         if (data && data.errors) setErrors(data.errors)

@@ -4,22 +4,22 @@ import LoginForm from "./LoginForm"
 import "./LoginForm.css"
 
 
-function LoginFormModal() {
+function LoginFormModal({showLoginModal, setShowLoginModal}) {
   console.log("LOGINFORMMODAL COMPONENT STARTS")
-  const [showModal, setShowModal] = useState(false)
+  // const [showModal, setShowModal] = useState(false)
 
   return (
     <>
       {/* <button onClick={() => setShowModal(true)}>Log In</button> */}
-
+{/*
       <div className="login-button"
-          onClick={() => setShowModal(true)}>
+          onClick={() => setShowLoginModal(true)}>
         Log In
-      </div>
+      </div> */}
 
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <LoginForm />
+      {showLoginModal && (
+        <Modal onClose={() => setShowLoginModal(false)}>
+          <LoginForm setShowLoginModal={setShowLoginModal} />
         </Modal>
       )}
     </>

@@ -4,7 +4,7 @@ import SignupFormModal from "../SignupFormModal"
 import DemoUser from "../DemoUser"
 
 
-const FunctionButton = () => {
+const FunctionButton = ({setShowLoginModal}) => {
   const [showMenu, setShowMenu] = useState(false)
 
   const openMenu = () => {
@@ -15,6 +15,7 @@ const FunctionButton = () => {
   useEffect(() => {
     if (!showMenu) return
     const closeMenu = () => setShowMenu(false)
+    // this event listener includes the login button to...
     document.addEventListener("click", closeMenu)
     // MUST include cleanup fn
     return () => document.removeEventListener("click", closeMenu)
@@ -35,7 +36,11 @@ const FunctionButton = () => {
 
           <div className="logindropdown">
             <div className="login-select">
-              <LoginFormModal />
+              {/* <LoginFormModal /> */}
+              <div className="login-button"
+          onClick={() => setShowLoginModal(true)}>
+              Log In
+            </div>
             </div>
 
             <div className="login-select">

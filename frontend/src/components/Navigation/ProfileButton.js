@@ -22,6 +22,9 @@ const ProfileButton = ({ user }) => {
     return () => document.removeEventListener("click", closeMenu)
   }, [showMenu])
 
+  useEffect(() => {
+
+  }, [user])
 
   const logoutUser = (e) => {
     e.preventDefault()
@@ -44,8 +47,9 @@ const ProfileButton = ({ user }) => {
           <div className="pfdropdown">
 
             <div className="currentuser-wrapper">
-              <div className="currentuser">{user?.username}</div>
-              <div className="currentuser">{user?.email}</div>
+              {console.log("PROFILEBUTTON COMP: USER:", user)}
+              <div className="currentuser">{user.username}</div>
+              <div className="currentuser">{user.email}</div>
             </div>
 
             <div className='middleline'></div>
