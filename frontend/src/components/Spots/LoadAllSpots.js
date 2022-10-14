@@ -35,7 +35,7 @@ const LoadAllSpots = () => {
 
   return (
     <>
-      <div className="allspots-wrapper">
+      <div className="wrapper-center">
         <div className="allspots-container">
           {
             spotsArr.map((spot) => (

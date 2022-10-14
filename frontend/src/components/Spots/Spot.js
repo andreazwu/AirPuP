@@ -9,25 +9,26 @@ const Spot = ({spot}) => {
         <div className="allspots-spot-image-container">
         {spot.previewImage ?
           (<div><img src={spot.previewImage} /></div>) :
-          (<div><img src="https://bitsofco.de/content/images/2018/12/broken-1.png" alt="spot has no preview image" /></div>)
+          (<div><img src="../images/no-image.png" alt="spot has no preview image" /></div>)
         }
         </div>
 
-        <div>
-          {spot.city}, {spot.state}
-        </div>
+        <div className="allspots-spot-info">
+          <div className="allspots-spot-location">
+            {spot.city}, {spot.state}
+          </div>
 
-        <div>
-          {spot.avgRating ?
-            (<span>★{spot.avgRating}</span>):
-            (<span>no rating</span>)
-          }
-        </div>
+          <div className="allspots-spot-rating">
+            {spot.avgRating ?
+              (<span>★{spot.avgRating}</span>):
+              (<span>no rating</span>)
+            }
+          </div>
 
-        <div>
-          $<span>{spot.price}</span> night
+          <div className="allspots-spot-price">
+            $<span>{spot.price}</span> night
+          </div>
         </div>
-
 
       </Link>
     </div>

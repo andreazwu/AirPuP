@@ -32,7 +32,7 @@ const LoadUserSpots = () => {
         <h1>My Spots</h1>
       </div>
 
-      <div className="allspots-wrapper">
+      <div className="wrapper-center">
         <div className="allspots-container">
           {
             spotsArr.length === 0 ?
