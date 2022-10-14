@@ -48,7 +48,7 @@ const SpotForm = ({spot, formType}) => {
   }, [address, city, state, country, lat, lng, name, description, price])
 
 
-
+  // handleSubmit is ASYNCHRONOUS - AWAIT dispatch (create thunk (newspot))
   const handleSubmit = async (e) => {
     e.preventDefault()
     setHasSubmitted(true)
@@ -64,7 +64,7 @@ const SpotForm = ({spot, formType}) => {
     console.log("SPOTFORM HANDLESUBMIT, CURRENT SPOT:", spot)
 
     if (formType==="create") {
-      const newSpot = await dispatch(thunkCreateNewSpot(spot)) // MUST await
+      const newSpot = await dispatch(thunkCreateNewSpot(spot)) //<<<<<<
       console.log(newSpot) //<<< newSpot undefined at time of console-logging
 
       //redirect to newly created spot -- cannot read id <<<<<<

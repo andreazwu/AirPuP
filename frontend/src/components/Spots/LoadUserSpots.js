@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { thunkGetUserSpots } from "../../store/spots";
+import { useDispatch, useSelector } from "react-redux"
+import { Redirect } from "react-router-dom"
+import { thunkGetUserSpots, acResetSpots } from "../../store/spots"
 import MySpot from "./MySpot"
 import "./Spots.css"
 
@@ -12,8 +12,14 @@ const LoadUserSpots = () => {
   const spotsObj = useSelector((state)=>state.spots.allSpots) // {1:{x}, 2:{y}, 3:{z}}
   const spotsArr = Object.values(spotsObj) // [{x}, {y}, {z}]
 
-  //dispatch THUNK AC
-  useEffect(() => dispatch(thunkGetUserSpots()), [dispatch])
+  useEffect(() => {
+    dispatch(thunkGetUserSpots())
+    // cleanup function to reset spots
+    return () => {
+      console.log("LOADUSERSPOT USE EFFECT CLEANUP FUNCTION: RESET SPOTS")
+      dispatch(acResetSpots())
+    }
+  }, [dispatch])
 
   //conditional rendering:
   //recall empty arr/ obj is NOT falsy
@@ -34,7 +40,7 @@ const LoadUserSpots = () => {
             <div>You're not currently hosting any spots!</div> :
 
             spotsArr.map((spot) => (
-              //implement spot in separate component; add prop
+              //implement spot in separate component add prop
               <MySpot key={spot.id} spot={spot}>
                 {console.log("LOAD USER SPOTS COMPONENT RETURN:", spot)}
               </MySpot>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetAllSpots } from "../../store/spots";
+import { thunkGetAllSpots, acResetSpots } from "../../store/spots";
 import Spot from "./Spot"
 import "./Spots.css"
 
@@ -20,6 +20,11 @@ const LoadAllSpots = () => {
   useEffect(() => {
     console.log("5 USE EFFECT RUNNING: DISPATCH THUNK")
     dispatch(thunkGetAllSpots())
+    // cleanup function to reset spots
+    return () => {
+      console.log("LOADALLSPOTS USE EFFECT CLEANUP FUNCTION: RESET SPOTS")
+      dispatch(acResetSpots())
+    }
   }, [dispatch])
 
   console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "ARRAY:", spotsArr)

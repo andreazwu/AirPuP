@@ -7,6 +7,7 @@ const LOAD_ONE_SPOT = "spots/LOAD_ONE_SPOT"
 const CREATE_SPOT = "spots/CREATE_SPOT"
 const UPDATE_SPOT = "spots/UPDATE_SPOT"
 const DELETE_SPOT = "spots/DELETE_SPOT"
+const RESET_SPOTS = "spots/RESET_SPOTS"
 
 
 // ACTION CREATORS:
@@ -49,6 +50,13 @@ const acDeleteSpot = (spotId) => {
   return {
     type: DELETE_SPOT,
     spotId
+  }
+}
+
+// "reset" AC - to be used in useEffect clearnup fn
+export const acResetSpots = () => {
+  return {
+    type: RESET_SPOTS
   }
 }
 
@@ -202,6 +210,11 @@ const spotsReducer = (state = initialState, action) => {
       delete newState.allSpots[action.spotId]
       if (newState.singleSpot.id === action.spotId) newState.singleSpot = {}
       console.log("SPOTSREDUCER DELETE SPOT END:", newState)
+      return newState
+
+    case RESET_SPOTS:
+      newState = {...state}
+      newState.allSpots = {}
       return newState
 
     default:
