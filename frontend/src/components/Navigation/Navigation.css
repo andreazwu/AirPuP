@@ -17,30 +17,35 @@
   width: 70px;
   height: 40px;
   border-radius: 20px;
-  border: 1px solid rgb(96, 123, 198, 0.5);
+  /* border: 1px solid rgb(255, 90, 96); */
+  border: 1px solid rgb(96, 123, 198, 0.2);
   justify-self: left;
   background-color: white;
   transition: box-shadow 0.5s;
 }
 
 .pfbutton:hover {
-  box-shadow: 1px 2px 5px rgb(187, 200, 228);
+  box-shadow: 1px 2px 5px rgb(187, 200, 228, 0.7);
   cursor: pointer;
 }
 
 .fa-user {
-  color: rgb(96, 123, 198);
+  color: rgb(171, 178, 193);
+  /* color: rgb(255, 90, 96); */
+  /* color: rgb(96, 123, 198); */
   margin-left: 5px;
 }
 
 .fa-bars {
-  color: rgb(96, 123, 198);
+  color: rgb(171, 178, 193);
+  /* color: rgb(255, 90, 96); */
+  /* color: rgb(96, 123, 198); */
   margin-right: 8px;
 }
 
 .pfdropdown {
   border: solid rgb(187, 200, 228, 0.3) 0.1px;
-  box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.7);
+  box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.5);
   background-color: white;
   border-radius: 15px;
   top: 83px;

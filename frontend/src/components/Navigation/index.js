@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom"
 import { useSelector } from "react-redux"
 import ProfileButton from "./ProfileButton"
 import FunctionButton from "./FunctionButton"
-import logo from "../../images/logo.jpg"
+// import logo from "../../images/logo.jpg" //blue
+import logo from "../../images/logo2.jpg" //pink
 
 import "./Navigation.css"
 

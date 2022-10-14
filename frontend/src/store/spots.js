@@ -150,8 +150,6 @@ const initialState = {
   singleSpot:{}
 }
 
-// const initialState = {}
-
 const spotsReducer = (state = initialState, action) => {
   let newState
   switch (action.type){
