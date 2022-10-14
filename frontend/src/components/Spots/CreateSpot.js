@@ -5,7 +5,7 @@ import "./Spots.css"
 
 const CreateSpot = () => {
   const spot = {}
-  console.log("COMPONENT CREATESPOT'S SPOT:", spot)
+  console.log("COMPONENT CREATESPOT'S EMPTY SPOT:", spot)
 
   return (
     <SpotForm spot={spot} formType="create" />

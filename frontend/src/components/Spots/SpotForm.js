@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { thunkCreateNewSpot, thunkEditSpot } from "../../store/spots"
+import { thunkCreateNewSpot, thunkEditSpot, thunkAddSpotImage } from "../../store/spots"
 import "./Spots.css"
 
 const SpotForm = ({spot, formType}) => {
@@ -11,7 +11,7 @@ const SpotForm = ({spot, formType}) => {
   const history = useHistory()
 
   const currentUser = useSelector((state) => {
-    console.log("2 USE SELECTOR RUNNING")
+    console.log("2 USE SELECTOR DETECT CHANGES IN STATE (CURRENT USER)")
     return state.session.user
   })
 
@@ -26,6 +26,7 @@ const SpotForm = ({spot, formType}) => {
   const [name, setName] = useState(spot.name || "")
   const [description, setDescription] = useState(spot.description || "")
   const [price, setPrice] = useState(spot.price || "")
+  const [url, setUrl] = useState("")
 
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -58,7 +59,7 @@ const SpotForm = ({spot, formType}) => {
 
     const spot = {
       // ...spot, //ReferenceError: Cannot access 'spot' before initialization
-      address, city, state, country, lat, lng, name, description, price
+      address, city, state, country, lat: 90, lng: 90, name, description, price, url
     }
 
     console.log("SPOTFORM HANDLESUBMIT, CURRENT SPOT:", spot)

@@ -7,6 +7,7 @@ const LOAD_ONE_SPOT = "spots/LOAD_ONE_SPOT"
 const CREATE_SPOT = "spots/CREATE_SPOT"
 const UPDATE_SPOT = "spots/UPDATE_SPOT"
 const DELETE_SPOT = "spots/DELETE_SPOT"
+const ADD_SPOT_IMAGE = "spots/ADD_SPOT_IMAGE"
 const RESET_SPOTS = "spots/RESET_SPOTS"
 
 
@@ -50,6 +51,13 @@ const acDeleteSpot = (spotId) => {
   return {
     type: DELETE_SPOT,
     spotId
+  }
+}
+
+const acAddSpotImage = (image) => {
+  return {
+    type: ADD_SPOT_IMAGE,
+    image
   }
 }
 
@@ -126,8 +134,6 @@ export const thunkEditSpot = (myspot) => async (dispatch) => {
     const spot = await response.json()
     dispatch(acUpdateSpot(spot))
     return spot
-  } else {
-    //come back and do error handling logic <<<<<<<
   }
 }
 
@@ -139,6 +145,23 @@ export const thunkRemoveSpot = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(acDeleteSpot(spotId))
+  }
+}
+
+// add image thunk
+export const thunkAddSpotImage = (spotId, url, preview = true) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify (
+      {url, preview}
+    )
+  })
+
+  if (response.ok) {
+    const image = await response.json()
+    dispatch(acAddSpotImage(image))
+    return image
   }
 }
 
@@ -208,6 +231,14 @@ const spotsReducer = (state = initialState, action) => {
       delete newState.allSpots[action.spotId]
       if (newState.singleSpot.id === action.spotId) newState.singleSpot = {}
       console.log("SPOTSREDUCER DELETE SPOT END:", newState)
+      return newState
+
+    case ADD_SPOT_IMAGE:
+      newState = {...state}
+      newState.allSpots = {...state.allSpots}
+      newState.singleSpot = {...state.singleSpot,
+                            SpotImages: [...state.singleSpot.SpotImages,
+                                          action.image]}
       return newState
 
     case RESET_SPOTS:
