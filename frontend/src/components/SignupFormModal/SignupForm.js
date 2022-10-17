@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { Redirect } from "react-router-dom"
 import * as sessionActions from "../../store/session"
 
-import './SignupForm.css'
+import "./SignupForm.css"
 
-function SignupFormPage({setShowSignupModal}) {
+function SignupFormPage({onClose, setShowSignupModal}) {
   const dispatch = useDispatch()
 
   const [email, setEmail] = useState("")
@@ -17,30 +17,38 @@ function SignupFormPage({setShowSignupModal}) {
   const [errors, setErrors] = useState([])
 
   const currentUser = useSelector((state) => state.session.user)
+
   if (currentUser) {
-    dispatch(sessionActions.login({ email, password }))
+    // dispatch(sessionActions.login({ email, password }))
     return <Redirect to="/" />
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+
     if (password === confirmPassword) {
       setErrors([])
-      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-        .then(() => setShowSignupModal(false))
-        .catch(
-          async (res) => {
-          const data = await res.json()
-          if (data && data.errors) setErrors(data.errors)
-        })
+      return await dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+        // .then(() => setShowSignupModal(false))
+        .catch(async (res) => {
+            const data = await res.json()
+            const errArr = Object.values(data.errors)
+            if (data && errArr.length) setErrors(errArr)
+          })
+        .then(onClose)
     }
-    return setErrors(['Confirm Password field must be the same as the Password field'])
+    return setErrors(["Please Confirm Password"])
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      <button className="close-button" onClick={onClose}>
+          <i className="fa-solid fa-xmark"></i>
+      </button>
+
       <ul>
-        {errors.map((error, idx) => (
+        {errors.length > 0 &&
+        errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>

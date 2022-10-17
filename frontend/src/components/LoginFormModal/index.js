@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Modal } from "../../context/Modal"
 import LoginForm from "./LoginForm"
+
 import "./LoginForm.css"
 
 
@@ -16,9 +17,12 @@ function LoginFormModal({showLoginModal, setShowLoginModal}) {
         Log In
       </div> */}
 
+      {/* doesn't have to pass in setShowLoginModal prop, passing in onClose instead is fine */}
       {showLoginModal && (
         <Modal onClose={() => setShowLoginModal(false)}>
-          <LoginForm setShowLoginModal={setShowLoginModal} />
+          <LoginForm
+            onClose={() => setShowLoginModal(false)}setShowLoginModal={setShowLoginModal}
+          />
         </Modal>
       )}
     </>

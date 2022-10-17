@@ -4,7 +4,7 @@ import * as sessionActions from "../../store/session"
 
 import "./LoginForm.css"
 
-function LoginForm({setShowLoginModal}) {
+function LoginForm({onClose, setShowLoginModal}) {
   const dispatch = useDispatch()
 
   const [credential, setCredential] = useState("")
@@ -15,7 +15,8 @@ function LoginForm({setShowLoginModal}) {
     e.preventDefault()
     setErrors([])
     return dispatch(sessionActions.login({ credential, password }))
-      .then(() => setShowLoginModal(false))
+      // .then(() => setShowLoginModal(false))
+      .then(onClose)
       .catch(
         // come back and implement errror message
         async (res) => {
@@ -28,6 +29,10 @@ function LoginForm({setShowLoginModal}) {
   return (
     <div className="modal-wrapper">
       <form onSubmit={handleSubmit}>
+        <button className="close-button" onClick={onClose}>
+          <i className="fa-solid fa-xmark"></i>
+        </button>
+
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>

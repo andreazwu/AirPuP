@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Modal } from '../../context/Modal';
-import SignupForm from './SignupForm';
+import React, { useState } from "react"
+import { Modal } from '../../context/Modal'
+import SignupForm from './SignupForm'
 
-import './SignupForm.css';
+import './SignupForm.css'
 
 function SignupFormModal({showSignupModal, setShowSignupModal}) {
-  // const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false)
 
   return (
     <>
@@ -17,11 +17,13 @@ function SignupFormModal({showSignupModal, setShowSignupModal}) {
 
       {showSignupModal && (
         <Modal onClose={() => setShowSignupModal(false)}>
-          <SignupForm setShowSignupModal={setShowSignupModal}/>
+          <SignupForm
+            onClose={() => setShowSignupModal(false)}
+            setShowSignupModal={setShowSignupModal}/>
         </Modal>
       )}
     </>
-  );
+  )
 }
 
-export default SignupFormModal;
+export default SignupFormModal
