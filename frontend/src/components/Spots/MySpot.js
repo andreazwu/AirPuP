@@ -1,7 +1,7 @@
 import { Link, useHistory } from "react-router-dom"
 import "./Spots.css"
 import { useDispatch, useSelector } from "react-redux"
-import { thunkRemoveSpot } from "../../store/spots"
+import { thunkEditSpot, thunkRemoveSpot } from "../../store/spots"
 
 const MySpot = ({spot}) => {
   const dispatch = useDispatch()
@@ -51,7 +51,7 @@ const MySpot = ({spot}) => {
         <div>
           {owner && (
             <>
-              <button onClick={() => history.push(`/edit/${spot.id}`)}>
+              <button onClick={() => history.push(`/myspots/edit/${spot.id}`)}>
                 Edit
               </button>
               <button onClick={deleteSpotHandleClick}>

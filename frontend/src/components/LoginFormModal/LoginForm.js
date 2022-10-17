@@ -15,8 +15,8 @@ function LoginForm({onClose, setShowLoginModal}) {
     e.preventDefault()
     setErrors([])
     return dispatch(sessionActions.login({ credential, password }))
-      // .then(() => setShowLoginModal(false))
-      .then(onClose)
+      .then(() => setShowLoginModal(false))
+      // .then(onClose)
       .catch(
         // come back and implement errror message
         async (res) => {
@@ -29,9 +29,11 @@ function LoginForm({onClose, setShowLoginModal}) {
   return (
     <div className="modal-wrapper">
       <form onSubmit={handleSubmit}>
+
+        {/* //don't need x button
         <button className="close-button" onClick={onClose}>
           <i className="fa-solid fa-xmark"></i>
-        </button>
+        </button> */}
 
         <ul>
           {errors.map((error, idx) => (

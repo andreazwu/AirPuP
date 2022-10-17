@@ -19,32 +19,34 @@ function SignupFormPage({onClose, setShowSignupModal}) {
   const currentUser = useSelector((state) => state.session.user)
 
   if (currentUser) {
-    // dispatch(sessionActions.login({ email, password }))
     return <Redirect to="/" />
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     if (password === confirmPassword) {
       setErrors([])
-      return await dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-        // .then(() => setShowSignupModal(false))
+      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+        .then(() => {
+          setShowSignupModal(false)
+        })
         .catch(async (res) => {
             const data = await res.json()
             const errArr = Object.values(data.errors)
             if (data && errArr.length) setErrors(errArr)
           })
-        .then(onClose)
     }
     return setErrors(["Please Confirm Password"])
   }
 
   return (
     <form onSubmit={handleSubmit}>
+
+      {/* // doesn't need x button
       <button className="close-button" onClick={onClose}>
           <i className="fa-solid fa-xmark"></i>
-      </button>
+      </button> */}
 
       <ul>
         {errors.length > 0 &&

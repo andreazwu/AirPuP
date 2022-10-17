@@ -45,7 +45,7 @@ return (
           <LoadUserSpots />
         </Route>
 
-        <Route path="/edit/:spotId">
+        <Route path="/myspots/edit/:spotId">
           <h1> App: Edit A Spot~ </h1>
           <EditSpot />
         </Route>

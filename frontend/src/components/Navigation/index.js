@@ -44,7 +44,7 @@ const Navigation = ({ isLoaded }) => {
 
         <SignupFormModal
           showSignupModal={showSignupModal}
-          setSignupShowModal={setShowSignupModal}
+          setShowSignupModal={setShowSignupModal}
         />
 
         {/* <div className="rawaha"> div.rawaha shortcut </div> */}

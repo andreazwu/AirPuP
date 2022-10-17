@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Modal } from '../../context/Modal'
-import SignupForm from './SignupForm'
+import SignupFormPage from './SignupForm'
 
 import './SignupForm.css'
 
@@ -17,8 +17,8 @@ function SignupFormModal({showSignupModal, setShowSignupModal}) {
 
       {showSignupModal && (
         <Modal onClose={() => setShowSignupModal(false)}>
-          <SignupForm
-            onClose={() => setShowSignupModal(false)}
+          <SignupFormPage
+            // onClose={() => setShowSignupModal(false)}
             setShowSignupModal={setShowSignupModal}/>
         </Modal>
       )}
