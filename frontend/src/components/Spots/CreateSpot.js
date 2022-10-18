@@ -203,7 +203,9 @@ const CreateSpot = () => {
             </label>
         </div>
 
-        <button disabled={errors.length > 0 ? true : false}>
+        <button
+        // disabled={errors.length > 0 ? true : false}
+        >
           Create
         </button>
 
