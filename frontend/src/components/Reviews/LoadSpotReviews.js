@@ -6,7 +6,6 @@ import { thunkGetSpotReviews } from "../../store/reviews"
 import "./Reviews.css"
 
 
-
 const LoadSpotReviews = ({spotId}) => {
   console.log("1 (2.2) COMPONENT-LOADSPOTREVIEWS STARTS")
 
@@ -40,7 +39,10 @@ const LoadSpotReviews = ({spotId}) => {
       */
       reviewsArr.map((review) => (
         <div className="single-review">
-          <h3>{review.User.firstName}</h3>
+          <h3>{review.User.firstName}{" "}{review.User.lastName}</h3>
+          <p className="single-review-date">
+            {new Date(review.createdAt).toString().slice(3,-42)}
+          </p>
           <p>{review.review}</p>
           <div>
             {
@@ -49,7 +51,7 @@ const LoadSpotReviews = ({spotId}) => {
                 return (
                   <img
                   className="single-review-image"
-                  scr={image.url} />
+                  src={image.url} />
                 )
               })
             }

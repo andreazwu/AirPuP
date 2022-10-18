@@ -1,0 +1,24 @@
+
+.single-review {
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.single-review>h3 {
+  font-weight: 500;
+  margin-bottom: -10px;
+}
+
+.single-review-date {
+  font-size: 14px;
+  color:rgb(187, 200, 228, 0.8);
+  font-style: normal;
+}
+
+.single-review-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 4px;
+  margin-right: 4px;
+  object-fit: cover;
+}
