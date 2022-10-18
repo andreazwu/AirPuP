@@ -210,6 +210,7 @@ const spotsReducer = (state = initialState, action) => {
       // action.spots --> {Spots: [{x}, {y}, {z}]}
       action.spots.Spots.forEach((spot) => normalizedSpots[spot.id] = spot)
       newState.allSpots = normalizedSpots
+      newState.singleSpot = {}
       console.log("SPOTSREDUCER LOAD ALL SPOTS END:", newState)
       return newState
 
@@ -220,6 +221,7 @@ const spotsReducer = (state = initialState, action) => {
       // action.spots --> {Spots: [{x}, {y}, {z}]}
       action.spots.Spots.forEach((spot) => normalizedUserSpots[spot.id] = spot)
       newState.allSpots = normalizedUserSpots
+      newState.singleSpot = {}
       console.log("SPOTSREDUCER LOAD USER SPOTS END:", newState)
       return newState
 

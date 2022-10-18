@@ -6,19 +6,19 @@ module.exports = {
     await queryInterface.bulkInsert('ReviewImages', [
       {
         reviewId: 1,
-        url: 'https://www.travelandleisure.com/thmb/0rXl4LWsLDE5pBJNGbQgT6DpYHs=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/avenue-of-the-baobabs-madagascar-MOSTBEAUTIFUL0921-9018225e787e4539b1294976f7a2baf4.jpg'
+        url: 'https://a0.muscache.com/im/pictures/7be81de9-1676-4b05-a141-f3af7034dba8.jpg?im_w=720'
       },
       {
         reviewId: 2,
-        url: 'https://www.travelandleisure.com/thmb/BA2YOwD5vpe16dx63JX1tTr7hyo=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/salar-de-uyuni-bolivia-MOSTBEAUTIFUL0921-d1c3606335b749d4a5d8e3b2eb8e00d4.jpg'
+        url: 'https://a0.muscache.com/im/pictures/f51d2a7b-cec0-43ae-87c2-274ab08188da.jpg?im_w=720'
       },
       {
         reviewId: 2,
-        url: 'https://www.travelandleisure.com/thmb/CaAwLVxoe6Z_ytpRHACoVhOevnc=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ha-long-bay-vietnam-MOSTBEAUTIFUL0921-910a3a82a03f4bb59d49290fbdc2a6db.jpg'
+        url: 'https://a0.muscache.com/im/pictures/704caa1a-2f31-41b8-8b0e-bdd07a2f12c4.jpg?im_w=720'
       },
       {
         reviewId: 3,
-        url: 'https://www.travelandleisure.com/thmb/awAmCqNCN6S8pP2yaMFIx4X9q58=/650x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/lake-atitlan-guatemala-MOSTBEAUTIFUL0921-35f105b0ae6543eabb6869c0003c4d1e.jpg'
+        url: 'https://a0.muscache.com/im/pictures/0f7dfdda-ffd9-4ee1-aa4c-51db0f3e1110.jpg?im_w=720'
       },
     ]);
   },

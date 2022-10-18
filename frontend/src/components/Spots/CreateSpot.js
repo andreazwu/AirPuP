@@ -49,7 +49,7 @@ const CreateSpot = () => {
     if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
     if (!description.length) errorsArr.push("please enter a description")
     if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
-    if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+    if (!url.length || url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif")) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
     console.log("USE EFFECT FOR VALIDATION ERRORS ENDS, ERRORS ARR:", errorsArr)
 
@@ -113,7 +113,10 @@ const CreateSpot = () => {
   return (
     <>
       <div>
-        {hasSubmitted && errors?.map((error)=>(<div key={error}>{error}</div>))}
+        {
+        hasSubmitted &&
+        errors?.map((error)=>(<div key={error}>{error}</div>))
+        }
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -204,7 +207,11 @@ const CreateSpot = () => {
         </div>
 
         <button
-        // disabled={errors.length > 0 ? true : false}
+        disabled={
+          hasSubmitted &&
+          errors.length > 0 ? true : false
+        }
+
         >
           Create
         </button>

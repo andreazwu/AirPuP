@@ -60,7 +60,7 @@ const acAddReviewImage = (image) => {
 // load all spot reviews thunk
 export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
   console.log("THUNK STARTS RUNNING, BEFORE FETCH FROM BACKEND")
-  const response = await csrfFetch(`api/spots/${spotId}/reviews`)
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
   console.log("THUNK STARTS RUNNING, AFTER FETCH FROM BACKEND")
 
   if (response.ok) {

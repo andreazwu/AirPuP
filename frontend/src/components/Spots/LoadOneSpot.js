@@ -6,24 +6,24 @@ import LoadSpotReviews from "../Reviews/LoadSpotReviews"
 import "./Spots.css"
 
 const LoadOneSpot = () => {
-  console.log("1 COMPONENT-LOADONESPOT RUNNING")
+  // console.log("1 COMPONENT-LOADONESPOT RUNNING")
   const dispatch = useDispatch()
   const history = useHistory()
   const { spotId } = useParams()
 
   const spot = useSelector((state)=>{
-    console.log("2 USE SELECTOR RUNNING")
+    // console.log("2 USE SELECTOR RUNNING")
     return state.spots.singleSpot
   }) // single obj {x}
 
   //dispatch THUNK AC
   useEffect(() => {
-    console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
+    // console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
     dispatch(thunkGetOneSpot(+spotId)) //<<<< spotId =__=|||
     return () => dispatch(acResetSpots())
   }, [dispatch, spotId])
 
-  console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
+  // console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
 
 
   // //verify if currentUser is owner of spot
@@ -53,7 +53,7 @@ const LoadOneSpot = () => {
   if (!previewImage) previewImage = displayImages[0]
   else displayImages.splice(displayImages.indexOf(previewImage),1)
 
-  console.log(`THIS IS THE DISPLAY IMAGES ARR: ${displayImages}; THIS IS THE PREVIEW IMAGE: ${previewImage}`)
+  // console.log(`THIS IS THE DISPLAY IMAGES ARR: ${displayImages}; THIS IS THE PREVIEW IMAGE: ${previewImage}`)
 
 
 
@@ -61,7 +61,7 @@ const LoadOneSpot = () => {
     <>
       <div className="whole-container">
         Heyaa this is spot # {spotId}
-        {console.log("4 (2.5) RETURN:", spot)}
+        {/* {console.log("4 (2.5) RETURN:", spot)} */}
 
         <div className="title-whole">
           <div>
