@@ -1,5 +1,6 @@
 import { csrfFetch } from './csrf';
 
+//---------------------------------------------------
 // ACTION TYPES:
 const LOAD_ALL_SPOTS = "spots/LOAD_ALL_SPOTS"
 const LOAD_USER_SPOTS = "spots/LOAD_USER_SPOTS"
@@ -10,7 +11,7 @@ const DELETE_SPOT = "spots/DELETE_SPOT"
 const ADD_SPOT_IMAGE = "spots/ADD_SPOT_IMAGE"
 const RESET_SPOTS = "spots/RESET_SPOTS"
 
-
+//---------------------------------------------------
 // ACTION CREATORS:
 const acLoadAllSpots = (spots) => {
   return {
@@ -176,7 +177,7 @@ export const thunkAddSpotImage = (spotId, imageObj) => async (dispatch) => {
   }
 }
 
-
+//---------------------------------------------------
 // REDUCER:
 
 const initialState = {

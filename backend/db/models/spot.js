@@ -121,7 +121,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
-        min: 0,
+        min: 1,
       }
     }
   }, {

@@ -50,7 +50,6 @@ return (
           <EditSpot />
         </Route>
 
-        {/* <Route path="/myspots/edit/:spotId" component={EditSpot} /> */}
 
       </Switch>
     )}

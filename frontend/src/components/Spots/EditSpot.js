@@ -73,7 +73,7 @@ const EditSpot = () => {
     if (!country.length) errorsArr.push("please enter country")
     if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
     if (!description.length) errorsArr.push("please enter a description")
-    if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
+    if (!price || price <= 0) errorsArr.push("please enter a valid price greater than 0")
     // if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
     setErrors(errorsArr)
@@ -222,7 +222,9 @@ const EditSpot = () => {
             </label> */}
         </div>
 
-        <button disabled={errors.length > 0 ? true : false}>
+        <button
+        // disabled={errors.length > 0 ? true : false}
+        >
           Update
         </button>
 
