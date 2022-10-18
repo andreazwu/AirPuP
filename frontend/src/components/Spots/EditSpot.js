@@ -16,6 +16,8 @@ const EditSpot = () => {
   const currentUser = useSelector((state) => state.session.user)
 
   const [address, setAddress] = useState(spot && spot.address)
+  console.log("EDITSPOT COMP, USESTATE(SPOT.ADDRESS), ADDRESS:", address)
+
   const [city, setCity] = useState(spot && spot.city)
   const [state, setState] = useState(spot && spot.state)
   const [country, setCountry] = useState(spot && spot.country)
@@ -24,38 +26,45 @@ const EditSpot = () => {
   const [name, setName] = useState(spot && spot.name)
   const [description, setDescription] = useState(spot && spot.description)
   const [price, setPrice] = useState(spot && spot.price)
-
   // const [url, setUrl] = useState(spot.SpotImages[0].url)
   // const [url, setUrl] = useState("")
-
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
+
+  //check for logged in/ ownership status
+  useEffect(() => {
+    if (currentUser) {
+      if (currentUser.id === spot.ownerId) setErrors([])
+      else setErrors(["You are not the owner of this spot"])
+    }
+    else setErrors(["You must be logged in to update a spot"])
+  }, [currentUser, spot])
 
   useEffect(() => {
     console.log("USE EFFECT FOR FETCHING ONE SPOT STARTS, SPOTID:", spotId)
     dispatch(thunkGetOneSpot(+spotId))
   }, [dispatch, spotId])
 
-  //check for validation errors
-  useEffect(() => {
-    console.log("USE EFFECT FOR VALIDATION ERRORS STARTS")
-    let errorsArr = []
+  // //check for validation errors
+  // useEffect(() => {
+  //   console.log("USE EFFECT FOR VALIDATION ERRORS STARTS")
+  //   let errorsArr = []
 
-    if (!address.length) errorsArr.push("please enter street address")
-    if (!city.length) errorsArr.push("please enter city")
-    if (!state.length) errorsArr.push("please enter state")
-    if (!country.length) errorsArr.push("please enter country")
-    // if (!lat.length || lat > 90 || lat < -90) errorsArr.push("please enter a valid latitude between -90 and 90")
-    // if (!lng.length || lng > 180 || lng < -180) errorsArr.push("please enter a valid longitude between -180 and 180")
-    if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
-    if (!description.length) errorsArr.push("please enter a description")
-    if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
-    // if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+  //   if (!address.length) errorsArr.push("please enter street address")
+  //   if (!city.length) errorsArr.push("please enter city")
+  //   if (!state.length) errorsArr.push("please enter state")
+  //   if (!country.length) errorsArr.push("please enter country")
+  //   // if (!lat.length || lat > 90 || lat < -90) errorsArr.push("please enter a valid latitude between -90 and 90")
+  //   // if (!lng.length || lng > 180 || lng < -180) errorsArr.push("please enter a valid longitude between -180 and 180")
+  //   if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
+  //   if (!description.length) errorsArr.push("please enter a description")
+  //   if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
+  //   // if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
-    console.log("USE EFFECT FOR VALIDATION ERRORS ENDS, ERRORS ARR:", errorsArr)
+  //   console.log("USE EFFECT FOR VALIDATION ERRORS ENDS, ERRORS ARR:", errorsArr)
 
-    setErrors(errorsArr)
-  }, [address, city, state, country, name, description, price])
+  //   setErrors(errorsArr)
+  // }, [address, city, state, country, name, description, price])
 
 
   // handleSubmit is ASYNCHRONOUS
@@ -64,6 +73,19 @@ const EditSpot = () => {
     e.preventDefault()
     setHasSubmitted(true)
 
+    const errorsArr = []
+
+    if (!address.length) errorsArr.push("please enter street address")
+    if (!city.length) errorsArr.push("please enter city")
+    if (!state.length) errorsArr.push("please enter state")
+    if (!country.length) errorsArr.push("please enter country")
+    if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
+    if (!description.length) errorsArr.push("please enter a description")
+    if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
+    // if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+
+    setErrors(errorsArr)
+
     const spot = {
       address, city, state, country, name, description, price
     }
@@ -71,7 +93,7 @@ const EditSpot = () => {
     console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, PAYLOAD SPOT:", spot)
 
     // AWAIT thunk; returns promise (spotObj or errors)
-    const updatedSpot = await dispatch(thunkEditSpot(spot))
+    const updatedSpot = await dispatch(thunkEditSpot(spot, spotId))
 
     if (updatedSpot) {
       console.log("COMPONENT HANDLESUBMIT, AFTER THUNK AC RETURNS PROMISE, updatedSpot:", updatedSpot)

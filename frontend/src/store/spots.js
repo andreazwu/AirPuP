@@ -130,8 +130,8 @@ export const thunkCreateNewSpot = (newspot) => async (dispatch) => {
 }
 
 // update spot thunk
-export const thunkEditSpot = (myspot) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${myspot.id}`, {
+export const thunkEditSpot = (myspot, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(myspot)

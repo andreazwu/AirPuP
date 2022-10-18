@@ -1,7 +1,7 @@
 import { Link, useHistory } from "react-router-dom"
 import "./Spots.css"
 import { useDispatch, useSelector } from "react-redux"
-import { thunkEditSpot, thunkRemoveSpot } from "../../store/spots"
+import { thunkEditSpot, thunkRemoveSpot, thunkGetOneSpot } from "../../store/spots"
 import EditSpot from "./EditSpot"
 
 const MySpot = ({spot}) => {
@@ -21,6 +21,10 @@ const MySpot = ({spot}) => {
   const editSpotHandleClick = async () => {
     history.push(`/myspots/edit/${spot.id}`)
     // await dispatch(thunkEditSpot(spot.id))
+  }
+
+  const spotToEdit = async () => {
+    await dispatch(thunkGetOneSpot(spot.id))
   }
 
   return (
@@ -59,7 +63,6 @@ const MySpot = ({spot}) => {
             <>
               <button onClick={editSpotHandleClick}>
                 Edit
-                {/* <EditSpot /> */}
               </button>
               <button onClick={deleteSpotHandleClick}>
                 Delete
