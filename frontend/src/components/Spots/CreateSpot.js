@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { thunkCreateNewSpot, thunkEditSpot, thunkAddSpotImage } from "../../store/spots"
+import { countries } from "./countries"
 
 import "./Spots.css"
 
@@ -158,12 +159,25 @@ const CreateSpot = () => {
             </label>
             <label>
               Country:
+              <select
+                type="text"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                <option value="" selected disabled>
+                  Select a Country
+                </option>
+                {countries.map((ele)=>(<option>{ele}</option>))}
+              </select>
+            </label>
+            {/* <label>
+              Country:
               <input
                 type="text"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               />
-            </label>
+            </label> */}
             {/* <label>
               Latitude:
               <input

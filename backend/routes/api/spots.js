@@ -57,6 +57,11 @@ const validSpot = [
     .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage("Price per day is required"),
+  // check("url")
+  //   .notEmpty()
+  //   .withMessage("URL cannot be empty")
+  //   .isURL()
+  //   .withMessage("URL is not valid"),
   handleValidationErrors
 ]
 
