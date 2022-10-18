@@ -203,7 +203,9 @@ const CreateSpot = () => {
             </label>
         </div>
 
-        <button type="submit">Submit</button>
+        <button disabled={errors.length > 0 ? true : false}>
+          Create
+        </button>
 
       </form>
       {console.log("CREATESPOT COMPONENT ENDS")}

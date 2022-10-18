@@ -4,7 +4,6 @@ import { login } from "../../store/session"
 import "./DemoUser.css"
 
 const DemoUser = () => {
-  console.log("DEMOUSER COMPONENT STARTS")
   const dispatch = useDispatch()
 
   const loginDemoUser = () => {

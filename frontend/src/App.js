@@ -40,7 +40,7 @@ return (
           <CreateSpot />
         </Route>
 
-        <Route path='/myspots'>
+        <Route exact path='/myspots'>
           <h1> App: These are my spots~~ </h1>
           <LoadUserSpots />
         </Route>
@@ -49,6 +49,8 @@ return (
           <h1> App: Edit A Spot~ </h1>
           <EditSpot />
         </Route>
+
+        {/* <Route path="/myspots/edit/:spotId" component={EditSpot} /> */}
 
       </Switch>
     )}
