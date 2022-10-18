@@ -15,23 +15,25 @@ const EditSpot = () => {
   const spot = useSelector((state) => state.spots.singleSpot)
   const currentUser = useSelector((state) => state.session.user)
 
-  const [address, setAddress] = useState(spot && spot.address)
-  console.log("EDITSPOT COMP, USESTATE(SPOT.ADDRESS), ADDRESS:", address)
-
-  const [city, setCity] = useState(spot && spot.city)
-  const [state, setState] = useState(spot && spot.state)
-  const [country, setCountry] = useState(spot && spot.country)
-  // const [lat, setLat] = useState(spot && spot.lat)
-  // const [lng, setLng] = useState(spot && spot.lng)
-  const [name, setName] = useState(spot && spot.name)
-  const [description, setDescription] = useState(spot && spot.description)
-  const [price, setPrice] = useState(spot && spot.price)
-  // const [url, setUrl] = useState(spot.SpotImages[0].url)
+  const [address, setAddress] = useState("")
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
+  const [country, setCountry] = useState("")
+  const [lat, setLat] = useState("")
+  const [lng, setLng] = useState("")
+  const [name, setName] = useState("")
+  const [description, setDescription] = useState("")
+  const [price, setPrice] = useState("")
   // const [url, setUrl] = useState("")
+
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
-  //check for logged in/ ownership status
+  useEffect(() => {
+    console.log("USE EFFECT FOR FETCHING ONE SPOT STARTS, SPOTID:", spotId)
+    dispatch(thunkGetOneSpot(+spotId))
+  }, [dispatch, spotId])
+
   useEffect(() => {
     if (currentUser) {
       if (currentUser.id === spot.ownerId) setErrors([])
@@ -41,35 +43,24 @@ const EditSpot = () => {
   }, [currentUser, spot])
 
   useEffect(() => {
-    console.log("USE EFFECT FOR FETCHING ONE SPOT STARTS, SPOTID:", spotId)
-    dispatch(thunkGetOneSpot(+spotId))
-  }, [dispatch, spotId])
-
-  // //check for validation errors
-  // useEffect(() => {
-  //   console.log("USE EFFECT FOR VALIDATION ERRORS STARTS")
-  //   let errorsArr = []
-
-  //   if (!address.length) errorsArr.push("please enter street address")
-  //   if (!city.length) errorsArr.push("please enter city")
-  //   if (!state.length) errorsArr.push("please enter state")
-  //   if (!country.length) errorsArr.push("please enter country")
-  //   // if (!lat.length || lat > 90 || lat < -90) errorsArr.push("please enter a valid latitude between -90 and 90")
-  //   // if (!lng.length || lng > 180 || lng < -180) errorsArr.push("please enter a valid longitude between -180 and 180")
-  //   if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
-  //   if (!description.length) errorsArr.push("please enter a description")
-  //   if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
-  //   // if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
-
-  //   console.log("USE EFFECT FOR VALIDATION ERRORS ENDS, ERRORS ARR:", errorsArr)
-
-  //   setErrors(errorsArr)
-  // }, [address, city, state, country, name, description, price])
+    if (spot) {
+      setAddress(spot.address)
+      setCity(spot.city)
+      setState(spot.state)
+      setCountry(spot.country)
+      setLat(spot.lat)
+      setLng(spot.lng)
+      setName(spot.name)
+      setDescription(spot.description)
+      setPrice(spot.price)
+    }
+  }, [spot])
 
 
   // handleSubmit is ASYNCHRONOUS
   const handleSubmit = async (e) => {
     console.log("EDITSPOT COMPONENT HANDLESUBMIT STARTS:")
+
     e.preventDefault()
     setHasSubmitted(true)
 
@@ -82,18 +73,19 @@ const EditSpot = () => {
     if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
     if (!description.length) errorsArr.push("please enter a description")
     if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
-    // if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+    if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
     setErrors(errorsArr)
 
-    const spot = {
+    const spotInfo = {
+      ...spot,
       address, city, state, country, name, description, price
     }
 
-    console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, PAYLOAD SPOT:", spot)
+    console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, PAYLOAD SPOT:", spotInfo)
 
-    // AWAIT thunk; returns promise (spotObj or errors)
-    const updatedSpot = await dispatch(thunkEditSpot(spot, spotId))
+    // AWAIT thunk returns promise (spotObj or errors)
+    const updatedSpot = await dispatch(thunkEditSpot(spotInfo, +spotId))
 
     if (updatedSpot) {
       console.log("COMPONENT HANDLESUBMIT, AFTER THUNK AC RETURNS PROMISE, updatedSpot:", updatedSpot)
