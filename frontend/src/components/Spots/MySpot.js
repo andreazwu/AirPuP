@@ -1,8 +1,8 @@
 import { Link, useHistory } from "react-router-dom"
-import "./Spots.css"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkEditSpot, thunkRemoveSpot, thunkGetOneSpot } from "../../store/spots"
-import EditSpot from "./EditSpot"
+
+import "./Spots.css"
 
 const MySpot = ({spot}) => {
   const dispatch = useDispatch()

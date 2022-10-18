@@ -23,7 +23,7 @@ const LoadUserSpots = () => {
 
   //conditional rendering:
   //recall empty arr/ obj is NOT falsy
-  if (!spotsArr.length) return null
+  // if (!spotsArr.length) return null
   if (!currentUser) return <Redirect to="/" />
 
   return (

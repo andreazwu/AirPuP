@@ -8,6 +8,7 @@ import LoadUserSpots from "./components/Spots/LoadUserSpots";
 import LoadOneSpot from './components/Spots/LoadOneSpot';
 import CreateSpot from './components/Spots/CreateSpot';
 import EditSpot from './components/Spots/EditSpot';
+import LoadUserReviews from "./components/Reviews/LoadUserReviews";
 
 
 function App() {
@@ -50,6 +51,10 @@ return (
           <EditSpot />
         </Route>
 
+        <Route exact path='/myreviews'>
+          <h1> App: These are my reviews~~ </h1>
+          <LoadUserReviews />
+        </Route>
 
       </Switch>
     )}

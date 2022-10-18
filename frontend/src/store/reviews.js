@@ -86,14 +86,30 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
   }
 }
 
-// // load all user reviews thunk
-// export const thunkGetUserReviews = () => async (dispatch) => {
-//   const response = await csrfFetch("/api/reviews/current")
-//   if (response.ok) {
-//     const reviews = await response.json() //array
-//     dispatch(acLoadUserreviews(reviews))
-//   }
-// }
+// load all user reviews thunk
+export const thunkGetUserReviews = () => async (dispatch) => {
+  const response = await csrfFetch("/api/reviews/current")
+  if (response.ok) {
+    /*
+    {"Reviews": [
+      {
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "User": {"id":, "firstName":, "lastName": },
+        "Spot": { id, ownerId, add, city, state, coun, lat, lng,    name, price, previewImage: url },
+        "ReviewImages": [{"id": ,"url": }, {}, {}]
+      }
+    ]}
+    */
+    const data = await response.json() //object
+    const reviewsArr = data.Reviews //array [{}, {}]
+    dispatch(acLoadUserReviews(reviewsArr))
+    return data
+  }
+}
 
 // // create new review thunk
 // export const thunkCreateNewReview = (newreview) => async (dispatch) => {
@@ -202,8 +218,22 @@ const reviewsReducer = (state = initialState, action) => {
       //payload = reviews = [{}, {}]
       action.reviews.forEach((review) => normalizedReviews[review.id] = review)
       newState.spot = normalizedReviews
+      newState.user = {}
       console.log("REVIEWSREDUCER LOAD SPOT REVIEWS BEGIN:", newState)
       return newState
+
+    case LOAD_USER_REVIEWS:
+      console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", state)
+      newState = {...state}
+      const normalizedUserReviews = {}
+      //payload = reviews = [{}, {}]
+      action.reviews.forEach((review) => normalizedUserReviews[review.id] = review)
+      newState.user = normalizedUserReviews
+      newState.spot = {}
+      console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", newState)
+      return newState
+
+
     default:
       return state
   }
