@@ -24,7 +24,7 @@ const EditSpot = () => {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
-  // const [url, setUrl] = useState("")
+  const [url, setUrl] = useState("")
 
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
@@ -53,6 +53,7 @@ const EditSpot = () => {
       setName(spot.name)
       setDescription(spot.description)
       setPrice(spot.price)
+      // setUrl(spot.SpotImages[0].url)
     }
   }, [spot])
 
@@ -73,13 +74,14 @@ const EditSpot = () => {
     if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
     if (!description.length) errorsArr.push("please enter a description")
     if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
-    if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+    // if (!url.length || url.length > 255) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
     setErrors(errorsArr)
 
     const spotInfo = {
       ...spot,
-      address, city, state, country, name, description, price
+      address, city, state, country, name, description, price,
+      // SpotImages[0].url : url // lol
     }
 
     console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, PAYLOAD SPOT:", spotInfo)
