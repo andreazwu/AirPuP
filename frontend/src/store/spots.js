@@ -184,6 +184,21 @@ const initialState = {
   allSpots:{},
   singleSpot:{}
 }
+// spots: {
+//   allSpots: {
+//     [spotId]: { id, ownerId, address, city, state, country
+//                 lat, lng, name, description, price,
+//                 avgRating,
+//                 previewImage }
+//   },
+//   singleSpot: { id, ownerId, address, city, state, country
+//                 lat, lng, name, description, price,
+//                 numReviews,
+//                 avgRating,
+//                 SpotImages: [ { id, url, preview }, {}, {} ],
+//                 Owner: { id, firstName, lastName }
+//   }
+// }
 
 const spotsReducer = (state = initialState, action) => {
   let newState

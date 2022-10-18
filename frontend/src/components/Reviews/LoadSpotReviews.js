@@ -1,0 +1,64 @@
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
+import { thunkGetSpotReviews } from "../../store/reviews"
+
+import "./Reviews.css"
+
+
+
+const LoadSpotReviews = ({spotId}) => {
+  console.log("1 (2.2) COMPONENT-LOADSPOTREVIEWS STARTS")
+
+  const dispatch = useDispatch()
+  // const { spotId } = useParams()
+
+  const reviewsObj = useSelector((state) => {
+    console.log("2 (2.1/3) USE SELECTOR RUNNING: DETECTS CHANGES IN STATE")
+    return state.reviews.spot
+  })
+
+  const reviewsArr = Object.values(reviewsObj)
+
+  useEffect(() => {
+    console.log("5 USE EFFECT RUNNING: DISPATCH THUNK")
+    dispatch(thunkGetSpotReviews(+spotId))
+  }, [dispatch])
+
+  console.log("3 (2.4) THIS IS THE CURRENT SPOTREVIEWS RECEIVED FROM USE SELECTOR:", reviewsObj, "ARRAY:", reviewsArr)
+
+
+  if (!reviewsArr.length) return null
+
+  return (
+    <>
+    {
+      /* [{},{}], each {} is:
+      { id, userId, spotId, review, stars,
+        User: { id, firstName, lastName },
+        ReviewImages: [ { id, url }, {}, {} ] }
+      */
+      reviewsArr.map((review) => (
+        <div className="single-review">
+          <h3>{review.User.firstName}</h3>
+          <p>{review.review}</p>
+          <div>
+            {
+              review.ReviewImages &&
+              review.ReviewImages.map((image) => {
+                return (
+                  <img
+                  className="single-review-image"
+                  scr={image.url} />
+                )
+              })
+            }
+          </div>
+        </div>
+      ))
+    }
+    </>
+  )
+}
+
+export default LoadSpotReviews

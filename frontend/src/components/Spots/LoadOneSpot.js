@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { thunkGetOneSpot, acResetSpots } from "../../store/spots"
+import LoadSpotReviews from "../Reviews/LoadSpotReviews"
 import "./Spots.css"
 
 const LoadOneSpot = () => {
@@ -128,6 +129,8 @@ const LoadOneSpot = () => {
 
 
       </div>
+
+      <LoadSpotReviews spotId={spotId} />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux";
-import { thunkGetAllSpots, acResetSpots } from "../../store/spots";
+import { useDispatch, useSelector } from "react-redux"
+import { thunkGetAllSpots, acResetSpots } from "../../store/spots"
 import Spot from "./Spot"
 import "./Spots.css"
 
@@ -39,7 +39,7 @@ const LoadAllSpots = () => {
         <div className="allspots-container">
           {
             spotsArr.map((spot) => (
-              //implement spot in separate component; add prop
+              //implement spot in separate component add prop
               <Spot key={spot.id} spot={spot}>
                 {console.log("4 (2.5) RETURN:", spot)}
               </Spot>
