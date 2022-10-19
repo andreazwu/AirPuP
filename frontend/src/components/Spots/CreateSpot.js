@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { thunkCreateNewSpot, thunkEditSpot, thunkAddSpotImage } from "../../store/spots"
+import { thunkCreateNewSpot, thunkAddSpotImage } from "../../store/spots"
 import { countries } from "./countries"
 
 import "./Spots.css"
@@ -36,9 +36,14 @@ const CreateSpot = () => {
     else setErrors(["You must be logged in to host new spot"])
   }, [currentUser])
 
-  //check for validation errors
-  useEffect(() => {
-    console.log("USE EFFECT FOR VALIDATION ERRORS STARTS")
+
+  // handleSubmit is ASYNCHRONOUS
+  const handleSubmit = async (e) => {
+    console.log("COMPONENT HANDLESUBMIT STARTS:")
+    e.preventDefault()
+    setErrors([])
+    setHasSubmitted(true)
+
     let errorsArr = []
 
     if (!address.length) errorsArr.push("please enter street address")
@@ -52,43 +57,19 @@ const CreateSpot = () => {
     if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
     if (!url.length || url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif")) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
-    console.log("USE EFFECT FOR VALIDATION ERRORS ENDS, ERRORS ARR:", errorsArr)
-
     setErrors(errorsArr)
-  }, [address, city, state, country, name, description, price, url])
 
-
-  // handleSubmit is ASYNCHRONOUS
-  const handleSubmit = async (e) => {
-    console.log("COMPONENT HANDLESUBMIT STARTS:")
-    e.preventDefault()
-    setHasSubmitted(true)
-    // if (errors.length) alert ("Please provide a valid entry!")
-
-    const spot = {
+    const spotInfo = {
       address, city, state, country, lat: 90, lng: 90, name, description, price
     }
-    console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, PAYLOAD SPOT:", spot)
+    const imageInfo = ({ url, preview: true})
 
-    // AWAIT thunk; returns promise (spotObj or errors)
-    const newSpot = await dispatch(thunkCreateNewSpot(spot))
-      // .then((res) => {
-      //   if (res.errors) setErrors(Object.values(res.errors))
-      //   else history.push(`/spots/${res.id}`)
-      // })
+    console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, PAYLOAD SPOT:", spotInfo)
 
+    const newSpot = await dispatch(thunkCreateNewSpot(spotInfo, imageInfo))
 
     if (newSpot) {
-      console.log("COMPONENT HANDLESUBMIT, AFTER THUNK AC RETURNS PROMISE, NEWSPOT:", newSpot)
-
-      const imageObj = ({ url: url, preview: true})
-
-      console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK FOR ADD SPOT IMAGE, IMAGEOBJ:", imageObj)
-
-      await dispatch(thunkAddSpotImage(newSpot.id, imageObj))
-
-      // history.push(`/spots/${newSpot.id}`) // ?? type err: cannot read properties of undefined in LoadOneSpot
-
+      await dispatch(thunkAddSpotImage(newSpot.id, imageInfo))
       reset()
       history.push("/myspots")
     }
@@ -110,6 +91,10 @@ const CreateSpot = () => {
     setHasSubmitted(false)
   }
 
+  const cancelHandler = (e) => {
+    e.preventDefault()
+    history.push("/")
+  }
 
   return (
     <>
@@ -221,14 +206,16 @@ const CreateSpot = () => {
         </div>
 
         <button
-        disabled={
-          hasSubmitted &&
-          errors.length > 0 ? true : false
-        }
+        // disabled={
+        //   hasSubmitted &&
+        //   errors.length > 0 ? true : false
+        // }
         >
           Create
         </button>
-
+        <button onClick={cancelHandler}>
+          Cancel
+        </button>
       </form>
       {console.log("CREATESPOT COMPONENT ENDS")}
     </>

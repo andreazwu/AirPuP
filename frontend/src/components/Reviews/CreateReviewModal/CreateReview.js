@@ -30,8 +30,8 @@ const CreateReview = ({spotId, setShowModal}) => {
 
   const handleSubmit = async (e) => {
     console.log("COMPONENT HANDLESUBMIT STARTS")
-
     e.preventDefault()
+    setErrors([])
     setHasSubmitted(true)
 
     const errorsArr = []
@@ -41,20 +41,22 @@ const CreateReview = ({spotId, setShowModal}) => {
 
     setErrors(errorsArr)
 
+    // if (errorsArr.length) return
+
     const reviewInfo = { review, stars }
 
-    console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, REVIEWINFO:", reviewInfo)
+    // console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, REVIEWINFO:", reviewInfo)
 
     const newReview = await dispatch(thunkCreateNewReview(reviewInfo, spotId, currentUser))
 
     if (newReview && !url.length) setShowModal(false)
 
-    if (newReview && url.length) {
-      console.log("COMPONENT HANDLESUBMIT, AFTER THUNK RETURNS: NEWREVIEW:", newReview)
+    if (newReview && url.length && !errorsArr.length) {
+      // console.log("COMPONENT HANDLESUBMIT, AFTER THUNK RETURNS: NEWREVIEW:", newReview)
 
       const imageObj = ({url: url})
 
-      console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK FOR ADD REVIEW IMAGE, IMAGEOBJ:", imageObj)
+      // console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK FOR ADD REVIEW IMAGE, IMAGEOBJ:", imageObj)
 
       await dispatch(thunkAddReviewImage(newReview.id, imageObj))
       .then(()=>setShowModal(false))
@@ -62,7 +64,7 @@ const CreateReview = ({spotId, setShowModal}) => {
       reset()
       history.push(`/spots/${spotId}`)
     }
-    console.log("COMPONENT HANDLESUBMIT ENDS")
+    // console.log("COMPONENT HANDLESUBMIT ENDS")
   }
 
   const reset = () => {

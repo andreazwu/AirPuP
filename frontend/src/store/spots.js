@@ -106,17 +106,28 @@ export const thunkGetOneSpot = (spotId) => async (dispatch) => {
 }
 
 // create new spot thunk
-export const thunkCreateNewSpot = (newspot) => async (dispatch) => {
+export const thunkCreateNewSpot = (spotInfo, imageInfo) => async (dispatch) => {
   console.log("THUNK CREATESPOT STARTS RUNNING, BEFORE POST TO BACKEND")
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(newspot)
+    body: JSON.stringify(spotInfo)
   })
   console.log("THUNK CREATESPOT STARTS RUNNING, AFTER POST TO BACKEND")
 
+
   if (response.ok) {
     const newspot = await response.json()
+
+    // //<<<
+    // const imageResponse = await csrfFetch(`api/spots/${newspot.id}/images`, {
+    //   method: "POST",
+    //   headers: {"Content-Type": "application/json"},
+    //   body: JSON.stringify(imageInfo)
+    // })
+    // //<<<
+
+
     console.log("THUNK CREATESPOT BEFORE DISPATCH AC")
 
     dispatch(acCreateSpot(newspot))
