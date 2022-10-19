@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import LoadAllSpots from './components/Spots/LoadAllSpots';
+import LoadAllSpots from "./components/Spots/LoadAllSpots";
 import LoadUserSpots from "./components/Spots/LoadUserSpots";
-import LoadOneSpot from './components/Spots/LoadOneSpot';
-import CreateSpot from './components/Spots/CreateSpot';
-import EditSpot from './components/Spots/EditSpot';
+import LoadOneSpot from "./components/Spots/LoadOneSpot";
+import CreateSpot from "./components/Spots/CreateSpot";
+import EditSpot from "./components/Spots/EditSpot";
 import LoadUserReviews from "./components/Reviews/LoadUserReviews";
 import PageNotFound from "./components/PageNotFound";
 
@@ -27,16 +27,16 @@ return (
       <Switch>
 
         <Route exact path="/">
-          <h1> App: Hello Yes I'm Still The Main Page... </h1>
+          <h1> App: Hello Yes I"m Still The Main Page... </h1>
           <LoadAllSpots />
         </Route>
 
-        <Route path="/newspot">
+        <Route exact path="/newspot">
           <h1> App: Create A New Spot!! </h1>
           <CreateSpot />
         </Route>
 
-        <Route exact path='/myspots'>
+        <Route exact path="/myspots">
           <h1> App: These are my spots~~ </h1>
           <LoadUserSpots />
         </Route>
@@ -46,7 +46,7 @@ return (
           <EditSpot />
         </Route>
 
-        <Route exact path='/myreviews'>
+        <Route exact path="/myreviews">
           <h1> App: These are my reviews~~ </h1>
           <LoadUserReviews />
         </Route>

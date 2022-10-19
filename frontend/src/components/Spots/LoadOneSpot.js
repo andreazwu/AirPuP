@@ -20,13 +20,13 @@ const LoadOneSpot = () => {
 
   useEffect(async () => {
     // console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
-    const spotExists = await dispatch(thunkGetOneSpot(spotId))
-    if (spotExists) {
-      dispatch(thunkGetSpotReviews(spotId))
-    } else {
-      history.push("/pagenotfound")
+    const getSpotAndReviews = async () => {
+      const spotExists = await dispatch(thunkGetOneSpot(spotId))
+      if (spotExists) {
+        dispatch(thunkGetSpotReviews(spotId))
+      }
     }
-
+    getSpotAndReviews()
     return () => dispatch(acResetSpots())
   }, [dispatch, spotId])
 
@@ -41,7 +41,12 @@ const LoadOneSpot = () => {
 
   //verify if currentUser has left a review already
   const reviewsObj = useSelector((state) => state.reviews.spot)
-
+  const reviewArr = Object.values(reviewsObj)
+  let userHasReviewed = false
+  if (currentUser) {
+    const userReviews = reviewArr.filter((review) => review.userId === currentUser.id)
+    userHasReviewed = !!userReviews.length
+  }
 
   // if (!spot) return null
   if (!Object.values(spot).length) return null
@@ -129,6 +134,7 @@ const LoadOneSpot = () => {
           {
             currentUser &&
             !owner &&
+            !userHasReviewed &&
             <CreateReviewModal spotId={spotId}/>
           }
         </div>
