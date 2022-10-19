@@ -49,9 +49,9 @@ const MyReview = ({review}) => {
 
 
       <div>
-        <button onClick={editReviewHandleClick}>
+        {/* <button onClick={editReviewHandleClick}>
           Edit Review
-        </button>
+        </button> */}
         <button onClick={deleteReviewHandleClick}>
           Delete Review
         </button>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { thunkGetOneSpot, acResetSpots } from "../../store/spots"
+import CreateReviewModal from "../Reviews/CreateReviewModal"
 import LoadSpotReviews from "../Reviews/LoadSpotReviews"
 import "./Spots.css"
 
@@ -26,10 +27,10 @@ const LoadOneSpot = () => {
   // console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
 
 
-  // //verify if currentUser is owner of spot
-  // const currentUser = useSelector((state) => state.session.user)
-  // let owner = false
-  // if (currentUser?.id === spot.ownerId) owner = true
+  //verify if currentUser is owner of spot
+  const currentUser = useSelector((state) => state.session.user)
+  let owner = false
+  if (currentUser?.id === spot.ownerId) owner = true
 
   // //handle delete spot click
   // const deleteSpotHandleClick = async () => {
@@ -126,9 +127,14 @@ const LoadOneSpot = () => {
             </>
           )}
         </div> */}
-
-
       </div>
+        {/* only show "create review" button to NON-owner of spot */}
+        <div>
+          {
+            !owner &&
+            <CreateReviewModal spotId={spotId}/>
+          }
+        </div>
 
       <LoadSpotReviews spotId={spotId} />
     </>

@@ -47,11 +47,11 @@ const acDeleteReview = (reviewId) => {
   }
 }
 
-const acAddReviewImage = (image) => {
-  console.log("ACTION CREATOR ADD REVIEW IMAGE, PAYLOAD:", image)
+const acAddReviewImage = (image, reviewId) => {
   return {
     type: ADD_REVIEW_IMAGE,
-    image
+    image,
+    reviewId
   }
 }
 
@@ -185,26 +185,22 @@ export const thunkRemoveReview = (reviewId) => async (dispatch) => {
   }
 }
 
-// // add image thunk
-// export const thunkAddReviewImage = (reviewId, imageObj) => async (dispatch) => {
-//   console.log("THUNK ADDreviewIMAGE STARTS RUNNING, BEFORE POST TO BACKEND")
-//   const response = await csrfFetch(`/api/reviews/${reviewId}/images`, {
-//     method: "POST",
-//     headers: {"Content-Type": "application/json"},
-//     body: JSON.stringify (
-//       imageObj
-//     )
-//   })
-//   console.log("THUNK ADDreviewIMAGE STARTS RUNNING, AFTER FETCH FROM BACKEND, RES:", response)
-
-//   if (response.ok) {
-//     console.log("THUNK ADDreviewIMAGE, BEFORE DISPATCH ACTION CREATOR (add review image)")
-//     const image = await response.json()
-//     dispatch(acAddReviewImage(image))
-//     console.log("THUNK ADDreviewIMAGE, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
-//     return image
-//   }
-// }
+// add image thunk
+export const thunkAddReviewImage = (reviewId, imageObj) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}/images`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify (
+      imageObj
+    )
+  })
+  if (response.ok) {
+    // response image is: { id: reviewId, url: imageURL}
+    const image = await response.json()
+    dispatch(acAddReviewImage(image, reviewId))
+    return image
+  }
+}
 
 
 //---------------------------------------------------
@@ -214,22 +210,6 @@ const initialState = {
   spot:{},
   user:{}
 }
-
-// reviews: {
-//   spot: {
-//     [reviewId]: { id, userId, spotId, review, stars,
-//                   User: { id, firstName, lastName },
-//                   ReviewImages: [ { id, url }, {}, {} ] }
-//   },
-//   user: {
-//     [reviewId]: { id, userId, spotId, review, stars,
-//                   User: { id, firstName, lastName },
-//                   Spot: { id, ownerId, add, city, state, coun,
-//                           lat, lng, name, price,
-//                           previewImage },
-//                   ReviewImages: [ { id, url }, {}, {} ] }
-//   }
-// }
 
 const reviewsReducer = (state = initialState, action) => {
   let newState
@@ -273,6 +253,17 @@ const reviewsReducer = (state = initialState, action) => {
       delete newState.user[action.reviewId]
       return newState
 
+    case ADD_REVIEW_IMAGE:
+      console.log("REVIEWSREDUCER ADD REVIEW IMAGE BEGIN:", state)
+
+      newState = {...state}
+      newState.spot = {...state.spot}
+      newState.user = {...state.user}
+      newState.spot[action.reviewId].ReviewImages = [action.image]
+      newState.user[action.reviewId].ReviewImages = [action.image]
+
+      console.log("REVIEWSREDUCER ADD REVIEW IMAGE END:", newState)
+      return newState
     default:
       return state
   }
@@ -280,3 +271,19 @@ const reviewsReducer = (state = initialState, action) => {
 
 
 export default reviewsReducer
+
+// reviews: {
+//   spot: {
+//     [reviewId]: { id, userId, spotId, review, stars,
+//                   User: { id, firstName, lastName },
+//                   ReviewImages: [ { id, url }, {}, {} ] }
+//   },
+//   user: {
+//     [reviewId]: { id, userId, spotId, review, stars,
+//                   User: { id, firstName, lastName },
+//                   Spot: { id, ownerId, add, city, state, coun,
+//                           lat, lng, name, price,
+//                           previewImage },
+//                   ReviewImages: [ { id, url }, {}, {} ] }
+//   }
+// }
