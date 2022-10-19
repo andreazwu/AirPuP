@@ -5,7 +5,7 @@ import { thunkCreateNewReview, thunkAddReviewImage } from "../../../store/review
 
 import "./CreateReview.css"
 
-const CreateReview = ({spotId}) => {
+const CreateReview = ({spotId, setShowModal}) => {
   console.log("CREATEREVIEW COMPONENT STARTS:")
 
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ const CreateReview = ({spotId}) => {
     const errorsArr = []
 
     if (!review.length || review.length > 255) errorsArr.push("please enter a valid review fewer than 255 characters long")
-    if (!url.length || url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif")) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+    if (url.length && (url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif"))) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
     setErrors(errorsArr)
 
@@ -47,8 +47,9 @@ const CreateReview = ({spotId}) => {
 
     const newReview = await dispatch(thunkCreateNewReview(reviewInfo, spotId, currentUser))
 
+    if (newReview && !url.length) setShowModal(false)
 
-    if (newReview) {
+    if (newReview && url.length) {
       console.log("COMPONENT HANDLESUBMIT, AFTER THUNK RETURNS: NEWREVIEW:", newReview)
 
       const imageObj = ({url: url})
@@ -56,6 +57,7 @@ const CreateReview = ({spotId}) => {
       console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK FOR ADD REVIEW IMAGE, IMAGEOBJ:", imageObj)
 
       await dispatch(thunkAddReviewImage(newReview.id, imageObj))
+      .then(()=>setShowModal(false))
 
       reset()
       history.push(`/spots/${spotId}`)

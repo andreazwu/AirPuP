@@ -19,7 +19,9 @@ const CreateReviewModal = ({spotId}) => {
 
           <CreateReview
           onCreation={() => setShowModal(false)}
-          spotId={spotId} />
+          spotId={spotId}
+          setShowModal={setShowModal}
+          />
 
         </Modal>
       )}
