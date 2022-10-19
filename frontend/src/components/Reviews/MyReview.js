@@ -5,6 +5,17 @@ import "./Reviews.css"
 
 const MyReview = ({review}) => {
   const dispatch = useDispatch()
+  const history = useHistory()
+
+  const deleteReviewHandleClick = async () => {
+    if (window.confirm("Are you sure you want to delete this review?")) {
+      await dispatch(thunkRemoveReview(review.id))
+    }
+  }
+
+  const editReviewHandleClick = async () => {
+    history.push(`/myreviews/edit/${review.id}`)
+  }
 
   return (
     <div className="my-single-review">
@@ -37,12 +48,14 @@ const MyReview = ({review}) => {
       </div>
 
 
-      <button
-      className="review-buttons"
-      onClick={() => dispatch(thunkRemoveReview(review.id))}
-      >
-        Delete Review
-      </button>
+      <div>
+        <button onClick={editReviewHandleClick}>
+          Edit Review
+        </button>
+        <button onClick={deleteReviewHandleClick}>
+          Delete Review
+        </button>
+      </div>
 
 
     </div>

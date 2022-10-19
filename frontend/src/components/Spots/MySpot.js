@@ -15,7 +15,9 @@ const MySpot = ({spot}) => {
 
   //handle delete spot click
   const deleteSpotHandleClick = async () => {
-    await dispatch(thunkRemoveSpot(spot.id))
+    if (window.confirm("Are you sure you want to delete this spot?")) {
+      await dispatch(thunkRemoveSpot(spot.id))
+    }
   }
 
   const editSpotHandleClick = async () => {
@@ -23,9 +25,9 @@ const MySpot = ({spot}) => {
     // await dispatch(thunkEditSpot(spot.id))
   }
 
-  const spotToEdit = async () => {
-    await dispatch(thunkGetOneSpot(spot.id))
-  }
+  // const spotToEdit = async () => {
+  //   await dispatch(thunkGetOneSpot(spot.id))
+  // }
 
   return (
     <div>
