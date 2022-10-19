@@ -118,7 +118,6 @@ export const thunkCreateNewSpot = (spotInfo, imageInfo) => async (dispatch) => {
 
   if (response.ok) {
     const newspot = await response.json()
-
     // //<<<
     // const imageResponse = await csrfFetch(`api/spots/${newspot.id}/images`, {
     //   method: "POST",
@@ -126,18 +125,12 @@ export const thunkCreateNewSpot = (spotInfo, imageInfo) => async (dispatch) => {
     //   body: JSON.stringify(imageInfo)
     // })
     // //<<<
-
-
     console.log("THUNK CREATESPOT BEFORE DISPATCH AC")
 
     dispatch(acCreateSpot(newspot))
     console.log("THUNK CREATESPOT AFTER DISPATCH AC")
 
-    return newspot //<<<<<< must return (for spotform line 67) handlesubmit: newSpot = await dispatch(thunkCreateNewSpot(spot))
-  } else {
-    //come back and do error handling logic <<<<<<<
-    const data = await response.json()
-    console.log(data)
+    return newspot
   }
 }
 

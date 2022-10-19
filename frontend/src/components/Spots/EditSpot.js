@@ -80,7 +80,7 @@ const EditSpot = () => {
 
     const spotInfo = {
       ...spot,
-      address, city, state, country, name, description, price,
+      address, city, state, country, name, description, price, url: spot.SpotImages[0].url
       // SpotImages[0].url : url // lol
     }
 

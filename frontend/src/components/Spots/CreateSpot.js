@@ -60,7 +60,7 @@ const CreateSpot = () => {
     setErrors(errorsArr)
 
     const spotInfo = {
-      address, city, state, country, lat: 90, lng: 90, name, description, price
+      address, city, state, country, lat: 90, lng: 90, name, description, price, url
     }
     const imageInfo = ({ url, preview: true})
 

@@ -57,11 +57,11 @@ const validSpot = [
     .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage("Price per day is required"),
-  // check("url")
-  //   .notEmpty()
-  //   .withMessage("URL cannot be empty")
-  //   .isURL()
-  //   .withMessage("URL is not valid"),
+  check("url")
+    .notEmpty()
+    .withMessage("URL cannot be empty")
+    .isURL()
+    .withMessage("URL is not valid"),
   handleValidationErrors
 ]
 
@@ -75,6 +75,11 @@ const validReview = [
     .notEmpty()
     .isInt({ min: 1 }, { max: 5 })
     .withMessage("Stars must be an integer from 1 to 5"),
+  // check("url")
+  //   .notEmpty()
+  //   .withMessage("URL cannot be empty")
+  //   .isURL()
+  //   .withMessage("URL is not valid"),
   handleValidationErrors
 ]
 

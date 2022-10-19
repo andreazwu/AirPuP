@@ -17,10 +17,9 @@ const LoadOneSpot = () => {
     return state.spots.singleSpot
   }) // single obj {x}
 
-  //dispatch THUNK AC
   useEffect(() => {
     // console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
-    dispatch(thunkGetOneSpot(+spotId)) //<<<< spotId =__=|||
+    dispatch(thunkGetOneSpot(+spotId))
     return () => dispatch(acResetSpots())
   }, [dispatch, spotId])
 
@@ -32,20 +31,10 @@ const LoadOneSpot = () => {
   let owner = false
   if (currentUser?.id === spot.ownerId) owner = true
 
-  // //handle delete spot click
-  // const deleteSpotHandleClick = async () => {
-  //   await dispatch(thunkRemoveSpot(spot.id))
-  //   history.push("/")
-  // }
 
-
-  //conditional rendering:
   // if (!spot) return null
   if (!Object.values(spot).length) return null
 
-
-
-  //organize images (AFTER conditional rendering)
   //SpotImages: [{id, url, preview}]
   let displayImages = [...spot.SpotImages]
   let previewImage = displayImages.find((image)=>{
@@ -55,8 +44,6 @@ const LoadOneSpot = () => {
   else displayImages.splice(displayImages.indexOf(previewImage),1)
 
   // console.log(`THIS IS THE DISPLAY IMAGES ARR: ${displayImages}; THIS IS THE PREVIEW IMAGE: ${previewImage}`)
-
-
 
   return (
     <>
@@ -131,6 +118,7 @@ const LoadOneSpot = () => {
         {/* only show "create review" button to NON-owner of spot */}
         <div>
           {
+            currentUser &&
             !owner &&
             <CreateReviewModal spotId={spotId}/>
           }

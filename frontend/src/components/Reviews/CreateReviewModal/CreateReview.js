@@ -112,6 +112,7 @@ const CreateReview = ({spotId, setShowModal}) => {
               <input
                 type="text"
                 value={url}
+                placeholder="optional"
                 onChange={(e) => setUrl(e.target.value)}
               />
             </label>
