@@ -111,30 +111,53 @@ export const thunkGetUserReviews = () => async (dispatch) => {
   }
 }
 
-// // create new review thunk
-// export const thunkCreateNewReview = (newreview) => async (dispatch) => {
-//   console.log("THUNK CREATEreview STARTS RUNNING, BEFORE POST TO BACKEND")
-//   const response = await csrfFetch("/api/reviews", {
-//     method: "POST",
-//     headers: {"Content-Type": "application/json"},
-//     body: JSON.stringify(newreview)
-//   })
-//   console.log("THUNK CREATEreview STARTS RUNNING, AFTER POST TO BACKEND")
+// create new review thunk
+export const thunkCreateNewReview = (newreview, spotId, user) => async (dispatch) => {
+  console.log("THUNK CREATEREVIEW STARTS RUNNING, BEFORE POST TO BACKEND")
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(newreview)
+  })
+  console.log("THUNK CREATEREVIEW STARTS RUNNING, AFTER POST TO BACKEND")
 
-//   if (response.ok) {
-//     const newreview = await response.json()
-//     console.log("THUNK CREATEreview BEFORE DISPATCH AC")
+  if (response.ok) {
+    /* response from backend: "newreview"
+      {
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36"
+      }
+    */
 
-//     dispatch(acCreateReview(newreview))
-//     console.log("THUNK CREATEreview AFTER DISPATCH AC")
-
-//     return newreview //<<<<<< must return (for reviewform line 67) handlesubmit: newreview = await dispatch(thunkCreateNewreview(review))
-//   } else {
-//     //come back and do error handling logic <<<<<<<
-//     const data = await response.json()
-//     console.log(data)
+// vs. structure in reducer state:
+//   spot: {
+//     [reviewId]: { id, userId, spotId, review, stars,
+//                   User: { id, firstName, lastName },
+//                   ReviewImages: [ { id, url }, {}, {} ] }
 //   }
-// }
+
+    const newreview = await response.json()
+
+    const userInfo = {}
+    userInfo.id = user.id
+    userInfo.firstName = user.firstName
+    userInfo.lastName = user.lastName
+
+    newreview.User = userInfo
+    newreview.ReviewImages = []
+
+    console.log("THUNK CREATEreview BEFORE DISPATCH AC")
+    dispatch(acCreateReview(newreview))
+    console.log("THUNK CREATEreview AFTER DISPATCH AC")
+
+    return newreview //<<<<<< must return for handlesubmit: newreview = await dispatch(thunkCreateNewreview(review))
+  }
+}
 
 // // update review thunk
 // export const thunkEditreview = (myreview, reviewId) => async (dispatch) => {
@@ -231,6 +254,14 @@ const reviewsReducer = (state = initialState, action) => {
       newState.user = normalizedUserReviews
       newState.spot = {}
       console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", newState)
+      return newState
+
+    case CREATE_REVIEW:
+      console.log("REVIEWSREDUCER CREATE REVIEW BEGIN:", state)
+      newState = {...state}
+      newState.user = {...state.user}
+      newState.spot = {...state.spot, [action.review.id]: action.review}
+      console.log("REVIEWSREDUCER CREATE REVIEW BEGIN:", newState)
       return newState
 
     case DELETE_REVIEW:
