@@ -81,7 +81,6 @@ const EditSpot = () => {
     const spotInfo = {
       ...spot,
       address, city, state, country, name, description, price, url: spot.SpotImages[0].url
-      // SpotImages[0].url : url // lol
     }
 
     console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, PAYLOAD SPOT:", spotInfo)
@@ -91,14 +90,6 @@ const EditSpot = () => {
 
     if (updatedSpot) {
       console.log("COMPONENT HANDLESUBMIT, AFTER THUNK AC RETURNS PROMISE, updatedSpot:", updatedSpot)
-
-      // const imageObj = ({ url: url, preview: true})
-
-      // console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK FOR ADD SPOT IMAGE, IMAGEOBJ:", imageObj)
-
-      // await dispatch(thunkAddSpotImage(updatedSpot.id, imageObj))
-
-      // history.push(`/spots/${updatedSpot.id}`) // ?? type err: cannot read properties of undefined in LoadOneSpot
 
       reset()
       history.push("/myspots")
