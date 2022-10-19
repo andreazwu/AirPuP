@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
+import { thunkGetSpotReviews } from "../../store/reviews"
 import { thunkGetOneSpot, acResetSpots } from "../../store/spots"
 import CreateReviewModal from "../Reviews/CreateReviewModal"
 import LoadSpotReviews from "../Reviews/LoadSpotReviews"
@@ -17,9 +18,15 @@ const LoadOneSpot = () => {
     return state.spots.singleSpot
   }) // single obj {x}
 
-  useEffect(() => {
+  useEffect(async () => {
     // console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
-    dispatch(thunkGetOneSpot(+spotId))
+    const spotExists = await dispatch(thunkGetOneSpot(spotId))
+    if (spotExists) {
+      dispatch(thunkGetSpotReviews(spotId))
+    } else {
+      history.push("/pagenotfound")
+    }
+
     return () => dispatch(acResetSpots())
   }, [dispatch, spotId])
 
@@ -30,6 +37,10 @@ const LoadOneSpot = () => {
   const currentUser = useSelector((state) => state.session.user)
   let owner = false
   if (currentUser?.id === spot.ownerId) owner = true
+
+
+  //verify if currentUser has left a review already
+  const reviewsObj = useSelector((state) => state.reviews.spot)
 
 
   // if (!spot) return null
@@ -114,19 +125,15 @@ const LoadOneSpot = () => {
         </div> */}
       </div>
         {/* only show "create review" button to NON-owner of spot */}
-        {/* <div>
+        <div>
           {
             currentUser &&
             !owner &&
             <CreateReviewModal spotId={spotId}/>
           }
-        </div> */}
+        </div>
 
-      <LoadSpotReviews
-        spotId={spotId}
-        currentUser={currentUser}
-        owner={owner}
-      />
+      <LoadSpotReviews spotId={spotId} />
     </>
   )
 }

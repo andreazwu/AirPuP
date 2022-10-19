@@ -1,0 +1,27 @@
+.wrapper-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+}
+
+.notfound-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo-back {
+  display: flex;
+  justify-content: center;
+  background-image: url("../../images/logo2.jpg");
+  height: 300px;
+  width: 300px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.logo-back:hover {
+  cursor: pointer;
+}

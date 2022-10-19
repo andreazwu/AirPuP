@@ -9,7 +9,7 @@ import LoadOneSpot from './components/Spots/LoadOneSpot';
 import CreateSpot from './components/Spots/CreateSpot';
 import EditSpot from './components/Spots/EditSpot';
 import LoadUserReviews from "./components/Reviews/LoadUserReviews";
-
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +54,10 @@ return (
         <Route path="/spots/:spotId">
           <h1> App: Load One Spot~ </h1>
           <LoadOneSpot />
+        </Route>
+
+        <Route>
+          <PageNotFound />
         </Route>
 
       </Switch>
