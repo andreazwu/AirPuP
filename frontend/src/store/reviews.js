@@ -151,16 +151,16 @@ export const thunkGetUserReviews = () => async (dispatch) => {
 //   }
 // }
 
-// // delete review thunk
-// export const thunkRemoveReview = (reviewId) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-//     method: "DELETE"
-//   })
+// delete review thunk
+export const thunkRemoveReview = (reviewId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE"
+  })
 
-//   if (response.ok) {
-//     dispatch(acDeleteReview(reviewId))
-//   }
-// }
+  if (response.ok) {
+    dispatch(acDeleteReview(reviewId))
+  }
+}
 
 // // add image thunk
 // export const thunkAddReviewImage = (reviewId, imageObj) => async (dispatch) => {
@@ -233,6 +233,14 @@ const reviewsReducer = (state = initialState, action) => {
       console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", newState)
       return newState
 
+    case DELETE_REVIEW:
+      console.log("REVIEWSREDUCER DELETE REVIEW BEGIN:", state)
+      newState = {...state}
+      newState.spot = {...state.spot}
+      newState.user = {...state.user}
+      delete newState.spot[action.reviewId]
+      delete newState.user[action.reviewId]
+      return newState
 
     default:
       return state

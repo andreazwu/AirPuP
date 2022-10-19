@@ -1,12 +1,10 @@
 import { Link, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-
+import { thunkRemoveReview } from "../../store/reviews"
 import "./Reviews.css"
-import reviewsReducer from "../../store/reviews"
 
 const MyReview = ({review}) => {
   const dispatch = useDispatch()
-
 
   return (
     <div className="my-single-review">
@@ -41,7 +39,7 @@ const MyReview = ({review}) => {
 
       <button
       className="review-buttons"
-      // onClick={() => dispatch(thunkRemoveReview(review.id))}
+      onClick={() => dispatch(thunkRemoveReview(review.id))}
       >
         Delete Review
       </button>
