@@ -75,11 +75,11 @@ const validReview = [
     .notEmpty()
     .isInt({ min: 1 }, { max: 5 })
     .withMessage("Stars must be an integer from 1 to 5"),
-  check("url")
-    .notEmpty()
-    .withMessage("URL cannot be empty")
-    .isURL()
-    .withMessage("URL is not valid"),
+  // check("url")
+  //   .notEmpty()
+  //   .withMessage("URL cannot be empty")
+  //   .isURL()
+  //   .withMessage("URL is not valid"),
   handleValidationErrors
 ]
 
@@ -498,6 +498,22 @@ router.get("/:spotId/reviews", async (req, res) => {
 
 // Create a Review for a Spot based on the Spot id
 router.post("/:spotId/reviews", [validReview, requireAuth], async (req, res) => {
+
+  const isUrl = (string) => {
+    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    return regexp.test(string)
+  }
+
+  const { url } = req.body
+
+  if (url.length!==0 && (!isUrl(url) || url.length > 255)) {
+    res.status(400)
+    return res.json({
+      "message": "URL is invalid",
+      "statusCode": 400
+    })
+  }
+
 
   const { spotId } = req.params
   const { user } = req

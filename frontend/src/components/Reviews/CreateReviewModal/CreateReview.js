@@ -37,18 +37,21 @@ const CreateReview = ({spotId, setShowModal}) => {
     const errorsArr = []
 
     if (!review.length || review.length > 255) errorsArr.push("please enter a valid review fewer than 255 characters long")
-    // if (url.length && (url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif"))) errorsArr.push("please enter a valid image url fewer than 255 characters long")
-    if (!url.length || url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif")) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+    if (url.length && (url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif"))) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
     setErrors(errorsArr)
 
-    // if (errorsArr.length) return
+    if (errorsArr.length) return
 
     const reviewInfo = { review, stars, url }
 
+    // console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, REVIEWINFO:", reviewInfo)
+
     const newReview = await dispatch(thunkCreateNewReview(reviewInfo, spotId, currentUser))
 
-    if (newReview) {
+    if (newReview && !url.length) setShowModal(false)
+
+    if (newReview && url.length && !errorsArr.length) {
       // console.log("COMPONENT HANDLESUBMIT, AFTER THUNK RETURNS: NEWREVIEW:", newReview)
 
       const imageObj = ({url: url})
@@ -109,6 +112,7 @@ const CreateReview = ({spotId, setShowModal}) => {
               <input
                 type="text"
                 value={url}
+                placeholder="optional"
                 onChange={(e) => setUrl(e.target.value)}
               />
             </label>
