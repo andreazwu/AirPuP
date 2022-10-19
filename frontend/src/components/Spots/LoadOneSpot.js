@@ -48,7 +48,6 @@ const LoadOneSpot = () => {
   return (
     <>
       <div className="whole-container">
-        Heyaa this is spot # {spotId}
         {/* {console.log("4 (2.5) RETURN:", spot)} */}
 
         <div className="title-whole">
@@ -62,7 +61,6 @@ const LoadOneSpot = () => {
               (<span>no rating  ·  </span>)
             }
 
-            {/* {console.log("RETURN NUM REVIEWS:", spot.numReviews)} */}
             {/* {console.log("add review link here <<<<<")} */}
             <span>{spot.numReviews} reviews  ·  </span>
 
@@ -116,15 +114,19 @@ const LoadOneSpot = () => {
         </div> */}
       </div>
         {/* only show "create review" button to NON-owner of spot */}
-        <div>
+        {/* <div>
           {
             currentUser &&
             !owner &&
             <CreateReviewModal spotId={spotId}/>
           }
-        </div>
+        </div> */}
 
-      <LoadSpotReviews spotId={spotId} />
+      <LoadSpotReviews
+        spotId={spotId}
+        currentUser={currentUser}
+        owner={owner}
+      />
     </>
   )
 }
