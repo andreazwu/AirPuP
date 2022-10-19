@@ -1,4 +1,3 @@
-
 .single-review {
   font-weight: 300;
   margin-bottom: 40px;
@@ -21,4 +20,41 @@
   border-radius: 4px;
   margin-right: 4px;
   object-fit: cover;
+}
+
+.my-all-wrapper-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 0 40px;
+}
+
+.my-all-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  grid-gap: 5vH 20vW;
+}
+
+
+
+.my-single-wrapper {
+  /* font-weight: 500; */
+  margin-bottom: 30px;
+}
+
+
+
+.my-single-image-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+
+.my-single-image {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
 }

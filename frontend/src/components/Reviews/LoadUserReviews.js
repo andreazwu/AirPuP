@@ -26,18 +26,20 @@ const LoadUserReviews = () => {
       </div>
 
       <div className="wrapper-center">
-        <div className="allreviews-container">
+        <div className="my-all-container">
           {
             reviewsArr.length === 0 ?
 
             <div>You don't have any reviews!</div> :
 
-            reviewsArr.map((review) => (
-              //implement review in separate component add prop
-              <MyReview key={review.id} review={review}>
-                {console.log("LOAD USER REVIEWS COMPONENT RETURN:", review)}
-              </MyReview>
-            ))
+            <div className="my-all-wrapper-wrapper">
+            <div className="my-all-wrapper">
+              {reviewsArr.map((review) => (
+                <MyReview key={review.id} review={review} />
+              ))}
+            </div>
+            </div>
+
           }
         </div>
       </div>

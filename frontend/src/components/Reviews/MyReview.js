@@ -18,10 +18,10 @@ const MyReview = ({review}) => {
   }
 
   return (
-    <div className="my-single-review">
+    <div className="my-single-wrapper">
 
       <div className="my-single-header">
-        Review For
+        Review For {" "}
         <Link to={`/spots/${review.Spot.id}`}>
           {review.Spot.name}
         </Link>
@@ -30,19 +30,19 @@ const MyReview = ({review}) => {
 
       <div className="my-single-stats">
 
-        <div className="rating">
+        <div className="my-single-rating">
           <i className="fa-solid fa-star"></i>
-          <div className="rating-number">
-            {review.stars}
-          </div>
+          <span className="my-single-rating-number">
+            {" "}{review.stars}
+          </span>
         </div>
 
         <p className="single-review-date">
             {new Date(review.createdAt).toString().slice(3,-42)}
         </p>
 
-        <div className="review">
-          {review.review}
+        <div className="my-single-review">
+          "{review.review}"
         </div>
 
       </div>
@@ -57,6 +57,23 @@ const MyReview = ({review}) => {
         </button>
       </div>
 
+      <div>
+        {
+          review.ReviewImages.length > 0 &&
+          <div>
+            <p>Review Images For This Spot:</p>
+            <div>
+              {review.ReviewImages.map((ele) => {
+                return (
+                  <div className="my-single-image-wrapper">
+                    <img src={ele.url} className="my-single-image" />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        }
+      </div>
 
     </div>
   )
