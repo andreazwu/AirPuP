@@ -4,7 +4,6 @@ import CreateReview from "./CreateReview"
 
 import "./CreateReview.css"
 
-
 const CreateReviewModal = ({spotId}) => {
   const [showModal, setShowModal] = useState(false)
 
@@ -18,7 +17,7 @@ const CreateReviewModal = ({spotId}) => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
 
-          <CreateReviewForm
+          <CreateReview
           onCreation={() => setShowModal(false)}
           spotId={spotId} />
 

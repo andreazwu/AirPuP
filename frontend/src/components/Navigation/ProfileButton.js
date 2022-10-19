@@ -63,7 +63,7 @@ const ProfileButton = ({ user }) => {
             </div>
 
             <div className="menu-select">
-              <div onClick={()=>history.push("myreviews")}>My Reviews</div>
+              <div onClick={()=>history.push("/myreviews")}>My Reviews</div>
             </div>
 
             <div className="menu-select">

@@ -260,7 +260,7 @@ const reviewsReducer = (state = initialState, action) => {
       newState.spot = {...state.spot}
       newState.user = {...state.user}
       newState.spot[action.reviewId].ReviewImages = [action.image]
-      newState.user[action.reviewId].ReviewImages = [action.image]
+      // newState.user[action.reviewId].ReviewImages = [action.image]
 
       console.log("REVIEWSREDUCER ADD REVIEW IMAGE END:", newState)
       return newState

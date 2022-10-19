@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { thunkEditSpot, thunkGetOneSpot, thunkAddSpotImage } from "../../store/spots"
-
+import { countries } from "./countries"
 import "./Spots.css"
 
 const EditSpot = () => {
@@ -174,11 +174,16 @@ const EditSpot = () => {
             </label>
             <label>
               Country:
-              <input
+              <select
                 type="text"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-              />
+              >
+                <option value="" selected disabled>
+                  Select a Country
+                </option>
+                {countries.map((ele)=>(<option>{ele}</option>))}
+              </select>
             </label>
             {/* <label>
               Latitude:

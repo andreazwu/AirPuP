@@ -31,11 +31,6 @@ return (
           <LoadAllSpots />
         </Route>
 
-        <Route path="/spots/:spotId">
-          <h1> App: Load One Spot~ </h1>
-          <LoadOneSpot />
-        </Route>
-
         <Route path="/newspot">
           <h1> App: Create A New Spot!! </h1>
           <CreateSpot />
@@ -54,6 +49,11 @@ return (
         <Route exact path='/myreviews'>
           <h1> App: These are my reviews~~ </h1>
           <LoadUserReviews />
+        </Route>
+
+        <Route path="/spots/:spotId">
+          <h1> App: Load One Spot~ </h1>
+          <LoadOneSpot />
         </Route>
 
       </Switch>

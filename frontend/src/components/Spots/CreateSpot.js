@@ -225,7 +225,6 @@ const CreateSpot = () => {
           hasSubmitted &&
           errors.length > 0 ? true : false
         }
-
         >
           Create
         </button>
