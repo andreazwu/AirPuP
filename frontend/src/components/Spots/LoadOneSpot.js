@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { thunkGetSpotReviews } from "../../store/reviews"
 import { thunkGetOneSpot, acResetSpots } from "../../store/spots"
 import CreateReviewModal from "../Reviews/CreateReviewModal"
 import LoadSpotReviews from "../Reviews/LoadSpotReviews"
@@ -18,15 +17,9 @@ const LoadOneSpot = () => {
     return state.spots.singleSpot
   }) // single obj {x}
 
-  useEffect(async () => {
+  useEffect(() => {
     // console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
-    const getSpotAndReviews = async () => {
-      const spotExists = await dispatch(thunkGetOneSpot(spotId))
-      if (spotExists) {
-        dispatch(thunkGetSpotReviews(spotId))
-      }
-    }
-    getSpotAndReviews()
+    dispatch(thunkGetOneSpot(+spotId))
     return () => dispatch(acResetSpots())
   }, [dispatch, spotId])
 
@@ -38,15 +31,6 @@ const LoadOneSpot = () => {
   let owner = false
   if (currentUser?.id === spot.ownerId) owner = true
 
-
-  //verify if currentUser has left a review already
-  const reviewsObj = useSelector((state) => state.reviews.spot)
-  const reviewArr = Object.values(reviewsObj)
-  let userHasReviewed = false
-  if (currentUser) {
-    const userReviews = reviewArr.filter((review) => review.userId === currentUser.id)
-    userHasReviewed = !!userReviews.length
-  }
 
   // if (!spot) return null
   if (!Object.values(spot).length) return null
@@ -134,7 +118,6 @@ const LoadOneSpot = () => {
           {
             currentUser &&
             !owner &&
-            !userHasReviewed &&
             <CreateReviewModal spotId={spotId}/>
           }
         </div>
