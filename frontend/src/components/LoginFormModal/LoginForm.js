@@ -21,7 +21,7 @@ function LoginForm({onClose, setShowLoginModal}) {
         // come back and implement errror message
         async (res) => {
           const data = await res.json()
-          if (data && data.errors) setErrors(data.errors)
+          if (data && data.message) setErrors([data.message])
         }
       )
   }
@@ -29,18 +29,24 @@ function LoginForm({onClose, setShowLoginModal}) {
   return (
     <div className="modal-wrapper">
       <form onSubmit={handleSubmit}>
-
         {/* //don't need x button
         <button className="close-button" onClick={onClose}>
           <i className="fa-solid fa-xmark"></i>
         </button> */}
 
-        <ul>
-          {errors.map((error, idx) => (
+        <div className="modal-header">Log In</div>
+        <div className="line-break"></div>
+
+        <div className='modal-subheader'>Welcome to AirPuP</div>
+
+        <div className='login-errors'>
+          {errors && errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
-        </ul>
-        <label>
+        </div>
+
+        <div className="form-input-wrapper">
+        <label className="login">
           Username or Email
           <input
             type="text"
@@ -49,7 +55,10 @@ function LoginForm({onClose, setShowLoginModal}) {
             required
           />
         </label>
-        <label>
+
+        <div className="form-input-break"></div>
+
+        <label className="login">
           Password
           <input
             type="password"
@@ -58,7 +67,8 @@ function LoginForm({onClose, setShowLoginModal}) {
             required
           />
         </label>
-        <button id="login-button" type="submit">Log In</button>
+        </div>
+        <button className="modal-login-button" type="submit">Log In</button>
       </form>
     </div>
   )

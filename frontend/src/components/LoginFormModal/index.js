@@ -19,7 +19,9 @@ function LoginFormModal({showLoginModal, setShowLoginModal}) {
 
       {/* doesn't have to pass in setShowLoginModal prop, passing in onClose instead is fine */}
       {showLoginModal && (
-        <Modal onClose={() => setShowLoginModal(false)}>
+        <Modal
+        className="modal-wrapper"
+        onClose={() => setShowLoginModal(false)}>
           <LoginForm
             // onClose={() => setShowLoginModal(false)}
             setShowLoginModal={setShowLoginModal}
