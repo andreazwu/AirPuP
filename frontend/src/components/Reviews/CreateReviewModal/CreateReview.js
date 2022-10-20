@@ -48,6 +48,14 @@ const CreateReview = ({spotId, setShowModal}) => {
     // console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, REVIEWINFO:", reviewInfo)
 
     const newReview = await dispatch(thunkCreateNewReview(reviewInfo, spotId, currentUser))
+      .catch(async (res) => {
+        const message = await res.json()
+        const messageErrors = []
+        if (message) {
+          messageErrors.push(message.message)
+          setErrors(messageErrors)
+        }
+      })
 
     if (newReview && !url.length) setShowModal(false)
 

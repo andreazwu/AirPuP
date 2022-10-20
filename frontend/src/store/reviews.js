@@ -113,13 +113,14 @@ export const thunkGetUserReviews = () => async (dispatch) => {
 
 // create new review thunk
 export const thunkCreateNewReview = (newreview, spotId, user) => async (dispatch) => {
-  console.log("THUNK CREATEREVIEW STARTS RUNNING, BEFORE POST TO BACKEND")
+
+  // console.log("THUNK CREATEREVIEW STARTS RUNNING, BEFORE POST TO BACKEND")
   const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(newreview)
   })
-  console.log("THUNK CREATEREVIEW STARTS RUNNING, AFTER POST TO BACKEND")
+  // console.log("THUNK CREATEREVIEW STARTS RUNNING, AFTER POST TO BACKEND")
 
   if (response.ok) {
     /* response from backend: "newreview"
@@ -156,6 +157,9 @@ export const thunkCreateNewReview = (newreview, spotId, user) => async (dispatch
     console.log("THUNK CREATEreview AFTER DISPATCH AC")
 
     return newreview //<<<<<< must return for handlesubmit: newreview = await dispatch(thunkCreateNewreview(review))
+  } else {
+    const result = await response.json()
+    return result
   }
 }
 
