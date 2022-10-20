@@ -54,7 +54,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         <div className="modal-subheader">Welcome to AirPuP</div>
 
 
-      <div className="field-errors">
+      <div className="validation-errors">
         {errors.length > 0 &&
         errors.map((error, idx) => (
           <li key={idx}>{error}</li>

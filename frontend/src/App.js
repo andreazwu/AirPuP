@@ -27,12 +27,10 @@ return (
       <Switch>
 
         <Route exact path="/">
-          <h1> App: Hello Yes I"m Still The Main Page... </h1>
           <LoadAllSpots />
         </Route>
 
         <Route exact path="/newspot">
-          <h1> App: Create A New Spot!! </h1>
           <CreateSpot />
         </Route>
 

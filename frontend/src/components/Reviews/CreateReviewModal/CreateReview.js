@@ -84,9 +84,9 @@ const CreateReview = ({spotId, setShowModal}) => {
 
   return (
     <div>
-      <div className="modal-subheader">Please Enter Your Review Info:</div>
+      <div className="review-modal-subheader">How was your stay?</div>
 
-      <div className="login-errors">
+      <div className="validation-errors">
         {
         hasSubmitted &&
         errors &&
@@ -97,17 +97,10 @@ const CreateReview = ({spotId, setShowModal}) => {
       <form onSubmit={handleSubmit}>
       <div className="form-input-wrapper">
 
+
+
             <label className="review-field">
-              Review:
-              <textarea
-                type="text"
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-              />
-            </label>
-            <div className="form-input-break"></div>
-            <label className="review-field">
-              Star Rating:<span>{" "}{" "}{" "}</span>
+              Rating:<span>{" "}{" "}{" "}</span>
               <select
                 type="number"
                 value={stars}
@@ -115,6 +108,15 @@ const CreateReview = ({spotId, setShowModal}) => {
               >
                 {[0,1,2,3,4,5].map((num)=>(<option>{num}</option>))}
               </select>
+            </label>
+            <div className="form-input-break"></div>
+            <label className="review-field">
+              Review:
+              <textarea
+                type="text"
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+              />
             </label>
             <div className="form-input-break"></div>
             <label className="review-field">

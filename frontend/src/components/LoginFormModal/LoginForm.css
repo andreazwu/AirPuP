@@ -35,7 +35,7 @@ form {
   margin: 20px 20px 10px 30px;
 }
 
-.login-errors {
+.validation-errors {
   list-style: none;
   font-size: 14px;
   color: rgb(255, 90, 96);
@@ -71,7 +71,7 @@ form {
 }
 
 input {
-  width: 90%;
+  width: 95%;
   font-size: 14px;
   padding: 4px;
   border: none;

@@ -39,7 +39,7 @@ function LoginForm({onClose, setShowLoginModal}) {
 
         <div className="modal-subheader">Welcome to AirPuP</div>
 
-        <div className="login-errors">
+        <div className="validation-errors">
           {errors.length > 0 && errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}

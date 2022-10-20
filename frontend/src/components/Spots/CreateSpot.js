@@ -97,128 +97,145 @@ const CreateSpot = () => {
   }
 
   return (
-    <>
-      <div>
-        {
-        hasSubmitted &&
-        errors?.map((error)=>(<div key={error}>{error}</div>))
-        }
-      </div>
+    <div className="host-whole-container">
+      <h2 className="host-header-container">
+        Become A Host Today!
+      </h2>
 
-      <form onSubmit={handleSubmit}>
-        <h2>Please Enter Your Spot Info: </h2>
-
-        <div className="create-spot-container">
-
-            <label>
-              Name:
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-            <label>
-              Address:
-              <input
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </label>
-            <label>
-              City:
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </label>
-            <label>
-              State:
-              <input
-                type="text"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-              />
-            </label>
-            <label>
-              Country:
-              <select
-                type="text"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              >
-                <option value="" selected disabled>
-                  Select a Country
-                </option>
-                {countries.map((ele)=>(<option>{ele}</option>))}
-              </select>
-            </label>
-            {/* <label>
-              Country:
-              <input
-                type="text"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              />
-            </label> */}
-            {/* <label>
-              Latitude:
-              <input
-                type="number"
-                value={lat}
-                onChange={(e) => setLat(e.target.value)}
-              />
-            </label>
-            <label>
-              Longitude:
-              <input
-                type="number"
-                value={lng}
-                onChange={(e) => setLng(e.target.value)}
-              />
-            </label> */}
-            <label>
-              Description:
-              <textarea
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-            <label>
-              Price:
-              <input
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </label>
-            <label>
-              Image URL:
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-              />
-            </label>
+        <div className="validation-errors">
+          {
+          hasSubmitted &&
+          errors?.map((error)=>(<div key={error}>{error}</div>))
+          }
         </div>
+      <div className="host-form-container form-input-wrapper">
 
-        <button
-        // disabled={
-        //   hasSubmitted &&
-        //   errors.length > 0 ? true : false
-        // }
-        >
-          Create
-        </button>
-        <button onClick={cancelHandler}>
-          Cancel
-        </button>
-      </form>
-      {console.log("CREATESPOT COMPONENT ENDS")}
-    </>
+        <form onSubmit={handleSubmit}>
+
+          <div className="create-spot-container">
+
+              <label>
+                Name:
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
+              <div className="form-input-break"></div>
+              <label>
+                Address:
+                <input
+                  type="text"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </label>
+              <div className="form-input-break"></div>
+              <label>
+                City:
+                <input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </label>
+              <div className="form-input-break"></div>
+              <label>
+                State:
+                <input
+                  type="text"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                />
+              </label>
+              <div className="form-input-break"></div>
+              <label>
+                Country: <span>{" "}</span>
+                <select
+                  type="text"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  <option value="" selected disabled>
+                    Select a Country
+                  </option>
+                  {countries.map((ele)=>(<option>{ele}</option>))}
+                </select>
+              </label>
+              {/* <label>
+                Country:
+                <input
+                  type="text"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
+              </label> */}
+              {/* <label>
+                Latitude:
+                <input
+                  type="number"
+                  value={lat}
+                  onChange={(e) => setLat(e.target.value)}
+                />
+              </label>
+              <label>
+                Longitude:
+                <input
+                  type="number"
+                  value={lng}
+                  onChange={(e) => setLng(e.target.value)}
+                />
+              </label> */}
+              <div className="form-input-break"></div>
+              <label>
+                Description:
+                <textarea
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </label>
+              <div className="form-input-break"></div>
+              <label>
+                Price:
+                <input
+                  type="number"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </label>
+              <div className="form-input-break"></div>
+              <label>
+                Image URL:
+                <input
+                  type="text"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                />
+              </label>
+          </div>
+
+          <div className="form-input-break"></div>
+          <button
+          // disabled={
+          //   hasSubmitted &&
+          //   errors.length > 0 ? true : false
+          // }
+          className="submit-button"
+          >
+            Create
+          </button>
+          <button
+          onClick={cancelHandler}
+          className="submit-button"
+          >
+            Cancel
+          </button>
+        </form>
+        {/* {console.log("CREATESPOT COMPONENT ENDS")} */}
+        </div>
+    </div>
   )
 }
 
