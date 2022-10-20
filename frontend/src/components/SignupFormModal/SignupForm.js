@@ -48,13 +48,21 @@ function SignupFormPage({onClose, setShowSignupModal}) {
           <i className="fa-solid fa-xmark"></i>
       </button> */}
 
-      <ul>
+        <div className="modal-header">Sign Up</div>
+        <div className="line-break"></div>
+
+        <div className='modal-subheader'>Welcome to AirPuP</div>
+
+
+      <div className='login-errors'>
         {errors.length > 0 &&
         errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
-      </ul>
-      <label>
+      </div>
+
+      <div className="form-input-wrapper">
+      <label className="login">
         Email
         <input
           type="text"
@@ -63,7 +71,8 @@ function SignupFormPage({onClose, setShowSignupModal}) {
           required
         />
       </label>
-      <label>
+      <div className="form-input-break"></div>
+      <label className="login">
         Username
         <input
           type="text"
@@ -72,7 +81,8 @@ function SignupFormPage({onClose, setShowSignupModal}) {
           required
         />
       </label>
-      <label>
+      <div className="form-input-break"></div>
+      <label className="login">
         First Name
         <input
           type="text"
@@ -81,7 +91,8 @@ function SignupFormPage({onClose, setShowSignupModal}) {
           required
         />
       </label>
-      <label>
+      <div className="form-input-break"></div>
+      <label className="login">
         Last Name
         <input
           type="text"
@@ -90,7 +101,8 @@ function SignupFormPage({onClose, setShowSignupModal}) {
           required
         />
       </label>
-      <label>
+      <div className="form-input-break"></div>
+      <label className="login">
         Password
         <input
           type="password"
@@ -99,7 +111,8 @@ function SignupFormPage({onClose, setShowSignupModal}) {
           required
         />
       </label>
-      <label>
+      <div className="form-input-break"></div>
+      <label className="login">
         Confirm Password
         <input
           type="password"
@@ -108,7 +121,8 @@ function SignupFormPage({onClose, setShowSignupModal}) {
           required
         />
       </label>
-      <button id="signup-button" type="submit">Sign Up</button>
+      </div>
+      <button className="modal-login-button" type="submit">Sign Up</button>
     </form>
   )
 }
