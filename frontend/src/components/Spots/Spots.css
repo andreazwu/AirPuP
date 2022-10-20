@@ -51,6 +51,8 @@
 
 
 
+
+
 .host-whole-container{
   width: 100%;
   display: flex;
@@ -70,6 +72,22 @@
 
 .host-form-container .form-input-break {
   width:102.5%;
+}
+
+.host-form-container select {
+  width: 92%;
+  /* margin-left: 13px; */
+}
+.host-form-container input {
+  margin-left: 3px;
+}
+.host-form-container textarea {
+  margin-left: 3px;
+}
+.host-form-container label {
+  color: rgb(255, 90, 96);
+  /* color: gray; */
+  margin-left: 6px;
 }
 
 .submit-button {
