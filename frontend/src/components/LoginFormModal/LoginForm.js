@@ -37,16 +37,16 @@ function LoginForm({onClose, setShowLoginModal}) {
         <div className="modal-header">Log In</div>
         <div className="line-break"></div>
 
-        <div className='modal-subheader'>Welcome to AirPuP</div>
+        <div className="modal-subheader">Welcome to AirPuP</div>
 
-        <div className='login-errors'>
+        <div className="login-errors">
           {errors.length > 0 && errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </div>
 
         <div className="form-input-wrapper">
-        <label className="login">
+        <label className="field">
           Username or Email
           <input
             type="text"
@@ -58,7 +58,7 @@ function LoginForm({onClose, setShowLoginModal}) {
 
         <div className="form-input-break"></div>
 
-        <label className="login">
+        <label className="field">
           Password
           <input
             type="password"
@@ -68,7 +68,7 @@ function LoginForm({onClose, setShowLoginModal}) {
           />
         </label>
         </div>
-        <button className="modal-login-button" type="submit">Log In</button>
+        <button className="modal-submit-button" type="submit">Log In</button>
       </form>
     </div>
   )

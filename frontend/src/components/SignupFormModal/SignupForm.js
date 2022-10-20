@@ -51,10 +51,10 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         <div className="modal-header">Sign Up</div>
         <div className="line-break"></div>
 
-        <div className='modal-subheader'>Welcome to AirPuP</div>
+        <div className="modal-subheader">Welcome to AirPuP</div>
 
 
-      <div className='login-errors'>
+      <div className="field-errors">
         {errors.length > 0 &&
         errors.map((error, idx) => (
           <li key={idx}>{error}</li>
@@ -62,7 +62,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
       </div>
 
       <div className="form-input-wrapper">
-      <label className="login">
+      <label className="field">
         Email
         <input
           type="text"
@@ -72,7 +72,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         />
       </label>
       <div className="form-input-break"></div>
-      <label className="login">
+      <label className="field">
         Username
         <input
           type="text"
@@ -82,7 +82,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         />
       </label>
       <div className="form-input-break"></div>
-      <label className="login">
+      <label className="field">
         First Name
         <input
           type="text"
@@ -92,7 +92,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         />
       </label>
       <div className="form-input-break"></div>
-      <label className="login">
+      <label className="field">
         Last Name
         <input
           type="text"
@@ -102,7 +102,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         />
       </label>
       <div className="form-input-break"></div>
-      <label className="login">
+      <label className="field">
         Password
         <input
           type="password"
@@ -112,7 +112,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         />
       </label>
       <div className="form-input-break"></div>
-      <label className="login">
+      <label className="field">
         Confirm Password
         <input
           type="password"
@@ -122,7 +122,7 @@ function SignupFormPage({onClose, setShowSignupModal}) {
         />
       </label>
       </div>
-      <button className="modal-login-button" type="submit">Sign Up</button>
+      <button className="modal-submit-button" type="submit">Sign Up</button>
     </form>
   )
 }

@@ -37,7 +37,7 @@ const CreateReview = ({spotId, setShowModal}) => {
     const errorsArr = []
 
     if (!review.length || review.length > 255) errorsArr.push("please enter a valid review fewer than 255 characters long")
-    if (url.length && (url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif"))) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+    if (url.length && (url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif"))) errorsArr.push("please enter a valid url fewer than 255 characters long")
 
     setErrors(errorsArr)
 
@@ -84,28 +84,30 @@ const CreateReview = ({spotId, setShowModal}) => {
 
   return (
     <div>
-      <div>
+      <div className="modal-subheader">Please Enter Your Review Info:</div>
+
+      <div className="login-errors">
         {
         hasSubmitted &&
-        errors?.map((error)=>(<div key={error}>{error}</div>))
+        errors &&
+        errors.map((error)=>(<div key={error}>{error}</div>))
         }
       </div>
 
       <form onSubmit={handleSubmit}>
-        <h2>Please Enter Your Review Info: </h2>
+      <div className="form-input-wrapper">
 
-        <div className="create-review-container">
-
-            <label>
+            <label className="review-field">
               Review:
-              <input
+              <textarea
                 type="text"
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
               />
             </label>
-            <label>
-              Stars:
+            <div className="form-input-break"></div>
+            <label className="review-field">
+              Star Rating:<span>{" "}{" "}{" "}</span>
               <select
                 type="number"
                 value={stars}
@@ -114,12 +116,13 @@ const CreateReview = ({spotId, setShowModal}) => {
                 {[0,1,2,3,4,5].map((num)=>(<option>{num}</option>))}
               </select>
             </label>
-            <label>
+            <div className="form-input-break"></div>
+            <label className="review-field">
               Image URL:
               <input
                 type="text"
                 value={url}
-                placeholder="optional"
+                placeholder="(optional)"
                 onChange={(e) => setUrl(e.target.value)}
               />
             </label>
@@ -130,6 +133,7 @@ const CreateReview = ({spotId, setShowModal}) => {
         //   hasSubmitted &&
         //   errors.length > 0 ? true : false
         // }
+        className="modal-submit-button"
         >
           Create Review
         </button>

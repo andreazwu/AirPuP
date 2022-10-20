@@ -64,7 +64,7 @@ form {
   margin-bottom: 4px;
 }
 
-.login {
+.field {
   color: rgb(255, 90, 96);
   font-size: 12px;
   padding-left: 3px;
@@ -83,7 +83,7 @@ input:focus {
   outline: none;
 }
 
-.modal-login-button {
+.modal-submit-button {
   width: 89%;
   padding: 10px;
   margin: 0px 25px 5px 25px;
@@ -92,6 +92,12 @@ input:focus {
   background: rgb(255, 90, 96);
   color: white;
   font: bold;
+}
+
+.modal-submit-button:hover {
+  background: white;
+  border: 1px rgb(255, 90, 96) solid;
+  color:rgb(255, 90, 96);
 }
 
 
