@@ -56,7 +56,6 @@ const CreateReview = ({spotId, setShowModal}) => {
           setErrors(messageErrors)
         }
       })
-
     if (newReview && !url.length) setShowModal(false)
 
     if (newReview && url.length && !errorsArr.length) {

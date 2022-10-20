@@ -111,11 +111,11 @@ const validPagination = [
   check("minPrice")
     .optional()
     .isDecimal({ min: 0 })
-    .withMessage("Minimum price must be greater than or equal to 0"),
+    .withMessage("Minimum price must be greater than or equal to 1"),
   check("maxPrice")
     .optional()
     .isDecimal({ min: 0 })
-    .withMessage("Maximum price must be greater than or equal to 0"),
+    .withMessage("Maximum price must be greater than or equal to 1"),
   handleValidationErrors
 ]
 //-------------------------------------------------------------------
