@@ -43,7 +43,6 @@ return (
         </Route>
 
         <Route exact path="/myreviews">
-          <h1> App: These are my reviews~~ </h1>
           <LoadUserReviews />
         </Route>
 

@@ -17,32 +17,46 @@ const MyReview = ({review}) => {
     history.push(`/myreviews/edit/${review.id}`)
   }
 
+  const stars = []
+  for (let i = 0; i<review.stars; i++) {
+    stars.push("star")
+  }
+
+
   return (
     <div className="my-single-wrapper">
 
       <div className="my-single-header">
         Review For {" "}
-        <Link to={`/spots/${review.Spot.id}`}>
+        <Link style={{ textDecoration: "none", color: "rgb(255, 90, 96)" }} to={`/spots/${review.Spot.id}`}>
           {review.Spot.name}
-        </Link>
+        </Link>:
       </div>
 
 
       <div className="my-single-stats">
-
-        <div className="my-single-rating">
-          <i className="fa-solid fa-star"></i>
-          <span className="my-single-rating-number">
-            {" "}{review.stars}
-          </span>
-        </div>
-
-        <p className="single-review-date">
+        <p className="my-single-review-date">
             {new Date(review.createdAt).toString().slice(3,-42)}
         </p>
+        <div className="my-single-rating">
+          {/* <i className="fa-solid fa-star"></i>
+          <span className="my-single-rating-number">
+            {" "}{review.stars}
+          </span> */}
+          {
+            stars.map((star) => (<i className="fa-solid fa-star"></i>))
+          }
+
+        </div>
 
         <div className="my-single-review">
-          "{review.review}"
+          <i className="fa fa-quote-left fa-lg" aria-hidden="true"></i>
+          <span>{" "}</span>
+          <span>
+            {review.review}
+          </span>
+          <span>{" "}</span>
+          <i className="fa fa-quote-right fa-lg" aria-hidden="true"></i>
         </div>
 
       </div>
@@ -52,7 +66,9 @@ const MyReview = ({review}) => {
         {/* <button onClick={editReviewHandleClick}>
           Edit Review
         </button> */}
-        <button onClick={deleteReviewHandleClick}>
+        <button
+        className="my-reviews-button"
+        onClick={deleteReviewHandleClick}>
           Delete Review
         </button>
       </div>
@@ -61,7 +77,7 @@ const MyReview = ({review}) => {
         {
           review.ReviewImages.length > 0 &&
           <div>
-            <p>Review Images For This Spot:</p>
+            <p>Review Image For This Spot:</p>
             <div>
               {review.ReviewImages.map((ele) => {
                 return (

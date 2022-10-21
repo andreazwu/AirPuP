@@ -70,12 +70,12 @@ const MySpot = ({spot}) => {
           {owner && (
             <>
               <button
-      className="myspot-buttons"
+              className="myspot-buttons"
               onClick={editSpotHandleClick}>
                 Edit Spot
               </button>
               <button
-      className="myspot-buttons"
+              className="myspot-buttons"
               onClick={deleteSpotHandleClick}>
                 Delete Spot
               </button>
