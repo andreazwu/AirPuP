@@ -54,6 +54,11 @@
   font-weight: bolder;
 }
 
+.allspots-spot-country {
+  font-size: 14px;
+  color: rgb(171, 178, 193);
+}
+
 .allspots-spot-price {
   font-weight: bolder;
 }

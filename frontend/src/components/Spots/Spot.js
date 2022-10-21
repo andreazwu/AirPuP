@@ -28,7 +28,9 @@ const Spot = ({spot}) => {
               }
             </div>
           </div>
-
+          <div className="allspots-spot-country">
+            {spot.country}
+          </div>
           <div className="allspots-spot-price">
             ${spot.price} <span>night</span>
           </div>
