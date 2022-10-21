@@ -9,9 +9,11 @@ const CreateReviewModal = ({spotId}) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>
+      <div
+      className="create-review-button"
+      onClick={() => setShowModal(true)}>
         Create Review
-      </button>
+      </div>
 
 
       {showModal && (

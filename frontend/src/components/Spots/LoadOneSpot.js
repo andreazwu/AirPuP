@@ -6,6 +6,7 @@ import CreateReviewModal from "../Reviews/CreateReviewModal"
 import LoadSpotReviews from "../Reviews/LoadSpotReviews"
 
 import noimage from "../../images/noimage.jpg"
+import aircover from "../../images/aircover.webp"
 
 import "./Spots.css"
 
@@ -94,22 +95,44 @@ const LoadOneSpot = () => {
               displayImages.map((image) =>
                 <img className="one-spot-other-image"
                 key={image.id} src={image.url}/>) :
-              // (<div></div>)
               (<div>listing has no other images</div>)
             }
           </div>
         </div>
 
-        <div className="below-pictures">
-          <div>
-            Hosted by: {spot.Owner.firstName}
+        <div className="one-spot-below-pictures">
+          <div className="one-spot-below-left">
+            <h2>Entire home hosted by {spot.Owner.firstName}</h2>
+            <div className="one-spot-linebreak"></div>
+            <div>
+              <img className="aircover" src={aircover} />
+              <p>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
+            </div>
+            <div className="one-spot-linebreak"></div>
+            <div>
+              {spot.description}
+            </div>
+            {/* <div className="one-spot-linebreak"></div> */}
           </div>
-          <div>
-            {spot.description}
+
+          <div className="one-spot-below-right-floating">
+            <div className="floating-header">
+              <div>
+                <span className="one-spot-price">${spot.price}</span> night
+              </div>
+
+              <div className="one-spot-floating-review">
+                  <span>
+                  {spot.avgRating ?
+                    (<span className="bold">★ {spot.avgRating}  ·   </span>):
+                    (<span className="bold">★ New  ·   </span>)
+                  }
+                  </span>
+                  <span>{spot.numReviews} reviews</span>
+              </div>
+            </div>
           </div>
-          <div>
-            ${spot.price}
-          </div>
+
         </div>
 
 
@@ -126,6 +149,7 @@ const LoadOneSpot = () => {
             </>
           )}
         </div> */}
+        <div className="one-spot-linebreak"></div>
 
         {/* only show "create review" button to NON-owner of spot */}
         <div>
