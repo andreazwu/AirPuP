@@ -100,7 +100,7 @@ const CreateReview = ({spotId, setShowModal}) => {
 
 
             <label className="review-field">
-              Rating:<span>{" "}{" "}{" "}</span>
+              Rating:&nbsp;
               <select
                 type="number"
                 value={stars}

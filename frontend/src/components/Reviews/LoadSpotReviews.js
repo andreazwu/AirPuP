@@ -51,11 +51,9 @@ const LoadSpotReviews = ({spotId}) => {
 
           <p className="single-review-review">
             <i className="fa fa-quote-left fa-lg" aria-hidden="true"></i>
-            <span>{" "}</span>
             <span>
               {review.review}
             </span>
-            <span>{" "}</span>
             <i className="fa fa-quote-right fa-lg" aria-hidden="true"></i>
           </p>
           <div>

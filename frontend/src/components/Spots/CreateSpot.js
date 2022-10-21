@@ -148,7 +148,7 @@ const CreateSpot = () => {
           </label>
           <div className="form-input-break"></div>
           <label>
-            Country: <span>{" "}</span>
+            Country:
             <select
               type="text"
               value={country}

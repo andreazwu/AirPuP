@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
-import LoadAllSpots from "./components/Spots/LoadAllSpots";
-import LoadUserSpots from "./components/Spots/LoadUserSpots";
-import LoadOneSpot from "./components/Spots/LoadOneSpot";
-import CreateSpot from "./components/Spots/CreateSpot";
-import EditSpot from "./components/Spots/EditSpot";
-import LoadUserReviews from "./components/Reviews/LoadUserReviews";
-import PageNotFound from "./components/PageNotFound";
+import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { Route, Switch } from "react-router-dom"
+import * as sessionActions from "./store/session"
+import Navigation from "./components/Navigation"
+import LoadAllSpots from "./components/Spots/LoadAllSpots"
+import LoadUserSpots from "./components/Spots/LoadUserSpots"
+import LoadOneSpot from "./components/Spots/LoadOneSpot"
+import CreateSpot from "./components/Spots/CreateSpot"
+import EditSpot from "./components/Spots/EditSpot"
+import LoadUserReviews from "./components/Reviews/LoadUserReviews"
+import PageNotFound from "./components/PageNotFound"
+import Footer from "./components/Navigation/Footer"
 
 function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const dispatch = useDispatch()
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
+  }, [dispatch])
 
 return (
   <>
@@ -56,8 +57,9 @@ return (
 
       </Switch>
     )}
+    <Footer />
   </>
-);
+)
 }
 
-export default App;
+export default App
