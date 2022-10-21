@@ -149,7 +149,17 @@ const LoadOneSpot = () => {
             </>
           )}
         </div> */}
-        <div className="one-spot-linebreak"></div>
+        <div className="one-spot-linebreak long"></div>
+
+        <h2 className="one-spot-above-review">
+            <span>
+            {spot.avgRating ?
+              (<span className="bold">★ {spot.avgRating}  ·   </span>):
+              (<span className="bold">★ New  ·   </span>)
+            }
+            </span>
+            <span>{spot.numReviews} reviews</span>
+        </h2>
 
         {/* only show "create review" button to NON-owner of spot */}
         <div>
@@ -160,7 +170,9 @@ const LoadOneSpot = () => {
           }
         </div>
 
-        <LoadSpotReviews spotId={spotId} />
+        <div className="one-spot-reviews-container">
+          <LoadSpotReviews spotId={spotId} />
+        </div>
       </div>
 
 

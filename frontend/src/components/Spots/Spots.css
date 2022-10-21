@@ -181,6 +181,10 @@
   height: 1px;
 }
 
+.long {
+  width: 99.8%;
+}
+
 .aircover {
   width: 120px;
 }
@@ -218,15 +222,21 @@
 }
 
 .one-spot-floating-review span {
-  font-weight: 500;
+  font-weight: bolder;
   font-size: 14px;
+}
+
+.one-spot-above-review {
+  font-weight: bolder;
+  font-size: 22px;
+  margin-top: -3px;
 }
 
 .create-review-button {
   cursor: pointer;
   width: 115px;
   padding: 3px 10px;
-  /* margin: 0px 25px 5px 25px; */
+  margin: 3px 0px 20px 0px;
   border: 1px rgb(255, 90, 96) solid;
   border-radius: 4px;
   background: rgb(255, 90, 96);
@@ -238,4 +248,10 @@
   background: white;
   border: 1px rgb(255, 90, 96) solid;
   color:rgb(255, 90, 96);
+}
+
+.one-spot-reviews-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }

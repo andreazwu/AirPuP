@@ -1,10 +1,9 @@
 .single-review {
-  font-weight: 300;
-  margin-bottom: 40px;
+  font-weight: bolder;
+  margin-bottom: 30px;
 }
 
-.single-review>h3 {
-  font-weight: 500;
+.single-review h3 {
   margin-bottom: -10px;
 }
 
@@ -12,6 +11,10 @@
   font-size: 14px;
   color:rgb(187, 200, 228, 0.8);
   font-style: normal;
+}
+
+.single-review-review {
+  margin-right: 20px;
 }
 
 .single-review-image {
