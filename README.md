@@ -42,6 +42,8 @@ Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
 
 ## My Contact Info:
 
-### [LinkedIn](https://www.linkedin.com/in/andreazwu/)
+### Andrea Wu
 
-### [GitHub](https://github.com/andreazwu)
+#### [LinkedIn](https://www.linkedin.com/in/andreazwu/)
+
+#### [GitHub](https://github.com/andreazwu)
