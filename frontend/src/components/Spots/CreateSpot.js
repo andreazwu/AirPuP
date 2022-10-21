@@ -49,11 +49,11 @@ const CreateSpot = () => {
     if (!address.length) errorsArr.push("please enter street address")
     if (!city.length) errorsArr.push("please enter city")
     if (!state.length) errorsArr.push("please enter state")
-    if (!country.length) errorsArr.push("please enter country")
+    if (!country.length) errorsArr.push("please select a country")
     // if (!lat.length || lat > 90 || lat < -90) errorsArr.push("please enter a valid latitude between -90 and 90")
     // if (!lng.length || lng > 180 || lng < -180) errorsArr.push("please enter a valid longitude between -180 and 180")
     if (!name.length || name.length > 50) errorsArr.push("please enter a valid name fewer than 50 characters long")
-    if (!description.length) errorsArr.push("please enter a description")
+    if (!description.length || description.length > 255) errorsArr.push("please enter a valid description fewer than 255 characters long")
     if (!price || price <=0) errorsArr.push("please enter a valid price greater than 0")
     if (!url.length || url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif")) errorsArr.push("please enter a valid image url fewer than 255 characters long")
 
