@@ -121,113 +121,128 @@ const EditSpot = () => {
   if (!Object.values(spot).length) return null
 
   return (
-    <>
-      <div>
-        {hasSubmitted && errors?.map((error)=>(<div key={error}>{error}</div>))}
+    <div className="host-whole-container">
+      <h2 className="host-header-container">
+        Edit Your Spot Info:
+      </h2>
+      <div className="validation-errors">
+          {
+          hasSubmitted &&
+          errors?.map((error)=>(<div key={error}>{error}</div>))
+          }
       </div>
 
+      <div className="host-form-container form-input-wrapper">
       <form onSubmit={handleSubmit}>
-        <h2>Please Enter Your Spot Info: </h2>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <div className="form-input-break"></div>
+        <label>
+          Address:
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </label>
+        <div className="form-input-break"></div>
+        <label>
+          City:
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </label>
+        <div className="form-input-break"></div>
+        <label>
+          State:
+          <input
+            type="text"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+          />
+        </label>
+        <div className="form-input-break"></div>
+        <label>
+          Country:
+          <select
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          >
+            <option value="" selected disabled>
+              Select a Country
+            </option>
+            {countries.map((ele)=>(<option>{ele}</option>))}
+          </select>
+        </label>
+        {/* <label>
+          Latitude:
+          <input
+            type="number"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
+          />
+        </label>
+        <label>
+          Longitude:
+          <input
+            type="number"
+            value={lng}
+            onChange={(e) => setLng(e.target.value)}
+          />
+        </label> */}
+        <div className="form-input-break"></div>
+        <label>
+          Description:
+          <textarea
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+        <div className="form-input-break"></div>
+        <label>
+          Price:
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </label>
+        {/* <label>
+          Image URL:
+          <input
+            type="text"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </label> */}
 
-        <div className="create-spot-container">
-
-            <label>
-              Name:
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-            <label>
-              Address:
-              <input
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </label>
-            <label>
-              City:
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </label>
-            <label>
-              State:
-              <input
-                type="text"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-              />
-            </label>
-            <label>
-              Country:
-              <select
-                type="text"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              >
-                <option value="" selected disabled>
-                  Select a Country
-                </option>
-                {countries.map((ele)=>(<option>{ele}</option>))}
-              </select>
-            </label>
-            {/* <label>
-              Latitude:
-              <input
-                type="number"
-                value={lat}
-                onChange={(e) => setLat(e.target.value)}
-              />
-            </label>
-            <label>
-              Longitude:
-              <input
-                type="number"
-                value={lng}
-                onChange={(e) => setLng(e.target.value)}
-              />
-            </label> */}
-            <label>
-              Description:
-              <textarea
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-            <label>
-              Price:
-              <input
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </label>
-            {/* <label>
-              Image URL:
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-              />
-            </label> */}
-        </div>
-
+        <div className="form-input-break"></div>
         <button
         // disabled={errors.length > 0 ? true : false}
+        className="submit-button"
         >
           Update
         </button>
 
-        <button onClick={cancelButton}>Cancel</button>
+        <button
+        onClick={cancelButton}
+        className="submit-button"
+        >
+          Cancel
+        </button>
       </form>
-      {console.log("EditSpot COMPONENT ENDS")}
-    </>
+    </div>
+    </div>
   )
 }
 

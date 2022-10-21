@@ -108,113 +108,109 @@ const CreateSpot = () => {
           errors?.map((error)=>(<div key={error}>{error}</div>))
           }
         </div>
+
       <div className="host-form-container form-input-wrapper">
-
         <form onSubmit={handleSubmit}>
-
-          <div className="create-spot-container">
-
-              <label>
-                Name:
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </label>
-              <div className="form-input-break"></div>
-              <label>
-                Address:
-                <input
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </label>
-              <div className="form-input-break"></div>
-              <label>
-                City:
-                <input
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-              </label>
-              <div className="form-input-break"></div>
-              <label>
-                State:
-                <input
-                  type="text"
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                />
-              </label>
-              <div className="form-input-break"></div>
-              <label>
-                Country: <span>{" "}</span>
-                <select
-                  type="text"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                >
-                  <option value="" selected disabled>
-                    Select a Country
-                  </option>
-                  {countries.map((ele)=>(<option>{ele}</option>))}
-                </select>
-              </label>
-              {/* <label>
-                Country:
-                <input
-                  type="text"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                />
-              </label> */}
-              {/* <label>
-                Latitude:
-                <input
-                  type="number"
-                  value={lat}
-                  onChange={(e) => setLat(e.target.value)}
-                />
-              </label>
-              <label>
-                Longitude:
-                <input
-                  type="number"
-                  value={lng}
-                  onChange={(e) => setLng(e.target.value)}
-                />
-              </label> */}
-              <div className="form-input-break"></div>
-              <label>
-                Description:
-                <textarea
-                  type="text"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </label>
-              <div className="form-input-break"></div>
-              <label>
-                Price:
-                <input
-                  type="number"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </label>
-              <div className="form-input-break"></div>
-              <label>
-                Image URL:
-                <input
-                  type="text"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </label>
-          </div>
+          <label>
+            Name:
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <div className="form-input-break"></div>
+          <label>
+            Address:
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
+          <div className="form-input-break"></div>
+          <label>
+            City:
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </label>
+          <div className="form-input-break"></div>
+          <label>
+            State:
+            <input
+              type="text"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            />
+          </label>
+          <div className="form-input-break"></div>
+          <label>
+            Country: <span>{" "}</span>
+            <select
+              type="text"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            >
+              <option value="" selected disabled>
+                Select a Country
+              </option>
+              {countries.map((ele)=>(<option>{ele}</option>))}
+            </select>
+          </label>
+          {/* <label>
+            Country:
+            <input
+              type="text"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            />
+          </label> */}
+          {/* <label>
+            Latitude:
+            <input
+              type="number"
+              value={lat}
+              onChange={(e) => setLat(e.target.value)}
+            />
+          </label>
+          <label>
+            Longitude:
+            <input
+              type="number"
+              value={lng}
+              onChange={(e) => setLng(e.target.value)}
+            />
+          </label> */}
+          <div className="form-input-break"></div>
+          <label>
+            Description:
+            <textarea
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </label>
+          <div className="form-input-break"></div>
+          <label>
+            Price:
+            <input
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </label>
+          <div className="form-input-break"></div>
+          <label>
+            Image URL:
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </label>
 
           <div className="form-input-break"></div>
           <button
