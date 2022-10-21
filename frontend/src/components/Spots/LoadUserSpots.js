@@ -31,7 +31,10 @@ const LoadUserSpots = () => {
       <div className="myspots-header">
         {
           spotsArr.length === 0 ?
-          <h1>You're not currently hosting any spots!</h1> :
+          (<>
+            <h1>My Spots</h1>
+            <h4>You Don't Have Any Spots!</h4>
+          </>):
           <h1>My Spots</h1>
         }
       </div>

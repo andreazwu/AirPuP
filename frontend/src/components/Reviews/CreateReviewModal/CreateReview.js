@@ -22,14 +22,14 @@ const CreateReview = ({spotId, setShowModal}) => {
   const currentUser = useSelector((state) => state.session.user)
 
   useEffect(() => {
-    console.log("USE EFFECT TO CHECK CURRENT USER", currentUser)
+    // console.log("USE EFFECT TO CHECK CURRENT USER", currentUser)
     if (currentUser) setErrors([])
     else setErrors(["You must be logged in to leave a review"])
   }, [currentUser])
 
 
   const handleSubmit = async (e) => {
-    console.log("COMPONENT HANDLESUBMIT STARTS")
+    // console.log("COMPONENT HANDLESUBMIT STARTS")
     e.preventDefault()
     setErrors([])
     setHasSubmitted(true)
@@ -106,7 +106,7 @@ const CreateReview = ({spotId, setShowModal}) => {
                 value={stars}
                 onChange={(e) => setStars(e.target.value)}
               >
-                {[0,1,2,3,4,5].map((num)=>(<option>{num}</option>))}
+                {[1,2,3,4,5].map((num)=>(<option>{num}</option>))}
               </select>
             </label>
             <div className="form-input-break"></div>

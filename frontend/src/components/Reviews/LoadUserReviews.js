@@ -24,7 +24,10 @@ const LoadUserReviews = () => {
       <div className="myspots-header">
         {
           reviewsArr.length === 0 ?
-          <h1>You don't have any reviews!</h1> :
+          (<>
+            <h1>My Reviews</h1>
+            <h4>You Don't Have Any Reviews!</h4>
+          </>):
           <h1>My Reviews</h1>
         }
       </div>

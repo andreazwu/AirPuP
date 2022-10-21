@@ -64,6 +64,12 @@
 
 .myspots-header {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.myspots-header>h1,.myspots-header>h4 {
+  display: flex;
   justify-content: center;
 }
 
