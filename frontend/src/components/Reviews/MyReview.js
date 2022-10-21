@@ -17,12 +17,6 @@ const MyReview = ({review}) => {
     history.push(`/myreviews/edit/${review.id}`)
   }
 
-  const stars = []
-  for (let i = 0; i<review.stars; i++) {
-    stars.push("star")
-  }
-
-
   return (
     <div className="my-single-wrapper">
 
@@ -43,9 +37,9 @@ const MyReview = ({review}) => {
           <span className="my-single-rating-number">
             {" "}{review.stars}
           </span> */}
-          {
-            stars.map((star) => (<i className="fa-solid fa-star"></i>))
-          }
+            {
+              [...Array(review.stars)].map((star) => (<i className="fa-solid fa-star"></i>))
+            }
 
         </div>
 
