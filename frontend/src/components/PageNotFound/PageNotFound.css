@@ -1,11 +1,3 @@
-.wrapper-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 40px;
-}
-
 .notfound-header {
   display: flex;
   justify-content: center;

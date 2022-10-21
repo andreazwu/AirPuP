@@ -6,11 +6,11 @@ import "./Spots.css"
 
 
 const LoadAllSpots = () => {
-  console.log("1 (2.2) COMPONENT-LOADALLSPOTS STARTS")
+  // console.log("1 (2.2) COMPONENT-LOADALLSPOTS STARTS")
   const dispatch = useDispatch()
 
   const spotsObj = useSelector((state)=>{
-    console.log("2 (2.1/3) USE SELECTOR RUNNING: DETECTS CHANGES IN STATE")
+    // console.log("2 (2.1/3) USE SELECTOR RUNNING: DETECTS CHANGES IN STATE")
     return state.spots.allSpots
   }) // {1:{x}, 2:{y}, 3:{z}}
 
@@ -18,16 +18,16 @@ const LoadAllSpots = () => {
 
   //dispatch THUNK AC
   useEffect(() => {
-    console.log("5 USE EFFECT RUNNING: DISPATCH THUNK")
+    // console.log("5 USE EFFECT RUNNING: DISPATCH THUNK")
     dispatch(thunkGetAllSpots())
     // cleanup function to reset spots
     return () => {
-      console.log("LOADALLSPOTS USE EFFECT CLEANUP FUNCTION: RESET SPOTS")
+      // console.log("LOADALLSPOTS USE EFFECT CLEANUP FUNCTION: RESET SPOTS")
       dispatch(acResetSpots())
     }
   }, [dispatch])
 
-  console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "ARRAY:", spotsArr)
+  // console.log("3 (2.4) THIS IS THE CURRENT SPOTS RECEIVED FROM USE SELECTOR:", spotsObj, "ARRAY:", spotsArr)
 
   //conditional rendering:
   //recall empty arr/ obj is NOT falsy
@@ -41,14 +41,14 @@ const LoadAllSpots = () => {
             spotsArr.map((spot) => (
               //implement spot in separate component add prop
               <Spot key={spot.id} spot={spot}>
-                {console.log("4 (2.5) RETURN:", spot)}
+                {/* {console.log("4 (2.5) RETURN:", spot)} */}
               </Spot>
             ))
           }
         </div>
       </div>
 
-  {console.log("END OF LOADALLSPOTS COMPONENT")}
+  {/* {console.log("END OF LOADALLSPOTS COMPONENT")} */}
 
     </>
   )

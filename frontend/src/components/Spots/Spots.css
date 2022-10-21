@@ -1,7 +1,9 @@
 .wrapper-center {
   display: flex;
   justify-content: center;
-  padding: 0 14vw;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12vw;
 }
 
 .allspots-container {
@@ -12,7 +14,8 @@
   /* row-gap col-gap */
   flex-wrap: wrap;
   width: 100%;
-  margin: 0px 14vw 20px 14vw;
+  margin-top: 40px;
+  /* margin: 0px 12vw 20px 12vw; */
   /* top right bot left */
 }
 
@@ -34,24 +37,65 @@
   border-radius: 15px;
 }
 
-.allspots-spot-info {
+/* .allspots-spot-info {
   text-decoration: none;
+} */
 
+.allspots-spot-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 2px 2px 0px;
+  /* margin-top: 5px; */
+  min-width: 0;
 }
 
 .allspots-spot-location {
-  font-weight: 500;
-  padding-bottom: 5px;
-  padding-left: 2px;
-  text-decoration: none;
+  font-weight: bolder;
+}
+
+.allspots-spot-price {
+  font-weight: bolder;
+}
+
+.allspots-spot-price span {
+  font-weight: lighter;
 }
 
 
+.myspots-header {
+  display: flex;
+  justify-content: center;
+}
 
+.myspots {
+  margin-top: 0px;
+}
 
+.myspot-buttons-container {
+  display: flex;
+  justify-content:space-between;
+  padding: 0px 2px 2px 0px;
+  /* margin-top: 5px; */
+  min-width: 0;
+}
 
+.myspot-buttons {
+  cursor: pointer;
+  width: 115px;
+  padding: 3px 10px;
+  margin: 6px 0px 3px 0px;
+  border: 1px rgb(255, 90, 96) solid;
+  border-radius: 4px;
+  background: rgb(255, 90, 96);
+  color: white;
+  font: bold;
+}
 
-
+.myspot-buttons:hover {
+  background: white;
+  border: 1px rgb(255, 90, 96) solid;
+  color:rgb(255, 90, 96);
+}
 
 .host-whole-container{
   width: 100%;
@@ -110,7 +154,7 @@
 .one-spot-container {
   display: flex;
   flex-direction: column;
-  margin: 0px 14vw;
+  margin: 0px 12vw;
 }
 
 .one-spot-header-name {
@@ -253,5 +297,6 @@
 .one-spot-reviews-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  row-gap: 20px;
+  column-gap: 40px;
 }

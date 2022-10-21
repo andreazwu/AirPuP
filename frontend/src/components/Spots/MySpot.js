@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkEditSpot, thunkRemoveSpot, thunkGetOneSpot } from "../../store/spots"
+import noimage from "../../images/noimage.jpg"
 
 import "./Spots.css"
 
@@ -31,28 +32,33 @@ const MySpot = ({spot}) => {
 
   return (
     <div>
-      <Link to={`/spots/${spot.id}`}>
+      <Link style={{ textDecoration: "none", color: "black" }} to={`/spots/${spot.id}`}>
 
-        <div className="allspots-spot-image-container">
-          {spot.previewImage ?
-            (<div><img src={spot.previewImage} /></div>) :
-            (<div><img src="../images/no-image.png" alt="spot has no preview image" /></div>)
-          }
+      <div className="allspots-spot-image-container">
+        {spot.previewImage ?
+          (<div><img src={spot.previewImage} /></div>) :
+          (<div><img src={noimage} alt="noimage" /></div>)
+        }
         </div>
 
-        <div>
-          {spot.city}, {spot.state}
-        </div>
+        <div className="allspots-spot-info">
 
-        <div>
-          {spot.avgRating ?
-            (<span>★{spot.avgRating}</span>):
-            (<span>no rating</span>)
-          }
-        </div>
+          <div className="allspots-spot-header">
+            <div className="allspots-spot-location">
+              {spot.city}, {spot.state}
+            </div>
 
-        <div>
-          $<span>{spot.price}</span> night
+            <div className="allspots-spot-rating">
+              {spot.avgRating ?
+                (<span>★ {spot.avgRating}</span>):
+                (<span>★ New</span>)
+              }
+            </div>
+          </div>
+
+          <div className="allspots-spot-price">
+            ${spot.price} <span>night</span>
+          </div>
         </div>
 
 
@@ -60,14 +66,18 @@ const MySpot = ({spot}) => {
 
 
         {/* only show edit/delete buttons to owner of spot */}
-        <div>
+        <div className="myspot-buttons-container">
           {owner && (
             <>
-              <button onClick={editSpotHandleClick}>
-                Edit
+              <button
+      className="myspot-buttons"
+              onClick={editSpotHandleClick}>
+                Edit Spot
               </button>
-              <button onClick={deleteSpotHandleClick}>
-                Delete
+              <button
+      className="myspot-buttons"
+              onClick={deleteSpotHandleClick}>
+                Delete Spot
               </button>
             </>
           )}

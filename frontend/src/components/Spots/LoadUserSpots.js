@@ -16,7 +16,7 @@ const LoadUserSpots = () => {
     dispatch(thunkGetUserSpots())
     // cleanup function to reset spots
     return () => {
-      console.log("LOADUSERSPOT USE EFFECT CLEANUP FUNCTION: RESET SPOTS")
+      // console.log("LOADUSERSPOT USE EFFECT CLEANUP FUNCTION: RESET SPOTS")
       dispatch(acResetSpots())
     }
   }, [dispatch])
@@ -28,12 +28,12 @@ const LoadUserSpots = () => {
 
   return (
     <>
-      <div>
+      <div className="myspots-header">
         <h1>My Spots</h1>
       </div>
 
       <div className="wrapper-center">
-        <div className="allspots-container">
+        <div className="allspots-container myspots">
           {
             spotsArr.length === 0 ?
 
@@ -42,7 +42,7 @@ const LoadUserSpots = () => {
             spotsArr.map((spot) => (
               //implement spot in separate component add prop
               <MySpot key={spot.id} spot={spot}>
-                {console.log("LOAD USER SPOTS COMPONENT RETURN:", spot)}
+                {/* {console.log("LOAD USER SPOTS COMPONENT RETURN:", spot)} */}
               </MySpot>
             ))
           }

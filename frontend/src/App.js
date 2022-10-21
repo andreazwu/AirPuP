@@ -35,7 +35,6 @@ return (
         </Route>
 
         <Route exact path="/myspots">
-          <h1> App: These are my spots~~ </h1>
           <LoadUserSpots />
         </Route>
 
