@@ -1,7 +1,7 @@
 .wrapper-center {
   display: flex;
   justify-content: center;
-  padding: 0 40px;
+  padding: 0 14vw;
 }
 
 .allspots-container {
@@ -12,7 +12,7 @@
   /* row-gap col-gap */
   flex-wrap: wrap;
   width: 100%;
-  margin: 0px 40px 20px 40px;
+  margin: 0px 14vw 20px 14vw;
   /* top right bot left */
 }
 
@@ -105,4 +105,59 @@
   background: white;
   border: 1px rgb(255, 90, 96) solid;
   color:rgb(255, 90, 96);
+}
+
+.one-spot-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 14vw;
+}
+
+.one-spot-header-name {
+  margin-top: 40px;
+  margin-bottom: 5px;
+}
+
+.one-spot-header-detail {
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+
+.one-spot-header-detail span {
+  font-size: 15px;
+  margin-right: 5px;
+  font-weight: 500;
+}
+
+.one-spot-images-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  overflow: hidden;
+  border-radius: 10px;
+  /* width: 60vw; */
+  height: 450px;
+}
+
+.one-spot-preview-image {
+  max-height: 450px;
+  object-fit: cover;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  min-height: 450px;
+}
+
+.one-spot-other-images-container {
+  display: grid;
+  grid-template: 1fr 1fr/ 1fr 1fr;
+  height: 450px;
+  gap: 4px;
+}
+
+.one-spot-other-image {
+  min-height: 100%;
+  max-height: 100%;
+  width: 100%;
+  object-fit: cover;
 }

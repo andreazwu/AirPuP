@@ -49,7 +49,6 @@ return (
         </Route>
 
         <Route path="/spots/:spotId">
-          <h1> App: Load One Spot~ </h1>
           <LoadOneSpot />
         </Route>
 

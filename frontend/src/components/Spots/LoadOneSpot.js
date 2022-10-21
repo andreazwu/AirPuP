@@ -4,6 +4,9 @@ import { useHistory, useParams } from "react-router-dom"
 import { thunkGetOneSpot, acResetSpots } from "../../store/spots"
 import CreateReviewModal from "../Reviews/CreateReviewModal"
 import LoadSpotReviews from "../Reviews/LoadSpotReviews"
+
+import noimage from "../../images/noimage.jpg"
+
 import "./Spots.css"
 
 const LoadOneSpot = () => {
@@ -35,54 +38,65 @@ const LoadOneSpot = () => {
   // if (!spot) return null
   if (!Object.values(spot).length) return null
 
-  //SpotImages: [{id, url, preview}]
+  //SpotImages: [{id, url, preview}, {}, {}]
   let displayImages = [...spot.SpotImages]
   let previewImage = displayImages.find((image)=>{
     return image.preview===true
   })
-  if (!previewImage) previewImage = displayImages[0]
-  else displayImages.splice(displayImages.indexOf(previewImage),1)
-
+  if (!previewImage) {
+    previewImage = displayImages[0]
+    displayImages.splice(0,1)
+  } else {
+    displayImages.splice(displayImages.indexOf(previewImage),1)
+  }
+  let nonPreviewCount = displayImages.length
+  if (nonPreviewCount < 4) {
+    for (let i = 3; i >= nonPreviewCount; i--) {
+      displayImages[i] = { "url" : noimage }
+    }
+  }
   // console.log(`THIS IS THE DISPLAY IMAGES ARR: ${displayImages}; THIS IS THE PREVIEW IMAGE: ${previewImage}`)
 
   return (
     <>
-      <div className="whole-container">
+      <div className="one-spot-container">
         {/* {console.log("4 (2.5) RETURN:", spot)} */}
 
-        <div className="title-whole">
-          <div>
-            <h2>{spot.name}</h2>
+        <div className="one-spot-header">
+          <div className="one-spot-header-name">
+            <h1>{spot.name}</h1>
           </div>
 
-          <div className="title-detail">
+          <div className="one-spot-header-detail">
             {spot.avgRating ?
-              (<span>★{spot.avgRating}  ·  </span>):
-              (<span>no rating  ·  </span>)
+              (<span>★ {spot.avgRating}  ·  </span>):
+              (<span>★ New  ·  </span>)
             }
-
-            {/* {console.log("add review link here <<<<<")} */}
-            <span>{spot.numReviews} reviews  ·  </span>
-
+            <span>{spot.numReviews}{" "}reviews  ·  </span>
+            <span>Superhost  ·  </span>
             <span>
               {spot.city}, {spot.state}, {spot.country}
             </span>
           </div>
         </div>
 
-        <div className="pictures-container">
-          <div className="preview-image">
-            {previewImage ?
-              (<img src={previewImage.url}/>) :
-              (<div>listing has no images</div>)
+        <div className="one-spot-images-container">
+          <div>
+            {
+              previewImage &&
+              <img className="one-spot-preview-image"
+              alt={spot.name} src={previewImage.url}/>
             }
           </div>
-          <div className="display-image">
-            {displayImages.length ?
-              displayImages.map((image)=><img key={image.id} src={image.url}/>) :
+          <div className="one-spot-other-images-container">
+            {
+              displayImages.length ?
+              displayImages.map((image) =>
+                <img className="one-spot-other-image"
+                key={image.id} src={image.url}/>) :
               // (<div></div>)
               (<div>listing has no other images</div>)
-           }
+            }
           </div>
         </div>
 
@@ -112,7 +126,7 @@ const LoadOneSpot = () => {
             </>
           )}
         </div> */}
-      </div>
+
         {/* only show "create review" button to NON-owner of spot */}
         <div>
           {
@@ -122,7 +136,10 @@ const LoadOneSpot = () => {
           }
         </div>
 
-      <LoadSpotReviews spotId={spotId} />
+        <LoadSpotReviews spotId={spotId} />
+      </div>
+
+
     </>
   )
 }
