@@ -12,7 +12,7 @@ Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
 
 ### Frontend
 
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) <a href='https://github.com/shivamkapasia0' target="_blank"><img alt='' src='https://img.shields.io/badge/Google_Maps API-100000?style=for-the-badge&logo=&logoColor=FFFFFF&labelColor=34A853&color=34A853'/></a>
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
 ### Hosting
 
@@ -42,5 +42,6 @@ Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
 
 ## My Contact Info:
 
-[LinkedIn](https://www.linkedin.com/in/andreazwu/)
-[GitHub](https://github.com/andreazwu)
+### [LinkedIn](https://www.linkedin.com/in/andreazwu/)
+
+### [GitHub](https://github.com/andreazwu)
