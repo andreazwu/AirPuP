@@ -10,7 +10,6 @@ const LoadSpotReviews = ({spotId}) => {
   // console.log("1 (2.2) COMPONENT-LOADSPOTREVIEWS STARTS")
 
   const dispatch = useDispatch()
-  // const { spotId } = useParams()
 
   const reviewsObj = useSelector((state) => {
     // console.log("2 (2.1/3) USE SELECTOR RUNNING: DETECTS CHANGES IN STATE")
@@ -22,7 +21,7 @@ const LoadSpotReviews = ({spotId}) => {
   useEffect(() => {
     // console.log("5 USE EFFECT RUNNING: DISPATCH THUNK")
     dispatch(thunkGetSpotReviews(+spotId))
-  }, [dispatch])
+  }, [dispatch, reviewsObj])
 
   // console.log("3 (2.4) THIS IS THE CURRENT SPOTREVIEWS RECEIVED FROM USE SELECTOR:", reviewsObj, "ARRAY:", reviewsArr)
 
@@ -44,11 +43,11 @@ const LoadSpotReviews = ({spotId}) => {
             {new Date(review.createdAt).toString().slice(3,-42)}
           </p>
 
-          {/* <p className="single-review-stars">
+          <p className="single-review-stars">
             {
               [...Array(review.stars)].map((star) => (<i className="fa-solid fa-star"></i>))
             }
-          </p> */}
+          </p>
 
           <p className="single-review-review">
             <i className="fa fa-quote-left fa-lg" aria-hidden="true"></i>

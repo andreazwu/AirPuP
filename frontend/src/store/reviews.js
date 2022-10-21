@@ -59,12 +59,12 @@ const acAddReviewImage = (image, reviewId) => {
 // THUNK ACs:
 // load all spot reviews thunk
 export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
-  console.log("THUNK STARTS RUNNING, BEFORE FETCH FROM BACKEND")
+  // console.log("THUNK STARTS RUNNING, BEFORE FETCH FROM BACKEND")
   const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
-  console.log("THUNK STARTS RUNNING, AFTER FETCH FROM BACKEND")
+  // console.log("THUNK STARTS RUNNING, AFTER FETCH FROM BACKEND")
 
   if (response.ok) {
-    console.log("THUNK, BEFORE DISPATCH ACTION CREATOR")
+    // console.log("THUNK, BEFORE DISPATCH ACTION CREATOR")
     // {
     //   "Reviews": [
     //     {
@@ -81,7 +81,7 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
     const data = await response.json() //object
     const reviewsArr = data.Reviews //array [{}, {}]
     dispatch(acLoadSpotReviews(reviewsArr))
-    console.log("THUNK, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
+    // console.log("THUNK, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
     return data
   }
 }
@@ -152,9 +152,9 @@ export const thunkCreateNewReview = (newreview, spotId, user) => async (dispatch
     newreview.User = userInfo
     newreview.ReviewImages = []
 
-    console.log("THUNK CREATEreview BEFORE DISPATCH AC")
+    // console.log("THUNK CREATEreview BEFORE DISPATCH AC")
     dispatch(acCreateReview(newreview))
-    console.log("THUNK CREATEreview AFTER DISPATCH AC")
+    // console.log("THUNK CREATEreview AFTER DISPATCH AC")
 
     return newreview //<<<<<< must return for handlesubmit: newreview = await dispatch(thunkCreateNewreview(review))
   } else {
@@ -219,37 +219,37 @@ const reviewsReducer = (state = initialState, action) => {
   let newState
   switch (action.type){
     case LOAD_SPOT_REVIEWS:
-      console.log("REVIEWSREDUCER LOAD SPOT REVIEWS BEGIN:", state)
+      // console.log("REVIEWSREDUCER LOAD SPOT REVIEWS BEGIN:", state)
       newState = {...state}
       const normalizedReviews = {}
       //payload = reviews = [{}, {}]
       action.reviews.forEach((review) => normalizedReviews[review.id] = review)
       newState.spot = normalizedReviews
       newState.user = {}
-      console.log("REVIEWSREDUCER LOAD SPOT REVIEWS BEGIN:", newState)
+      // console.log("REVIEWSREDUCER LOAD SPOT REVIEWS BEGIN:", newState)
       return newState
 
     case LOAD_USER_REVIEWS:
-      console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", state)
+      // console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", state)
       newState = {...state}
       const normalizedUserReviews = {}
       //payload = reviews = [{}, {}]
       action.reviews.forEach((review) => normalizedUserReviews[review.id] = review)
       newState.user = normalizedUserReviews
       newState.spot = {}
-      console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", newState)
+      // console.log("REVIEWSREDUCER LOAD USER REVIEWS BEGIN:", newState)
       return newState
 
     case CREATE_REVIEW:
-      console.log("REVIEWSREDUCER CREATE REVIEW BEGIN:", state)
+      // console.log("REVIEWSREDUCER CREATE REVIEW BEGIN:", state)
       newState = {...state}
       newState.user = {...state.user}
       newState.spot = {...state.spot, [action.review.id]: action.review}
-      console.log("REVIEWSREDUCER CREATE REVIEW BEGIN:", newState)
+      // console.log("REVIEWSREDUCER CREATE REVIEW BEGIN:", newState)
       return newState
 
     case DELETE_REVIEW:
-      console.log("REVIEWSREDUCER DELETE REVIEW BEGIN:", state)
+      // console.log("REVIEWSREDUCER DELETE REVIEW BEGIN:", state)
       newState = {...state}
       newState.spot = {...state.spot}
       newState.user = {...state.user}
@@ -258,7 +258,7 @@ const reviewsReducer = (state = initialState, action) => {
       return newState
 
     case ADD_REVIEW_IMAGE:
-      console.log("REVIEWSREDUCER ADD REVIEW IMAGE BEGIN:", state)
+      // console.log("REVIEWSREDUCER ADD REVIEW IMAGE BEGIN:", state)
 
       newState = {...state}
       newState.spot = {...state.spot}
@@ -266,7 +266,7 @@ const reviewsReducer = (state = initialState, action) => {
       newState.spot[action.reviewId].ReviewImages = [action.image]
       // newState.user[action.reviewId].ReviewImages = [action.image]
 
-      console.log("REVIEWSREDUCER ADD REVIEW IMAGE END:", newState)
+      // console.log("REVIEWSREDUCER ADD REVIEW IMAGE END:", newState)
       return newState
     default:
       return state

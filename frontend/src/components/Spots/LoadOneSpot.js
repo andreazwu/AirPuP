@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { thunkGetOneSpot, acResetSpots } from "../../store/spots"
+import { thunkGetOneSpot } from "../../store/spots"
+import { thunkGetSpotReviews } from "../../store/reviews"
+
 import CreateReviewModal from "../Reviews/CreateReviewModal"
 import LoadSpotReviews from "../Reviews/LoadSpotReviews"
 
@@ -13,7 +15,6 @@ import "./Spots.css"
 const LoadOneSpot = () => {
   // console.log("1 COMPONENT-LOADONESPOT RUNNING")
   const dispatch = useDispatch()
-  const history = useHistory()
   const { spotId } = useParams()
 
   const spot = useSelector((state)=>{
@@ -21,11 +22,15 @@ const LoadOneSpot = () => {
     return state.spots.singleSpot
   }) // single obj {x}
 
+  const reviews = useSelector((state) => {
+    return state.reviews.spot
+  })
+
   useEffect(() => {
     // console.log("5 USE EFFECT DISPATCH THUNK RUNNING")
     dispatch(thunkGetOneSpot(+spotId))
-    return () => dispatch(acResetSpots())
-  }, [dispatch, spotId])
+  }, [dispatch, spotId, reviews])
+
 
   // console.log(`3 THIS IS THE SPOTID FROM PARAMS: ${spotId}; CURRENT SPOT RECEIVED FROM USE SELECTOR: ${spot}`)
 
@@ -171,7 +176,7 @@ const LoadOneSpot = () => {
         </div>
 
         <div className="one-spot-reviews-container">
-          <LoadSpotReviews spotId={spotId} />
+          <LoadSpotReviews spotId={spotId}/>
         </div>
       </div>
 

@@ -56,7 +56,7 @@ const acDeleteSpot = (spotId) => {
 }
 
 const acAddSpotImage = (image) => {
-  console.log("ACTION CREATOR ADD SPOT IMAGE, PAYLOAD:", image)
+  // console.log("ACTION CREATOR ADD SPOT IMAGE, PAYLOAD:", image)
   return {
     type: ADD_SPOT_IMAGE,
     image
@@ -74,15 +74,15 @@ export const acResetSpots = () => {
 // THUNK ACs:
 // load all spots thunk
 export const thunkGetAllSpots = () => async (dispatch) => {
-  console.log("THUNK STARTS RUNNING, BEFORE FETCH FROM BACKEND")
+  // console.log("THUNK STARTS RUNNING, BEFORE FETCH FROM BACKEND")
   const response = await csrfFetch("/api/spots")
-  console.log("THUNK STARTS RUNNING, AFTER FETCH FROM BACKEND")
+  // console.log("THUNK STARTS RUNNING, AFTER FETCH FROM BACKEND")
 
   if (response.ok) {
-    console.log("THUNK, BEFORE DISPATCH ACTION CREATOR")
+    // console.log("THUNK, BEFORE DISPATCH ACTION CREATOR")
     const spots = await response.json() //array
     dispatch(acLoadAllSpots(spots))
-    console.log("THUNK, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
+    // console.log("THUNK, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
     // return spots
   }
 }
@@ -107,13 +107,13 @@ export const thunkGetOneSpot = (spotId) => async (dispatch) => {
 
 // create new spot thunk
 export const thunkCreateNewSpot = (spotInfo, imageInfo) => async (dispatch) => {
-  console.log("THUNK CREATESPOT STARTS RUNNING, BEFORE POST TO BACKEND")
+  // console.log("THUNK CREATESPOT STARTS RUNNING, BEFORE POST TO BACKEND")
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(spotInfo)
   })
-  console.log("THUNK CREATESPOT STARTS RUNNING, AFTER POST TO BACKEND")
+  // console.log("THUNK CREATESPOT STARTS RUNNING, AFTER POST TO BACKEND")
 
 
   if (response.ok) {
@@ -125,10 +125,10 @@ export const thunkCreateNewSpot = (spotInfo, imageInfo) => async (dispatch) => {
     //   body: JSON.stringify(imageInfo)
     // })
     // //<<<
-    console.log("THUNK CREATESPOT BEFORE DISPATCH AC")
+    // console.log("THUNK CREATESPOT BEFORE DISPATCH AC")
 
     dispatch(acCreateSpot(newspot))
-    console.log("THUNK CREATESPOT AFTER DISPATCH AC")
+    // console.log("THUNK CREATESPOT AFTER DISPATCH AC")
 
     return newspot
   }
@@ -162,7 +162,7 @@ export const thunkRemoveSpot = (spotId) => async (dispatch) => {
 
 // add image thunk
 export const thunkAddSpotImage = (spotId, imageObj) => async (dispatch) => {
-  console.log("THUNK ADDSPOTIMAGE STARTS RUNNING, BEFORE POST TO BACKEND")
+  // console.log("THUNK ADDSPOTIMAGE STARTS RUNNING, BEFORE POST TO BACKEND")
   const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -170,13 +170,13 @@ export const thunkAddSpotImage = (spotId, imageObj) => async (dispatch) => {
       imageObj
     )
   })
-  console.log("THUNK ADDSPOTIMAGE STARTS RUNNING, AFTER FETCH FROM BACKEND, RES:", response)
+  // console.log("THUNK ADDSPOTIMAGE STARTS RUNNING, AFTER FETCH FROM BACKEND, RES:", response)
 
   if (response.ok) {
-    console.log("THUNK ADDSPOTIMAGE, BEFORE DISPATCH ACTION CREATOR (add spot image)")
+    // console.log("THUNK ADDSPOTIMAGE, BEFORE DISPATCH ACTION CREATOR (add spot image)")
     const image = await response.json()
     dispatch(acAddSpotImage(image))
-    console.log("THUNK ADDSPOTIMAGE, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
+    // console.log("THUNK ADDSPOTIMAGE, AFTER DISPATCH ACTION CREATOR -- CYCLE ENDS")
     return image
   }
 }
@@ -208,66 +208,66 @@ const spotsReducer = (state = initialState, action) => {
   let newState
   switch (action.type){
     case LOAD_ALL_SPOTS:
-      console.log("SPOTSREDUCER LOAD ALL SPOTS BEGIN:", state)
+      // console.log("SPOTSREDUCER LOAD ALL SPOTS BEGIN:", state)
       newState = {...state}
       const normalizedSpots = {}
       // action.spots --> {Spots: [{x}, {y}, {z}]}
       action.spots.Spots.forEach((spot) => normalizedSpots[spot.id] = spot)
       newState.allSpots = normalizedSpots
       newState.singleSpot = {}
-      console.log("SPOTSREDUCER LOAD ALL SPOTS END:", newState)
+      // console.log("SPOTSREDUCER LOAD ALL SPOTS END:", newState)
       return newState
 
     case LOAD_USER_SPOTS:
-      console.log("SPOTSREDUCER LOAD USER SPOTS BEGIN:", state)
+      // console.log("SPOTSREDUCER LOAD USER SPOTS BEGIN:", state)
       newState = {...state}
       const normalizedUserSpots = {}
       // action.spots --> {Spots: [{x}, {y}, {z}]}
       action.spots.Spots.forEach((spot) => normalizedUserSpots[spot.id] = spot)
       newState.allSpots = normalizedUserSpots
       newState.singleSpot = {}
-      console.log("SPOTSREDUCER LOAD USER SPOTS END:", newState)
+      // console.log("SPOTSREDUCER LOAD USER SPOTS END:", newState)
       return newState
 
     case LOAD_ONE_SPOT:
-      console.log("SPOTSREDUCER LOAD ONE SPOT BEGIN:", state)
+      // console.log("SPOTSREDUCER LOAD ONE SPOT BEGIN:", state)
       newState = {...state}
       newState.singleSpot = action.spot
-      console.log("SPOTSREDUCER LOAD ONE SPOT END:", newState)
+      // console.log("SPOTSREDUCER LOAD ONE SPOT END:", newState)
       return newState
 
     case CREATE_SPOT:
-      console.log("SPOTSREDUCER CREATE SPOT BEGIN:", state)
+      // console.log("SPOTSREDUCER CREATE SPOT BEGIN:", state)
       newState = {...state}
       //CREATE SPOT returns response: missing "avgRating", "previewImage"
       newState.allSpots = {...state.allSpots, [action.spot.id]: action.spot}
-      console.log("SPOTSREDUCER CREATE SPOT END:", newState)
+      // console.log("SPOTSREDUCER CREATE SPOT END:", newState)
       return newState
 
     case UPDATE_SPOT:
-      console.log("SPOTSREDUCER UPDATE SPOT BEGIN:", state)
+      // console.log("SPOTSREDUCER UPDATE SPOT BEGIN:", state)
       newState = {...state}
       // if (newState.allSpots[action.spot.id])
       const updatedSpot = {...newState.allSpots[action.spot.id], ...action.spot}
-      console.log("SPOTSREDUCER UPDATE SPOT UPDATED SPOT:", updatedSpot)
+      // console.log("SPOTSREDUCER UPDATE SPOT UPDATED SPOT:", updatedSpot)
 
       newState.singleSpot = {...state.singleSpot, ...acUpdateSpot}
       newState.allSpots = {...state.allSpots, [action.spot.id]: updatedSpot}
-      console.log("SPOTSREDUCER UPDATE SPOT END:", newState)
+      // console.log("SPOTSREDUCER UPDATE SPOT END:", newState)
       return newState
 
     case DELETE_SPOT:
-      console.log("SPOTSREDUCER DELETE SPOT BEGIN:", state)
+      // console.log("SPOTSREDUCER DELETE SPOT BEGIN:", state)
       newState = {...state}
       newState.allSpots = {...state.allSpots}
       newState.singleSpot = {...state.singleSpot}
       delete newState.allSpots[action.spotId]
       if (newState.singleSpot.id === action.spotId) newState.singleSpot = {}
-      console.log("SPOTSREDUCER DELETE SPOT END:", newState)
+      // console.log("SPOTSREDUCER DELETE SPOT END:", newState)
       return newState
 
     case ADD_SPOT_IMAGE:
-      console.log("SPOTSREDUCER ADD SPOT IMAGE BEGIN:", state)
+      // console.log("SPOTSREDUCER ADD SPOT IMAGE BEGIN:", state)
 
       newState = {...state}
       newState.allSpots = {...state.allSpots}
@@ -275,7 +275,7 @@ const spotsReducer = (state = initialState, action) => {
       // newState.singleSpot.SpotImages = [...state.singleSpot.SpotImages, action.image] // ?? err: not iterable
       newState.singleSpot.SpotImages = [action.image]
 
-      console.log("SPOTSREDUCER ADD SPOT IMAGE END:", newState)
+      // console.log("SPOTSREDUCER ADD SPOT IMAGE END:", newState)
       return newState
 
     case RESET_SPOTS:
