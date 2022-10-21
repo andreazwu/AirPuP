@@ -29,16 +29,16 @@ const LoadUserSpots = () => {
   return (
     <>
       <div className="myspots-header">
-        <h1>My Spots</h1>
+        {
+          spotsArr.length === 0 ?
+          <h1>You're not currently hosting any spots!</h1> :
+          <h1>My Spots</h1>
+        }
       </div>
 
       <div className="wrapper-center">
         <div className="allspots-container myspots">
           {
-            spotsArr.length === 0 ?
-
-            <div>You're not currently hosting any spots!</div> :
-
             spotsArr.map((spot) => (
               //implement spot in separate component add prop
               <MySpot key={spot.id} spot={spot}>

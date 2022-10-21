@@ -44,12 +44,11 @@ const LoadSpotReviews = ({spotId}) => {
             {new Date(review.createdAt).toString().slice(3,-42)}
           </p>
 
-          <p className="single-review-stars">
+          {/* <p className="single-review-stars">
             {
               [...Array(review.stars)].map((star) => (<i className="fa-solid fa-star"></i>))
             }
-          </p>
-
+          </p> */}
 
           <p className="single-review-review">
             <i className="fa fa-quote-left fa-lg" aria-hidden="true"></i>

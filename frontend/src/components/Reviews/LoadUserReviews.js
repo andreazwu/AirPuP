@@ -22,28 +22,26 @@ const LoadUserReviews = () => {
   return (
     <>
       <div className="myspots-header">
-        <h1>My Reviews</h1>
+        {
+          reviewsArr.length === 0 ?
+          <h1>You don't have any reviews!</h1> :
+          <h1>My Reviews</h1>
+        }
       </div>
 
       <div className="wrapper-center">
         <div className="my-reviews-container">
           {
-            reviewsArr.length === 0 ?
-
-            <div>You don't have any reviews!</div> :
-
             <div className="my-reviews-wrapper-wrapper">
-            <div className="my-reviews-wrapper">
-              {reviewsArr.map((review) => (
-                <MyReview key={review.id} review={review} />
-              ))}
+              <div className="my-reviews-wrapper">
+                {reviewsArr.map((review) => (
+                  <MyReview key={review.id} review={review} />
+                ))}
+              </div>
             </div>
-            </div>
-
           }
         </div>
       </div>
-
     </>
   )
 }
