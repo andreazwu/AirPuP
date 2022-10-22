@@ -28,7 +28,8 @@ Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
 ![image](https://user-images.githubusercontent.com/17817050/197360844-f9b37b5c-5a9f-44e6-ace9-0a4ce8f0539f.png)
 
 ## Login/ Signup Modal
-![image](https://user-images.githubusercontent.com/17817050/197360873-e02deb33-c78a-410c-9615-868bb332621a.png) ![image](https://user-images.githubusercontent.com/17817050/197360888-06237d7a-9fa8-4603-ac1e-d446e491f4a6.png)
+:-------------------------:|:-------------------------:
+![image](https://user-images.githubusercontent.com/17817050/197360873-e02deb33-c78a-410c-9615-868bb332621a.png)  |  ![image](https://user-images.githubusercontent.com/17817050/197360888-06237d7a-9fa8-4603-ac1e-d446e491f4a6.png)
 
 ## Dropdown Menu/ Demo User
 ![image](https://user-images.githubusercontent.com/17817050/197360924-2b20077e-7733-450b-b05e-de35d0246f30.png) ![image](https://user-images.githubusercontent.com/17817050/197360907-c7ac5a66-c78a-4fbf-97a0-2ff031b31bad.png)
@@ -42,8 +43,7 @@ If you are logged in, and you are NOT the owner of the property, you will see th
 ![image](https://user-images.githubusercontent.com/17817050/197360575-404fa39f-7165-49c6-97c2-2b11a4e4d970.png)
 
 ## Host a Spot
-You can click on the "Host New Spot" in the dropdown menu to, you guessed it, host a new spot!
-![image](https://user-images.githubusercontent.com/17817050/197360974-c8c75274-9011-43a1-9e4c-ba6f21077beb.png)
+![image](https://user-images.githubusercontent.com/17817050/197361279-dbf9917a-be21-40fe-863d-74ec1241f6a8.png)
 
 ## My Spots (Edit/ Delete)
 ![image](https://user-images.githubusercontent.com/17817050/197361033-de1e0cb1-ca88-4b0d-9ed0-a6f2b39e2916.png)
