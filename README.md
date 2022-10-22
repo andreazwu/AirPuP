@@ -28,8 +28,7 @@ Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
 ![image](https://user-images.githubusercontent.com/17817050/197360844-f9b37b5c-5a9f-44e6-ace9-0a4ce8f0539f.png)
 
 ## Login/ Signup Modal
-:-------------------------:|:-------------------------:
-![image](https://user-images.githubusercontent.com/17817050/197360873-e02deb33-c78a-410c-9615-868bb332621a.png)  |  ![image](https://user-images.githubusercontent.com/17817050/197360888-06237d7a-9fa8-4603-ac1e-d446e491f4a6.png)
+![image](https://user-images.githubusercontent.com/17817050/197360873-e02deb33-c78a-410c-9615-868bb332621a.png| width=100) ![image](https://user-images.githubusercontent.com/17817050/197360888-06237d7a-9fa8-4603-ac1e-d446e491f4a6.png| width=100)
 
 ## Dropdown Menu/ Demo User
 ![image](https://user-images.githubusercontent.com/17817050/197360924-2b20077e-7733-450b-b05e-de35d0246f30.png) ![image](https://user-images.githubusercontent.com/17817050/197360907-c7ac5a66-c78a-4fbf-97a0-2ff031b31bad.png)
