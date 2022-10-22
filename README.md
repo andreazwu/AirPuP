@@ -25,15 +25,13 @@ Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
 - [Features](https://github.com/andreazwu/AirPuP/wiki/Feature-List)
 
 ## Landing Page
-![image](https://user-images.githubusercontent.com/17817050/197360283-0b77f1b6-c2a9-4c01-8518-a393504e5d25.png)
+![image](https://user-images.githubusercontent.com/17817050/197360844-f9b37b5c-5a9f-44e6-ace9-0a4ce8f0539f.png)
 
 ## Login/ Signup Modal
-![image](https://user-images.githubusercontent.com/17817050/197360341-786a4a7f-ae94-45d1-b764-12dbb7b7e213.png)
-![image](https://user-images.githubusercontent.com/17817050/197360352-1ffb3698-eded-4a89-a8ef-d308e098980b.png)
+![image](https://user-images.githubusercontent.com/17817050/197360873-e02deb33-c78a-410c-9615-868bb332621a.png) ![image](https://user-images.githubusercontent.com/17817050/197360888-06237d7a-9fa8-4603-ac1e-d446e491f4a6.png)
 
 ## Dropdown Menu/ Demo User
-![image](https://user-images.githubusercontent.com/17817050/197360410-30da9527-e501-494c-a34b-c7b473d3e63d.png)
-![image](https://user-images.githubusercontent.com/17817050/197360423-676cccaa-f215-4ba2-99ea-210bdbec6e5d.png)
+![image](https://user-images.githubusercontent.com/17817050/197360924-2b20077e-7733-450b-b05e-de35d0246f30.png) ![image](https://user-images.githubusercontent.com/17817050/197360907-c7ac5a66-c78a-4fbf-97a0-2ff031b31bad.png)
 
 ## Spot Detail Page
 ![image](https://user-images.githubusercontent.com/17817050/197360469-06f41448-2378-4486-b476-5f964f6fe5e8.png)
@@ -41,20 +39,18 @@ Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
 
 ## Create a Review
 If you are logged in, and you are NOT the owner of the property, you will see the "create review" button on the spot detail page.
-![image](https://user-images.githubusercontent.com/17817050/197360565-4d8aea52-53ae-4174-b024-13438aac164d.png)
 ![image](https://user-images.githubusercontent.com/17817050/197360575-404fa39f-7165-49c6-97c2-2b11a4e4d970.png)
 
 ## Host a Spot
 You can click on the "Host New Spot" in the dropdown menu to, you guessed it, host a new spot!
-![image](https://user-images.githubusercontent.com/17817050/197360664-5f3f07ad-6e9d-48fa-97b5-6dfb37f6b106.png)
-![image](https://user-images.githubusercontent.com/17817050/197360680-fe467cda-5ae5-46bb-9fc9-b161b939e46c.png)
+![image](https://user-images.githubusercontent.com/17817050/197360974-c8c75274-9011-43a1-9e4c-ba6f21077beb.png)
 
 ## My Spots (Edit/ Delete)
-![image](https://user-images.githubusercontent.com/17817050/197360691-464cf7f8-d045-473f-9cc9-c29620349631.png)
-![image](https://user-images.githubusercontent.com/17817050/197360700-04c16389-79e7-42bc-8f5f-34e3c6154aed.png)
+![image](https://user-images.githubusercontent.com/17817050/197361033-de1e0cb1-ca88-4b0d-9ed0-a6f2b39e2916.png)
+![image](https://user-images.githubusercontent.com/17817050/197361048-90015d21-3045-4fee-9d50-15020d6924d2.png)
 
 ## My Reviews (Delete)
-![image](https://user-images.githubusercontent.com/17817050/197360729-aabf9f66-3167-44f1-a3cb-49d1e0fa0bb8.png)
+![image](https://user-images.githubusercontent.com/17817050/197361095-56becb84-3baf-411d-923e-0abb97e41935.png)
 
 ## My Contact Info:
 
