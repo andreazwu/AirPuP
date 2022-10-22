@@ -56,14 +56,62 @@ module.exports = {
         ownerId: 4,
         address: "555 Gautier Lane",
         city: "Sreng",
-        state: "RU",
+        state: "SG",
         country: "Italy",
         lat: 41.7645357,
         lng: -126.4730328,
         name: "Nature's Heartbeat",
         description: "The Chalet is part of Sreng, which for centuries has been handed down from generation to generation. The house, immersed in the green meadows of the Dolomites, has all the comforts. We offer the breakfast basket.",
         price: 294
-      }
+      },
+      {
+        ownerId: 7,
+        address: "666 Lornado Lane",
+        city: "Gaspard",
+        state: "Alpes",
+        country: "France",
+        lat: 41.7645357,
+        lng: -126.4730328,
+        name: "Casa vacanze Pra di Brëc",
+        description: "Pra di Brëc is our dream that became true. We have restructured our grandparents’ home and we would like to offer you an experience characterized by simplicity and hospitality.",
+        price: 185
+      },
+      {
+        ownerId: 1,
+        address: "777 Ashen Lane",
+        city: "Abyss",
+        state: "Alpes",
+        country: "France",
+        lat: 41.7645357,
+        lng: -126.4730328,
+        name: "Chalet Lake Lodge",
+        description: "Our Chalet is in front of the lake, with stunning views of the glacier and Grande Motte. You have access to the garden, with sauna, hot tub and bbq. You have direct access to the lakeside, where you will find summer activities.",
+        price: 430
+      },
+      {
+        ownerId: 8,
+        address: "888 Faerghus Lane",
+        city: "Fhirdiad",
+        state: "Wallis",
+        country: "Switzerland",
+        lat: 41.7645357,
+        lng: -126.4730328,
+        name: "Beautiful Chalet with Mountain View",
+        description: "The chalet les granges has an exceptional setting with a panoramic view of the entire Mont-Blanc range. A feeling of being alone in the world. It has all the facilities to ensure you have an exceptional stay.",
+        price: 1400
+      },
+      {
+        ownerId: 3,
+        address: "999 Fraldarius Lane",
+        city: "Faerghus",
+        state: "DM",
+        country: "Switzerland",
+        lat: 41.7645357,
+        lng: -126.4730328,
+        name: "Mountain Chalet",
+        description: "It's a house. It's in the mountains. It's a nice place to train. I have a dog. I love dogs. You should come here with your dog.",
+        price: 70
+      },
     ], {});
   },
 
