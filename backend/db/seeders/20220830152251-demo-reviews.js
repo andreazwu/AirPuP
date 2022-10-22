@@ -73,7 +73,7 @@ module.exports = {
       {
         spotId: 5,
         userId: 1,
-        review: "Sylvain was an excellent host! The house is a dream, everything you need is available. We will certainly come back!",
+        review: "Sylvain was an excellent host! The house is a dream, everything you need is available. We will certainly come back.",
         stars: 5
       },
       {
@@ -122,7 +122,7 @@ module.exports = {
         spotId: 8,
         userId: 6,
         review: "There's a creepy doll in the bedroom. It's probably haunted.",
-        stars: 2
+        stars: 1
       },
       {
         spotId: 8,
@@ -147,6 +147,42 @@ module.exports = {
         userId: 4,
         review: "The host was kinda mean. He tried to spar with me and hit me pretty hard with his sword. His dog was really cute though, and the view was gorgeous!!",
         stars: 3
+      },
+      {
+        spotId: 9,
+        userId: 6,
+        review: "The host was funny. We had a karaoke night with his dog!!",
+        stars: 4
+      },
+      {
+        spotId: 11,
+        userId: 7,
+        review: "The best accomodation so far in norway. I can view the northern light for 2 nights in a row!!",
+        stars: 5
+      },
+      {
+        spotId: 11,
+        userId: 6,
+        review: "It is a great spot for aurora watching - we got to see it on our first night directly from the house!! ",
+        stars: 5
+      },
+      {
+        spotId: 11,
+        userId: 8,
+        review: "We built our trip around this stay and spent an immensely beautiful, not to say magical time there. We will be back.",
+        stars: 5
+      },
+      {
+        spotId: 11,
+        userId: 1,
+        review: "Our stay was magical and way beyond any expectations we had. We enjoyed seeing the northern lights from the hot tub!!",
+        stars: 4
+      },
+      {
+        spotId: 8,
+        userId: 1,
+        review: "The place was nice but it was also OUTRAGEOUSLY expensive! ",
+        stars: 2
       },
     ]);
   },

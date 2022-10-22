@@ -37,7 +37,7 @@ module.exports = {
         lng: -124.4730324,
         name: "Forest Haven - Otium",
         description: "As you descend the stairway into the woods you'll begin to experience the peace of Otium. The inside is designed with the colors and textures of nature, furnished with luxury linens and all the comforts of home!",
-        price: 1850
+        price: 850
       },
       {
         ownerId: 1,
@@ -111,6 +111,42 @@ module.exports = {
         name: "Mountain Chalet",
         description: "It's a house. It's in the mountains. It's a nice place to train. I have a dog. I love dogs. You should come here with your dog.",
         price: 70
+      },
+      {
+        ownerId: 5,
+        address: "10 Mercegrid Lane",
+        city: "Ingrid",
+        state: "Innlandet",
+        country: "Norway",
+        lat: 41.7645357,
+        lng: -126.4730328,
+        name: "Mjøsglåt - Unique treehouse",
+        description: "Faråsen treehouse! A unique experience in beautiful treehouse 10 meters above ground. This treehouse is called Mjøsgløtter and has its name because of the fantastic view.",
+        price: 120
+      },
+      {
+        ownerId: 2,
+        address: "11 Dedue Lane",
+        city: "Engenes",
+        state: "Troms",
+        country: "Norway",
+        lat: 41.7645357,
+        lng: -126.4730328,
+        name: "Magic Arctic Getaway",
+        description: "If you are looking for peace, seclusion, tranquility, nature and a great place to stay in the Arctic, then look no further, because you've just found it.",
+        price: 160
+      },
+      {
+        ownerId: 4,
+        address: "12 Sylvain Lane",
+        city: "Pudasjarvi",
+        state: "MG",
+        country: "Finland",
+        lat: 41.7645357,
+        lng: -126.4730328,
+        name: "Cosy family lakeside cabin",
+        description: "A unique family friendly cabin by the lake, away from busy cabin communities but still close to the popular ski resort. Ideal for adventure seekers or a simple relaxed retreat to enjoy the onboard amenities provided.",
+        price: 267
       },
     ], {});
   },
