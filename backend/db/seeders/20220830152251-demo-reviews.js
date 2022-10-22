@@ -7,19 +7,19 @@ module.exports = {
       {
         spotId: 1,
         userId: 2,
-        review: "Had a lovely honeymoon with my husband. It truly was a spectacular view from the balcony deck. Close to town but remote enough to enjoy nature and beautiful views.",
+        review: "Had a lovely honeymoon with my husband. The view from the balcony deck was spectacular.",
         stars: 5
       },
       {
         spotId: 1,
         userId: 4,
-        review: "Very Spacious. Our friends loved the cabin as well and the ambience.",
+        review: "Very Spacious. It was close to town but remote enough to enjoy nature and beautiful views.",
         stars: 4
       },
       {
         spotId: 1,
         userId: 7,
-        review: "I had a lovely time!",
+        review: "The location is great for exploring the region and in particular to unwind. I had a lovely time!",
         stars: 5
       },
       {
@@ -30,15 +30,15 @@ module.exports = {
       },
       {
         spotId: 2,
-        userId: 3,
-        review: "Brought my dog. He was so excited he chewed the sofa.",
-        stars: 4
-      },
-      {
-        spotId: 2,
         userId: 6,
         review: "Treehouse was quaint, cute, warm, and clean. The host was responsive. I would recommend it!!",
         stars: 5
+      },
+      {
+        spotId: 2,
+        userId: 3,
+        review: "Brought my dog. He was so excited he chewed the sofa.",
+        stars: 4
       },
       {
         spotId: 3,
@@ -61,7 +61,7 @@ module.exports = {
       {
         spotId: 4,
         userId: 8,
-        review: "I want to like it, but the bed is way too small to fit me and my partner :(",
+        review: "I really wanted to like it, but the bed was way too small to fit me and my partner comfortably. I wouldn't come back again :(",
         stars: 4
       },
       {
@@ -73,7 +73,7 @@ module.exports = {
       {
         spotId: 5,
         userId: 1,
-        review: "Sylvain was an excellent host! The house is a dream, everything you need is available. The location is great for exploring the region and in particular to unwind. A clear recommendation and we will certainly come back!",
+        review: "Sylvain was an excellent host! The house is a dream, everything you need is available. We will certainly come back!",
         stars: 5
       },
       {
