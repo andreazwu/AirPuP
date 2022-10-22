@@ -6,62 +6,63 @@ module.exports = {
       {
         ownerId: 1,
         address: "123 BlueLions Lane",
-        city: "Los Angeles",
-        state: "CA",
+        city: "Blue Lions",
+        state: "WI",
         country: "United States",
         lat: 37.7645358,
         lng: -122.4730327,
-        name: "Fhirdiad",
-        description: "Spot #1",
-        price: 188
+        name: "Modern Mountain Retreat - Hot Tub & Stellar Views!",
+        description: "This beautiful house has everything you need for a serene escape! Boasting unrestricted views, a deck built with sunset meals in mind, and proximity to local adventure, this Black Mountain home invites you to relax and explore with ease. ",
+        price: 439
       },
       {
         ownerId: 2,
-        address: "456 Garreg Rd",
-        city: "New York",
-        state: "NY",
-        country: "United States",
+        address: "456 Duscur Rd",
+        city: "Duscur",
+        state: "ON",
+        country: "Canada",
         lat: 38.7645351,
         lng: -123.4730322,
-        name: "Faerghus",
-        description: "Spot #2",
-        price: 204
+        name: "Outpost Luxury Treehouse",
+        description: "The Outpost Treehouse has been a lifelong dream and labor of love, handcrafted with reclaimed timber and vintage salvaged finds by husband and wife design team Dimi and Dedue Molinaro. Perfect for get aways.",
+        price: 189
       },
       {
         ownerId: 1,
         address: "333 Eagles Blvd",
-        city: "Milwaukee",
-        state: "WI",
+        city: "Black Eagles",
+        state: "IL",
         country: "United States",
         lat: 39.7645353,
         lng: -124.4730324,
-        name: "Sreng",
-        description: "Spot #3",
-        price: 120
+        name: "Forest Haven - Otium",
+        description: "As you descend the stairway into the woods you'll begin to experience the peace of Otium. The inside is designed with the colors and textures of nature, furnished with luxury linens and all the comforts of home!",
+        price: 1850
       },
       {
         ownerId: 1,
         address: "444 Golden Deer",
-        city: "Los Angeles",
-        state: "CA",
-        country: "United States",
+        city: "Mayfield",
+        state: "GD",
+        country: "United Kingdom",
         lat: 40.7645355,
         lng: -125.4730326,
-        name: "Riegan",
-        description: "Spot #4",
-        price: 65
+        name: "Picture-perfect Dome",
+        description: "Clad in aromatic cedar wood, beautifully furnished - ideal private, woodland retreat for couples. A wonderful place to chill-out and lose yourself - you won't want to leave! ",
+        price: 281
+
       },
       {
-        ownerId: 2,
-        address: "555 Ashen Lane",
-        city: "Seattle",
-        state: "WA",
-        country: "United States",
+        ownerId: 4,
+        address: "555 Gautier Lane",
+        city: "Sreng",
+        state: "RU",
+        country: "Italy",
         lat: 41.7645357,
         lng: -126.4730328,
-        name: "Abyss",
-        description: "Spot #5",
-        price: 178
+        name: "Nature's Heartbeat",
+        description: "The Chalet is part of Sreng, which for centuries has been handed down from generation to generation. The house, immersed in the green meadows of the Dolomites, has all the comforts. We offer the breakfast basket.",
+        price: 294
       }
     ], {});
   },

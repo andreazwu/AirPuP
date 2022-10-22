@@ -7,51 +7,81 @@ module.exports = {
       {
         spotId: 1,
         userId: 2,
-        review: "Honeymoon with husband, had a great time",
+        review: "Had a lovely honeymoon with my husband. It truly was a spectacular view from the balcony deck. Close to town but remote enough to enjoy nature and beautiful views.",
         stars: 5
       },
       {
         spotId: 1,
         userId: 4,
-        review: "No AC",
-        stars: 3
+        review: "Very Spacious. Our friends loved the cabin as well and the ambience.",
+        stars: 4
+      },
+      {
+        spotId: 1,
+        userId: 7,
+        review: "I had a lovely time!",
+        stars: 5
       },
       {
         spotId: 2,
-        userId: 1,
-        review: "Best host ever",
+        userId: 5,
+        review: "The host is absolutely AMAZING. Look at these beautiful flowers he prepared for us!!",
         stars: 5
       },
       {
         spotId: 2,
         userId: 3,
-        review: "Good place to relax",
+        review: "Brought my dog. He was so excited he chewed the sofa.",
         stars: 4
       },
       {
         spotId: 2,
-        userId: 4,
-        review: "Food was delicious",
+        userId: 6,
+        review: "Treehouse was quaint, cute, warm, and clean. The host was responsive. I would recommend it!!",
         stars: 5
       },
       {
-        spotId: 4,
+        spotId: 3,
         userId: 3,
-        review: "There was a creepy doll, I'm pretty sure it's cursed",
+        review: "It's a trap.",
         stars: 1
       },
       {
         spotId: 3,
         userId: 4,
-        review: "It's a trap",
-        stars: 1
+        review: "It might be haunted... Also the shower is freezing cold!!",
+        stars: 2
       },
       {
-        spotId: 1,
-        userId: 3,
-        review: "Best vacation ever",
+        spotId: 4,
+        userId: 2,
+        review: "Very peaceful.",
         stars: 5
-      }
+      },
+      {
+        spotId: 4,
+        userId: 8,
+        review: "I want to like it, but the bed is way too small to fit me and my partner :(",
+        stars: 4
+      },
+      {
+        spotId: 5,
+        userId: 6,
+        review: "This place is so beautiful, it makes me wanna sing!! The hills are alive~~ with the sound of muuuusic~~~",
+        stars: 5
+      },
+      {
+        spotId: 5,
+        userId: 1,
+        review: "Sylvain was an excellent host! The house is a dream, everything you need is available. The location is great for exploring the region and in particular to unwind. A clear recommendation and we will certainly come back!",
+        stars: 5
+      },
+      {
+        spotId: 5,
+        userId: 3,
+        review: "Too isolated. No place to find food.",
+        stars: 2
+      },
     ]);
   },
 
