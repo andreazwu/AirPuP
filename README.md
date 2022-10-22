@@ -2,7 +2,7 @@
 
 AirPuP is a website inspired by [AirBnB](https://airbnb.com/). It provides lodging and vacation rentals around the world, wherever you want to go!
 
-Click [here](https://andrea-airbnb.herokuapp.com/) to view AirPuP's Live Site.
+[Click here to view AirPuP's live site.](https://andrea-airbnb.herokuapp.com/)
 
 ## Languages, Frameworks, Platforms and Libraries
 
