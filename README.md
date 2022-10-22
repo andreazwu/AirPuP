@@ -28,8 +28,7 @@ AirPuP is a website inspired by [AirBnB](https://airbnb.com/). It provides lodgi
 ![image](https://user-images.githubusercontent.com/17817050/197360844-f9b37b5c-5a9f-44e6-ace9-0a4ce8f0539f.png)
 
 ## Login/ Signup Modal
-![image](https://user-images.githubusercontent.com/17817050/197361549-c6e4ca05-0bb9-4d91-b361-060035125fc9.png)
-![image](https://user-images.githubusercontent.com/17817050/197361515-8cbb012f-f790-488e-815c-81b3bec614e0.png)
+![image](https://user-images.githubusercontent.com/17817050/197362085-fe9ec940-4114-4fcd-99c7-583b8c3fc468.png)
 
 ## Dropdown Menu/ Demo User
 ![image](https://user-images.githubusercontent.com/17817050/197360924-2b20077e-7733-450b-b05e-de35d0246f30.png) ![image](https://user-images.githubusercontent.com/17817050/197360907-c7ac5a66-c78a-4fbf-97a0-2ff031b31bad.png)
