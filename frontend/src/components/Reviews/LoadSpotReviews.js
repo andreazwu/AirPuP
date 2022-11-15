@@ -21,7 +21,7 @@ const LoadSpotReviews = ({spotId}) => {
   useEffect(() => {
     // console.log("5 USE EFFECT RUNNING: DISPATCH THUNK")
     dispatch(thunkGetSpotReviews(+spotId))
-  }, [dispatch, reviewsObj])
+  }, [dispatch, reviewsObj]) //<<<<<<<
 
   // console.log("3 (2.4) THIS IS THE CURRENT SPOTREVIEWS RECEIVED FROM USE SELECTOR:", reviewsObj, "ARRAY:", reviewsArr)
 
