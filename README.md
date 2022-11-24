@@ -53,7 +53,7 @@ If you are logged in, and you are NOT the owner of the property, you will see th
 
 ## My Contact Info:
 
-### Andrea Wu\
+### Andrea Wu
 [![Linkedin][linkedin-color]][andrea-linkedin]
 [![GitHub][GitHub-color]][andrea-GitHub]
 
