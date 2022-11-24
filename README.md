@@ -53,8 +53,14 @@ If you are logged in, and you are NOT the owner of the property, you will see th
 
 ## My Contact Info:
 
-### Andrea Wu
+### Andrea Wu\
+[![Linkedin][linkedin-color]][andrea-linkedin]
+[![GitHub][GitHub-color]][andrea-GitHub]
 
-#### [LinkedIn](https://www.linkedin.com/in/andreazwu/)
-
-#### [GitHub](https://github.com/andreazwu)
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-color]: https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white
+[andrea-linkedin]: https://www.linkedin.com/in/andreazwu/
+[GitHub-color]: https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white
+[andrea-GitHub]: https://github.com/andreazwu
