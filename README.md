@@ -1,5 +1,7 @@
 # Welcome to AirPuP!
 
+<img src="https://andrea-airbnb.herokuapp.com/static/media/logo2.a8587cd0444b46701f78.jpg" width=180px ></img>
+
 AirPuP is a website inspired by [AirBnB](https://airbnb.com/). It provides lodging and vacation rentals around the world, wherever you want to go!
 
 [Click here to view AirPuP's live site.](https://andrea-airbnb.herokuapp.com/)
